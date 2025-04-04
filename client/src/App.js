@@ -8,7 +8,9 @@ function Insights4096() {
     if (!username) return; // Ensure username is entered
 
     try {
-      const response = await fetch(`/openings/${username}`);
+      const response = await fetch(
+        `https://insights4096-backend.onrender.com/openings/${username}`,
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch data");

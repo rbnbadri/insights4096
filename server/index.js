@@ -1,16 +1,17 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors"); // Import CORS
+const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // Enable CORS for all requests
+app.use(cors());
+app.use(express.static("client/build")); // Serve React frontend build from client/build
 
-// Function to fetch games for a specific month with proper zero-padding
+// Function to fetch games for a specific month
 async function fetchGames(username, year, month) {
     try {
-        const formattedMonth = month.toString().padStart(2, "0"); // Ensure MM format
+        const formattedMonth = month.toString().padStart(2, "0");
         const url = `https://api.chess.com/pub/player/${username}/games/${year}/${formattedMonth}`;
         const response = await axios.get(url);
         console.info(url);
@@ -64,7 +65,6 @@ function extractOpenings(games, username) {
                     drawn: 0,
                 };
             }
-
             if (!openings.both[ecoMain]) {
                 openings.both[ecoMain] = {
                     played: 0,
@@ -95,11 +95,11 @@ function extractOpenings(games, username) {
     return openings;
 }
 
-// API Endpoint
+// API endpoint
 app.get("/openings/:username", async (req, res) => {
     const username = req.params.username;
     const year = 2025;
-    const months = [1, 2, 3]; // January to March 2025
+    const months = [1, 2, 3];
 
     let allGames = [];
 
