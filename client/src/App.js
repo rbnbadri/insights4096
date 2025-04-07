@@ -1,29 +1,51 @@
 import React, { useState } from "react";
+import "./App.css";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
+  const [totals, setTotals] = useState({
+    played: 0,
+    won: 0,
+    lost: 0,
+    drawn: 0,
+  });
   const [submitted, setSubmitted] = useState(false);
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
   });
 
-  const handleChange = (e) => {
-    setUsername(e.target.value);
-  };
+  const handleChange = (e) => setUsername(e.target.value);
 
   const handleSubmit = async () => {
-    if (!username.trim()) return;
+    if (!username) return;
 
     try {
       const response = await fetch(
         `https://insights4096-backend.onrender.com/openings/${username}`,
       );
-
       const result = await response.json();
-      setFilteredData(result.data);
+      const gamedata = result.data;
+      const bothData = gamedata?.["both"];
+
+      const total = Object.values(bothData).reduce(
+        (acc, item) => {
+          acc.played += item.played;
+          acc.won += item.won;
+          acc.lost += item.lost;
+          acc.drawn += item.drawn;
+          return acc;
+        },
+        { played: 0, won: 0, lost: 0, drawn: 0 },
+      );
+
+      setFilteredData(gamedata);
       setSubmitted(true);
+      setTotals(total);
+
+      console.log("Fetched data:", JSON.stringify(bothData, null, 2));
+      console.log("Totals:", total);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -46,8 +68,8 @@ function Insights4096() {
     });
 
     const sortedData = Object.fromEntries(sortedEntries);
-    const updated = { ...filteredData, [side]: sortedData };
-    setFilteredData(updated);
+    setFilteredData({ ...filteredData, [side]: sortedData });
+
     setSortConfig({
       key,
       direction:
@@ -57,33 +79,52 @@ function Insights4096() {
 
   const renderTable = (side, title) => {
     const sideData = filteredData?.[side];
-    if (!sideData || Object.keys(sideData).length === 0) return null;
+    const sideLength = sideData ? Object.keys(sideData).length : 0;
+    console.log(
+      "Rendering table for side:",
+      side,
+      "Opening count:",
+      sideLength,
+    );
+
+    if (!sideData || sideLength === 0) return null;
 
     return (
-      <div style={{ marginTop: "20px" }}>
-        <h2>{title}</h2>
-        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+      <div className="table-container">
+        <div className="flex-row">
+          <h2>{title}</h2>
+        </div>
+        <table className="table">
           <thead>
             <tr>
               <th
+                className="table-header"
                 onClick={() => handleSort(side, "opening_name")}
-                style={headerStyle}
               >
                 Opening Name
               </th>
               <th
+                className="table-header"
                 onClick={() => handleSort(side, "played")}
-                style={headerStyle}
               >
                 Played
               </th>
-              <th onClick={() => handleSort(side, "won")} style={headerStyle}>
+              <th
+                className="table-header"
+                onClick={() => handleSort(side, "won")}
+              >
                 Won
               </th>
-              <th onClick={() => handleSort(side, "lost")} style={headerStyle}>
+              <th
+                className="table-header"
+                onClick={() => handleSort(side, "lost")}
+              >
                 Lost
               </th>
-              <th onClick={() => handleSort(side, "drawn")} style={headerStyle}>
+              <th
+                className="table-header"
+                onClick={() => handleSort(side, "drawn")}
+              >
                 Drawn
               </th>
             </tr>
@@ -91,11 +132,11 @@ function Insights4096() {
           <tbody>
             {Object.entries(sideData).map(([openingName, stats], idx) => (
               <tr key={idx}>
-                <td style={cellStyle}>{openingName}</td>
-                <td style={cellStyle}>{stats.played}</td>
-                <td style={cellStyle}>{stats.won}</td>
-                <td style={cellStyle}>{stats.lost}</td>
-                <td style={cellStyle}>{stats.drawn}</td>
+                <td className="table-cell">{openingName}</td>
+                <td className="table-cell">{stats.played}</td>
+                <td className="table-cell">{stats.won}</td>
+                <td className="table-cell">{stats.lost}</td>
+                <td className="table-cell">{stats.drawn}</td>
               </tr>
             ))}
           </tbody>
@@ -104,39 +145,28 @@ function Insights4096() {
     );
   };
 
-  const headerStyle = {
-    border: "1px solid black",
-    padding: "8px",
-    backgroundColor: "#f2f2f2",
-    cursor: "pointer",
-    textAlign: "left",
-  };
-
-  const cellStyle = {
-    border: "1px solid black",
-    padding: "8px",
-    textAlign: "left",
-  };
-
   return (
-    <div className="App" style={{ padding: "20px", fontFamily: "sans-serif" }}>
-      <h1>Chess Insights</h1>
-      <input
-        type="text"
-        value={username}
-        onChange={handleChange}
-        placeholder="Enter Chess.com Username"
-        style={{ marginRight: "10px" }}
-      />
-      <button onClick={handleSubmit}>Search</button>
+    <div className="App">
+      <div className="flex-row">
+        <h1 className="header">Chess Insights</h1>
+      </div>
+      <div className="flex-row">
+        <input
+          type="text"
+          value={username}
+          onChange={handleChange}
+          placeholder="Enter ChessDotCom username"
+        />
+        <button onClick={handleSubmit}>Search</button>
+      </div>
 
-      {submitted && filteredData?.both ? (
+      {submitted && filteredData ? (
         <>
+          <div className="openings-header">
+            All openings: P: {totals.played} W: {totals.won} L: {totals.lost} D:{" "}
+            {totals.drawn}
+          </div>
           {renderTable("both", "All Openings")}
-
-          {/* Uncomment below to restore white and black tables */}
-          {/* {renderTable("white", "White Openings")} */}
-          {/* {renderTable("black", "Black Openings")} */}
         </>
       ) : submitted ? (
         <p>No data found for the provided search.</p>
