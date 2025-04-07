@@ -7,7 +7,7 @@
 .flex-row {
   display: flex;
   align-items: center;
-  gap: 5px; /* Reduced gap */
+  gap: 5px;
   margin-bottom: 15px;
 }
 
@@ -20,28 +20,38 @@
   color: white;
   padding: 10px;
   font-weight: bold;
-  max-width: 70%; /* Adjusted for better width */
+  max-width: 70%;
   text-align: left;
   margin-bottom: 10px;
 }
 
-.table-container {
-  margin-top: 10px;
+.table-wrapper {
+  width: 85%;
 }
 
-.table {
+.summary-row th {
+  background-color: #444;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+table {
   border-collapse: collapse;
-  width: 50%; /* Unchanged as requested */
+  width: 100%;
 }
 
-.table-header,
-.table-cell {
+th, td {
   border: 1px solid black;
   padding: 8px;
   text-align: left;
 }
 
-.table-header {
-  background-color: #f2f2f2;
+th.sortable {
   cursor: pointer;
+}
+
+th.sortable:hover {
+  background-color: #ddd;
 }
