@@ -50,39 +50,31 @@ const OpeningStatsTable = ({ data }) => {
         <thead>
           <tr className="summary-row">
             <th colSpan="5">
-              <strong>
-                All Openings: P: {total.played} W: {total.won} L: {total.lost}{" "}
-                D: {total.drawn}
-              </strong>
+              <div className="summary-header">
+                <strong>
+                  All Openings: P: {total.played} W: {total.won} L: {total.lost}{" "}
+                  D: {total.drawn}
+                </strong>
+                {openingCount > 5 && (
+                  <div className="summary-buttons">
+                    {openingCount > 5 && visibleCount !== 5 && (
+                      <button onClick={() => setVisibleCount(5)}>Top 5</button>
+                    )}
+                    {openingCount > 10 && visibleCount !== 10 && (
+                      <button onClick={() => setVisibleCount(10)}>
+                        Top 10
+                      </button>
+                    )}
+                    {visibleCount !== "all" && (
+                      <button onClick={() => setVisibleCount("all")}>
+                        All
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
             </th>
           </tr>
-
-          {/* Buttons go here */}
-          {openingCount > 5 && (
-            <tr>
-              <th colSpan="5">
-                <div
-                  style={{ display: "flex", gap: "10px", marginBottom: "10px" }}
-                >
-                  {openingCount > 5 && visibleCount !== 5 && (
-                    <button onClick={() => setVisibleCount(5)}>
-                      Show Top 5
-                    </button>
-                  )}
-                  {openingCount > 10 && visibleCount !== 10 && (
-                    <button onClick={() => setVisibleCount(10)}>
-                      Show Top 10
-                    </button>
-                  )}
-                  {visibleCount !== "all" && (
-                    <button onClick={() => setVisibleCount("all")}>
-                      Show All
-                    </button>
-                  )}
-                </div>
-              </th>
-            </tr>
-          )}
 
           <tr>
             <th className="sortable" onClick={() => handleSort("name")}>

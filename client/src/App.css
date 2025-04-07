@@ -55,3 +55,16 @@ th.sortable {
 th.sortable:hover {
   background-color: #ddd;
 }
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-buttons button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
