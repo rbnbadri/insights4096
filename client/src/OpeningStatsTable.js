@@ -5,10 +5,11 @@ const OpeningStatsTable = ({ data }) => {
     key: "played",
     direction: "desc",
   });
+  const [visibleCount, setVisibleCount] = useState(5); // 5, 10, or "all"
 
   const sortedData = Object.entries(data).sort((a, b) => {
-    const aVal = a[1][sortConfig.key];
-    const bVal = b[1][sortConfig.key];
+    const aVal = sortConfig.key === "name" ? a[0] : a[1][sortConfig.key];
+    const bVal = sortConfig.key === "name" ? b[0] : b[1][sortConfig.key];
 
     if (aVal < bVal) return sortConfig.direction === "asc" ? -1 : 1;
     if (aVal > bVal) return sortConfig.direction === "asc" ? 1 : -1;
@@ -18,6 +19,8 @@ const OpeningStatsTable = ({ data }) => {
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    } else {
       direction = "desc";
     }
     setSortConfig({ key, direction });
@@ -34,6 +37,13 @@ const OpeningStatsTable = ({ data }) => {
     { played: 0, won: 0, lost: 0, drawn: 0 },
   );
 
+  const openingCount = sortedData.length;
+
+  const getVisibleData = () => {
+    if (visibleCount === "all") return sortedData;
+    return sortedData.slice(0, visibleCount);
+  };
+
   return (
     <div className="table-wrapper">
       <table>
@@ -47,7 +57,9 @@ const OpeningStatsTable = ({ data }) => {
             </th>
           </tr>
           <tr>
-            <th>Opening Name</th>
+            <th className="sortable" onClick={() => handleSort("name")}>
+              Opening Name
+            </th>
             <th className="sortable" onClick={() => handleSort("played")}>
               Played
             </th>
@@ -63,7 +75,7 @@ const OpeningStatsTable = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {sortedData.map(([opening, stats], idx) => (
+          {getVisibleData().map(([opening, stats], idx) => (
             <tr key={idx}>
               <td>{opening}</td>
               <td>{stats.played}</td>
@@ -74,6 +86,21 @@ const OpeningStatsTable = ({ data }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Show buttons only if there's more than 5 */}
+      {openingCount > 5 && (
+        <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+          {openingCount > 5 && visibleCount !== 5 && (
+            <button onClick={() => setVisibleCount(5)}>Show Top 5</button>
+          )}
+          {openingCount > 10 && visibleCount !== 10 && (
+            <button onClick={() => setVisibleCount(10)}>Show Top 10</button>
+          )}
+          {visibleCount !== "all" && (
+            <button onClick={() => setVisibleCount("all")}>Show All</button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
