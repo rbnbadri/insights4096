@@ -56,6 +56,34 @@ const OpeningStatsTable = ({ data }) => {
               </strong>
             </th>
           </tr>
+
+          {/* Buttons go here */}
+          {openingCount > 5 && (
+            <tr>
+              <th colSpan="5">
+                <div
+                  style={{ display: "flex", gap: "10px", marginBottom: "10px" }}
+                >
+                  {openingCount > 5 && visibleCount !== 5 && (
+                    <button onClick={() => setVisibleCount(5)}>
+                      Show Top 5
+                    </button>
+                  )}
+                  {openingCount > 10 && visibleCount !== 10 && (
+                    <button onClick={() => setVisibleCount(10)}>
+                      Show Top 10
+                    </button>
+                  )}
+                  {visibleCount !== "all" && (
+                    <button onClick={() => setVisibleCount("all")}>
+                      Show All
+                    </button>
+                  )}
+                </div>
+              </th>
+            </tr>
+          )}
+
           <tr>
             <th className="sortable" onClick={() => handleSort("name")}>
               Opening Name
@@ -74,6 +102,7 @@ const OpeningStatsTable = ({ data }) => {
             </th>
           </tr>
         </thead>
+
         <tbody>
           {getVisibleData().map(([opening, stats], idx) => (
             <tr key={idx}>
@@ -86,21 +115,6 @@ const OpeningStatsTable = ({ data }) => {
           ))}
         </tbody>
       </table>
-
-      {/* Show buttons only if there's more than 5 */}
-      {openingCount > 5 && (
-        <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
-          {openingCount > 5 && visibleCount !== 5 && (
-            <button onClick={() => setVisibleCount(5)}>Show Top 5</button>
-          )}
-          {openingCount > 10 && visibleCount !== 10 && (
-            <button onClick={() => setVisibleCount(10)}>Show Top 10</button>
-          )}
-          {visibleCount !== "all" && (
-            <button onClick={() => setVisibleCount("all")}>Show All</button>
-          )}
-        </div>
-      )}
     </div>
   );
 };

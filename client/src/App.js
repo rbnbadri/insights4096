@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 
 function Insights4096() {
+  useEffect(() => {
+    document.title = "Insights4096";
+  }, []);
+
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
   const [totals, setTotals] = useState({
