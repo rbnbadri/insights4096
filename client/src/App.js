@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import OpeningStatsTable from "./OpeningStatsTableFixed";
+import OpeningStatsTable from "./OpeningStatsTable";
 
 function Insights4096() {
   useEffect(() => {
