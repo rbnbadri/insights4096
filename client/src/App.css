@@ -30,8 +30,8 @@
 }
 
 .summary-row th {
-  background-color: #444;
-  color: white;
+  color: white !important;
+  background-color: black !important;
   font-weight: bold;
   text-align: left;
   padding: 10px;
@@ -67,6 +67,8 @@ th.sortable:hover {
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
+  text-align: left;
+  padding: 10px;
 }
 
 .filter-dropdown {
@@ -85,14 +87,36 @@ th.sortable:hover {
 }
 
 .react-select__control {
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid black !important;
+  text-align: left;
+  padding: 10px;
+  width: 300px; /* double width */
+  overflow: hidden;
+  align-content: left; 
+}
+
+.react-select__multi-value {
   background-color: white !important;
   color: black !important;
-  border: 1px solid black !important;
+}
+
+.react-select__multi-value__label {
+  color: black !important;
+}
+
+.react-select__multi-value__remove {
+  color: black !important;
 }
 
 .react-select__menu {
   background-color: white !important;
   color: black !important;
+  width: 300px;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .react-select__option {
@@ -105,14 +129,6 @@ th.sortable:hover {
   background-color: #eee !important;
 }
 
-.react-select__multi-value {
-  background-color: #ddd !important;
-}
-
-.react-select__multi-value__label {
-  color: black !important;
-}
-
 .react-select__placeholder {
-  color: #666 !important;
+  color: black !important;
 }

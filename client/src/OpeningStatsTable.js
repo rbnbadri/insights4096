@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from "react";
 import Select from "react-select";
 
-function OpeningStatsTable({ title, data, totals }) {
+function OpeningStatsTable({ title, data, side }) {
   const [showCount, setShowCount] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  //  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleClearFilters = () => {
     setSelectedOptions([]);
@@ -43,6 +42,27 @@ function OpeningStatsTable({ title, data, totals }) {
       .slice(0, showCount);
   }, [data, showCount, selectedOptions]);
 
+  const { filteredTotals, totalRows } = useMemo(() => {
+    const filtered = Object.entries(data).filter(
+      ([_, val]) =>
+        selectedOptions.length === 0 ||
+        selectedOptions.some((opt) => opt.value === val.ecoCode),
+    );
+
+    const totals = filtered.reduce(
+      (acc, [_, val]) => {
+        acc.played += val.played;
+        acc.won += val.won;
+        acc.lost += val.lost;
+        acc.drawn += val.drawn;
+        return acc;
+      },
+      { played: 0, won: 0, lost: 0, drawn: 0 },
+    );
+
+    return { filteredTotals: totals, totalRows: filtered.length };
+  }, [data, selectedOptions]);
+
   if (!data) return null;
 
   return (
@@ -52,17 +72,45 @@ function OpeningStatsTable({ title, data, totals }) {
           <tr className="summary-row">
             <th colSpan="6">
               <div className="summary-header">
-                {title} (P: {totals.played}, W: {totals.won}, L: {totals.lost},
-                D: {totals.drawn})
+                {title} (P: {filteredTotals.played}, W: {filteredTotals.won}, L:{" "}
+                {filteredTotals.lost}, D: {filteredTotals.drawn}) — Showing{" "}
+                {Object.keys(filteredEntries).length} rows out of {totalRows}
                 <Select
                   isMulti
                   options={uniqueEcoOptions}
                   value={selectedOptions}
-                  // onMenuOpen={() => setDropdownOpen(true)}
-                  // onMenuClose={() => setDropdownOpen(false)}
                   onChange={(selected) => setSelectedOptions(selected)}
                   placeholder="Filter openings"
                   classNamePrefix="react-select"
+                  hideSelectedOptions={false}
+                  styles={{
+                    multiValue: (base, { data, index }) => {
+                      if (index < 3) return base;
+                      return { ...base, display: "none" };
+                    },
+                    valueContainer: (base) => ({
+                      ...base,
+                      position: "relative",
+                    }),
+                    indicatorsContainer: (base) => ({
+                      ...base,
+                      position: "absolute",
+                      right: 0,
+                    }),
+                  }}
+                  formatOptionLabel={(data, { context }) => {
+                    if (context === "value") {
+                      const index = selectedOptions.findIndex(
+                        (opt) => opt.value === data.value,
+                      );
+                      if (index === 2 && selectedOptions.length > 3) {
+                        return `${data.label}, ...`;
+                      }
+                      if (index >= 3) return null;
+                      return data.label;
+                    }
+                    return data.label;
+                  }}
                 />
                 <div className="summary-buttons">
                   <button onClick={() => setShowCount(5)}>Top 5</button>

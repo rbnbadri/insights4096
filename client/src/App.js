@@ -68,7 +68,7 @@ function Insights4096() {
         <OpeningStatsTable
           title="All Openings"
           data={filteredData.both}
-          totals={totals}
+          side="both"
         />
       ) : submitted ? (
         <p>No data found for the provided search.</p>
