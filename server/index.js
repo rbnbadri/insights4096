@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors"); // Import CORS
+const ecoData = require("./eco_openings.json").data; // Load ECO mapping
 
 const app = express();
 const PORT = 3000;
@@ -44,10 +45,11 @@ function extractOpenings(games, username) {
     let rapidCount = 0;
 
     games.forEach((game) => {
-        if (game.time_class === "rapid" && game.eco) {
+        if (game.time_class === "rapid" && game.eco && game.pgn) {
             rapidCount++;
 
-            const ecoUrlParts = game.eco.split("/");
+            const ecoUrl = game.eco;
+            const ecoUrlParts = ecoUrl.split("/");
             const lastPart = ecoUrlParts[ecoUrlParts.length - 1];
             const ecoMain = lastPart.split(/[.\d]/)[0].replace(/-/g, " ");
 
@@ -56,12 +58,27 @@ function extractOpenings(games, username) {
                     ? "white"
                     : "black";
 
+            // Extract ECO code from PGN
+            let ecoCodeString = "NA: NA";
+            try {
+                const ecoMatch = game.pgn.match(/\[ECO\s+"([A-E][0-9]{2})"\]/);
+                const ecoCode = ecoMatch ? ecoMatch[1] : null;
+                if (ecoCode && ecoData[ecoCode] && ecoData[ecoCode].Opening) {
+                    ecoCodeString = `${ecoCode}: ${ecoData[ecoCode].Opening}`;
+                }
+            } catch (err) {
+                console.warn("ECO parsing failed:", err.message);
+            }
+
+            // Initialize structure if needed
             if (!openings[color][ecoMain]) {
                 openings[color][ecoMain] = {
                     played: 0,
                     won: 0,
                     lost: 0,
                     drawn: 0,
+                    ecoCode: ecoCodeString,
+                    ecoUrl: ecoUrl,
                 };
             }
 
@@ -71,9 +88,12 @@ function extractOpenings(games, username) {
                     won: 0,
                     lost: 0,
                     drawn: 0,
+                    ecoCode: ecoCodeString,
+                    ecoUrl: ecoUrl,
                 };
             }
 
+            // Update stats
             openings[color][ecoMain].played++;
             openings.both[ecoMain].played++;
 

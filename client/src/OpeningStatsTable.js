@@ -5,11 +5,17 @@ const OpeningStatsTable = ({ data }) => {
     key: "played",
     direction: "desc",
   });
-  const [visibleCount, setVisibleCount] = useState(5); // 5, 10, or "all"
+  const [visibleCount, setVisibleCount] = useState(5);
 
   const sortedData = Object.entries(data).sort((a, b) => {
-    const aVal = sortConfig.key === "name" ? a[0] : a[1][sortConfig.key];
-    const bVal = sortConfig.key === "name" ? b[0] : b[1][sortConfig.key];
+    const getValue = (entry, key) => {
+      if (key === "name") return entry[0];
+      if (key === "ecoCode") return entry[1].ecoCode || "";
+      return entry[1][key];
+    };
+
+    const aVal = getValue(a, sortConfig.key);
+    const bVal = getValue(b, sortConfig.key);
 
     if (aVal < bVal) return sortConfig.direction === "asc" ? -1 : 1;
     if (aVal > bVal) return sortConfig.direction === "asc" ? 1 : -1;
@@ -19,8 +25,6 @@ const OpeningStatsTable = ({ data }) => {
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
-    } else {
       direction = "desc";
     }
     setSortConfig({ key, direction });
@@ -49,7 +53,7 @@ const OpeningStatsTable = ({ data }) => {
       <table>
         <thead>
           <tr className="summary-row">
-            <th colSpan="5">
+            <th colSpan="7">
               <div className="summary-header">
                 <strong>
                   All Openings: P: {total.played} W: {total.won} L: {total.lost}{" "}
@@ -80,6 +84,9 @@ const OpeningStatsTable = ({ data }) => {
             <th className="sortable" onClick={() => handleSort("name")}>
               Opening Name
             </th>
+            <th className="sortable" onClick={() => handleSort("ecoCode")}>
+              Opening Name with Eco
+            </th>
             <th className="sortable" onClick={() => handleSort("played")}>
               Played
             </th>
@@ -99,6 +106,15 @@ const OpeningStatsTable = ({ data }) => {
           {getVisibleData().map(([opening, stats], idx) => (
             <tr key={idx}>
               <td>{opening}</td>
+              <td>
+                {stats.ecoCode && stats.ecoUrl ? (
+                  <a href={stats.ecoUrl} target="_blank" rel="noreferrer">
+                    {stats.ecoCode}
+                  </a>
+                ) : (
+                  "NA"
+                )}
+              </td>
               <td>{stats.played}</td>
               <td>{stats.won}</td>
               <td>{stats.lost}</td>
