@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from "react";
-import Select from "react-select";
-import "./App.css";
 
-const OpeningStatsTable = ({ data }) => {
+import React, { useState, useMemo } from 'react';
+import Select from 'react-select';
+import './App.css';
+
+function OpeningStatsTable({ data }) {
   const [sortConfig, setSortConfig] = useState({
     key: "played",
     direction: "desc",
@@ -148,6 +149,6 @@ const OpeningStatsTable = ({ data }) => {
       </table>
     </div>
   );
-};
+}
 
 export default OpeningStatsTable;
