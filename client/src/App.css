@@ -68,3 +68,51 @@ th.sortable:hover {
   font-size: 14px;
   cursor: pointer;
 }
+
+.filter-dropdown {
+  margin-top: 15px;
+  max-width: 70%;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.dropdown-container {
+  margin: 10px 0;
+  width: 300px;
+}
+
+.react-select__control {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid black !important;
+}
+
+.react-select__menu {
+  background-color: white !important;
+  color: black !important;
+}
+
+.react-select__option {
+  background-color: white !important;
+  color: black !important;
+  cursor: pointer;
+}
+
+.react-select__option--is-focused {
+  background-color: #eee !important;
+}
+
+.react-select__multi-value {
+  background-color: #ddd !important;
+}
+
+.react-select__multi-value__label {
+  color: black !important;
+}
+
+.react-select__placeholder {
+  color: #666 !important;
+}

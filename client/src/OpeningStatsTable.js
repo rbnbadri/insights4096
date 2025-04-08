@@ -1,148 +1,108 @@
+import React, { useState, useMemo } from "react";
+import Select from "react-select";
 
-import React, { useState, useMemo } from 'react';
-import Select from 'react-select';
-import './App.css';
-
-function OpeningStatsTable({ data }) {
-  const [sortConfig, setSortConfig] = useState({
-    key: "played",
-    direction: "desc",
-  });
-  const [visibleCount, setVisibleCount] = useState(5);
+function OpeningStatsTable({ title, data, totals }) {
+  const [showCount, setShowCount] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [hasFiltered, setHasFiltered] = useState(false);
+  //  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleSort = (key) => {
-    const direction =
-      sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
-    setSortConfig({ key, direction });
-  };
-
-  const sortedData = useMemo(() => {
-    const dataArray = Object.entries(data || {}).map(([name, stats]) => ({
-      name,
-      ...stats,
-    }));
-
-    if (sortConfig.key) {
-      dataArray.sort((a, b) => {
-        const aVal = a[sortConfig.key] ?? 0;
-        const bVal = b[sortConfig.key] ?? 0;
-        return sortConfig.direction === "asc" ? aVal - bVal : bVal - aVal;
-      });
-    }
-
-    return dataArray;
-  }, [data, sortConfig]);
-
-  const filteredSortedData = useMemo(() => {
-    if (!hasFiltered || selectedOptions.length === 0) {
-      return sortedData;
-    }
-
-    const selectedLabels = selectedOptions.map((option) => option.label);
-    return sortedData.filter((item) => selectedLabels.includes(item.ecoCode));
-  }, [sortedData, selectedOptions, hasFiltered]);
-
-  const displayData = filteredSortedData.slice(0, visibleCount);
-
-  const allOptions = useMemo(
-    () =>
-      sortedData.map((item) => ({
-        value: item.ecoCode,
-        label: item.ecoCode,
-      })),
-    [sortedData],
-  );
-
-  const handleSelectChange = (selected) => {
-    setSelectedOptions(selected || []);
-    setHasFiltered(true);
-  };
-
-  const clearFilters = () => {
+  const handleClearFilters = () => {
     setSelectedOptions([]);
-    setHasFiltered(false);
+    setShowCount(5);
   };
 
-  const total = useMemo(() => {
-    return filteredSortedData.reduce(
-      (acc, item) => {
-        acc.played += item.played;
-        acc.won += item.won;
-        acc.lost += item.lost;
-        acc.drawn += item.drawn;
-        return acc;
-      },
-      { played: 0, won: 0, lost: 0, drawn: 0 },
-    );
-  }, [filteredSortedData]);
+  const uniqueEcoOptions = useMemo(() => {
+    if (!data) return [];
+    const seen = new Set();
+    return Object.entries(data)
+      .filter(([_, value]) => {
+        if (seen.has(value.ecoCode)) return false;
+        seen.add(value.ecoCode);
+        return true;
+      })
+      .map(([_, value]) => ({
+        label: value.ecoCode,
+        value: value.ecoCode,
+      }));
+  }, [data]);
+
+  const filteredEntries = useMemo(() => {
+    if (!data) return [];
+    const entries = Object.entries(data);
+
+    let filtered = entries;
+    if (selectedOptions.length > 0) {
+      const selectedValues = selectedOptions.map((opt) => opt.value);
+      filtered = entries.filter(([_, val]) =>
+        selectedValues.includes(val.ecoCode),
+      );
+    }
+
+    return filtered
+      .sort((a, b) => b[1].played - a[1].played)
+      .slice(0, showCount);
+  }, [data, showCount, selectedOptions]);
+
+  if (!data) return null;
 
   return (
     <div className="table-wrapper">
-      <div className="table-header-bar">
-        <div className="summary-text">
-          All Openings: P: {total.played}, W: {total.won}, L: {total.lost}, D:{" "}
-          {total.drawn}
-        </div>
-        <div className="button-group">
-          <button onClick={() => setVisibleCount(5)}>Show 5</button>
-          <button onClick={() => setVisibleCount(10)}>Show 10</button>
-          <button onClick={() => setVisibleCount(sortedData.length)}>
-            Show All
-          </button>
-          <button onClick={clearFilters}>Clear Filters</button>
-        </div>
-      </div>
-
-      <div className="filter-dropdown">
-        <Select
-          isMulti
-          options={allOptions}
-          onChange={handleSelectChange}
-          value={selectedOptions}
-          placeholder="Filter openings"
-          className="react-select-container"
-          classNamePrefix="react-select"
-        />
-      </div>
-
       <table>
         <thead>
+          <tr className="summary-row">
+            <th colSpan="6">
+              <div className="summary-header">
+                {title} (P: {totals.played}, W: {totals.won}, L: {totals.lost},
+                D: {totals.drawn})
+                <Select
+                  isMulti
+                  options={uniqueEcoOptions}
+                  value={selectedOptions}
+                  // onMenuOpen={() => setDropdownOpen(true)}
+                  // onMenuClose={() => setDropdownOpen(false)}
+                  onChange={(selected) => setSelectedOptions(selected)}
+                  placeholder="Filter openings"
+                  classNamePrefix="react-select"
+                />
+                <div className="summary-buttons">
+                  <button onClick={() => setShowCount(5)}>Top 5</button>
+                  <button onClick={() => setShowCount(10)}>Top 10</button>
+                  <button onClick={() => setShowCount(1000)}>Show All</button>
+                  <button onClick={handleClearFilters}>Clear Filters</button>
+                </div>
+              </div>
+            </th>
+          </tr>
           <tr>
-            <th className="sortable" onClick={() => handleSort("name")}>
-              Opening Name
-            </th>
-            <th className="sortable" onClick={() => handleSort("ecoCode")}>
-              Opening Name with ECO
-            </th>
-            <th className="sortable" onClick={() => handleSort("played")}>
-              Played
-            </th>
-            <th className="sortable" onClick={() => handleSort("won")}>
-              Won
-            </th>
-            <th className="sortable" onClick={() => handleSort("lost")}>
-              Lost
-            </th>
-            <th className="sortable" onClick={() => handleSort("drawn")}>
-              Drawn
-            </th>
+            <th>Opening Name</th>
+            <th>Opening Name with Eco</th>
+            <th>Played</th>
+            <th>Won</th>
+            <th>Lost</th>
+            <th>Drawn</th>
           </tr>
         </thead>
         <tbody>
-          {displayData.map((item, idx) => (
+          {filteredEntries.map(([opening, stats], idx) => (
             <tr key={idx}>
-              <td>{item.name}</td>
+              <td>{opening}</td>
               <td>
-                <a href={item.ecoUrl} target="_blank" rel="noopener noreferrer">
-                  {item.ecoCode}
-                </a>
+                {stats.ecoUrl ? (
+                  <a
+                    href={stats.ecoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {stats.ecoCode}
+                  </a>
+                ) : (
+                  stats.ecoCode
+                )}
               </td>
-              <td>{item.played}</td>
-              <td>{item.won}</td>
-              <td>{item.lost}</td>
-              <td>{item.drawn}</td>
+              <td>{stats.played}</td>
+              <td>{stats.won}</td>
+              <td>{stats.lost}</td>
+              <td>{stats.drawn}</td>
             </tr>
           ))}
         </tbody>
