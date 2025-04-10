@@ -24,7 +24,7 @@ function Insights4096() {
 
     try {
       const response = await fetch(
-        `https://fc511c5e-ad91-434b-b376-03734aabba98-00-15nynkqgkr4sv.sisko.replit.dev/openings/${username}`,
+        `https://insights4096-backend.onrender.com/openings/${username}`,
       );
       const result = await response.json();
       const gamedata = result.data;
