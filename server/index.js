@@ -60,11 +60,13 @@ function extractOpenings(games, username) {
 
             // Extract ECO code from PGN
             let ecoCodeString = "NA: NA";
+            let ecoUrlString = null;
             try {
                 const ecoMatch = game.pgn.match(/\[ECO\s+"([A-E][0-9]{2})"\]/);
                 const ecoCode = ecoMatch ? ecoMatch[1] : null;
                 if (ecoCode && ecoData[ecoCode] && ecoData[ecoCode].Opening) {
                     ecoCodeString = `${ecoCode}: ${ecoData[ecoCode].Opening}`;
+                    ecoUrlString = ecoData[ecoCode].OpeningUrl;
                 }
             } catch (err) {
                 console.warn("ECO parsing failed:", err.message);
@@ -79,6 +81,7 @@ function extractOpenings(games, username) {
                     drawn: 0,
                     ecoCode: ecoCodeString,
                     ecoUrl: ecoUrl,
+                    ecoUrlString: ecoUrlString,
                 };
             }
 
@@ -90,6 +93,7 @@ function extractOpenings(games, username) {
                     drawn: 0,
                     ecoCode: ecoCodeString,
                     ecoUrl: ecoUrl,
+                    ecoUrlString: ecoUrlString,
                 };
             }
 

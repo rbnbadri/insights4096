@@ -4,2003 +4,2503 @@
   "data": {
     "A00": {
       "Opening": "Uncommon Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Uncommon"
     },
     "A01": {
       "Opening": "Nimzovich-Larsen Attack",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Nimzowitsch-Larsen-Attack"
     },
     "A02": {
       "Opening": "Bird's Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Birds-Opening"
     },
     "A03": {
       "Opening": "Bird's Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Birds-Opening"
     },
     "A04": {
       "Opening": "Reti Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Reti-Opening"
     },
     "A05": {
       "Opening": "Reti Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Reti-Opening"
     },
     "A06": {
       "Opening": "Reti Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Reti-Opening"
     },
     "A07": {
       "Opening": "King's Indian Attack",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Attack"
     },
     "A08": {
       "Opening": "King's Indian Attack",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Attack"
     },
     "A09": {
       "Opening": "Reti Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Reti-Opening"
     },
     "A10": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A11": {
       "Opening": "English Opening",
-      "Variation": "Caro-Kann Defensive System"
+      "Variation": "Caro-Kann Defensive System",
+      "OpeningUrl": "English-Opening"
     },
     "A12": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A13": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A14": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A15": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A16": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A17": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A18": {
       "Opening": "English Opening",
-      "Variation": "Mikenas-Carls"
+      "Variation": "Mikenas-Carls",
+      "OpeningUrl": "English-Opening"
     },
     "A19": {
       "Opening": "English Opening",
-      "Variation": "Mikenas-Carls"
+      "Variation": "Mikenas-Carls",
+      "OpeningUrl": "English-Opening"
     },
     "A20": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A21": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A22": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A23": {
       "Opening": "English Opening",
-      "Variation": "Bremen System"
+      "Variation": "Bremen System",
+      "OpeningUrl": "English-Opening"
     },
     "A24": {
       "Opening": "English Opening",
-      "Variation": "Bremen System"
+      "Variation": "Bremen System",
+      "OpeningUrl": "English-Opening"
     },
     "A25": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A26": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A27": {
       "Opening": "English Opening",
-      "Variation": "Three Knights System"
+      "Variation": "Three Knights System",
+      "OpeningUrl": "English-Opening"
     },
     "A28": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A29": {
       "Opening": "English Opening",
-      "Variation": "Four Knights"
+      "Variation": "Four Knights",
+      "OpeningUrl": "English-Opening"
     },
     "A30": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A31": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A32": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical Variation"
+      "Variation": "Symmetrical Variation",
+      "OpeningUrl": "English-Opening"
     },
     "A33": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A34": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A35": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A36": {
       "Opening": "English Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "English-Opening"
     },
     "A37": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A38": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A39": {
       "Opening": "English Opening",
-      "Variation": "Symmetrical"
+      "Variation": "Symmetrical",
+      "OpeningUrl": "English-Opening"
     },
     "A40": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "A41": {
       "Opening": "Queen's Pawn Game (with ...d6)",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "A42": {
       "Opening": "Modern Defense",
-      "Variation": "Averbakh System"
+      "Variation": "Averbakh System",
+      "OpeningUrl": "Modern-Defense-with-1-e4"
     },
     "A43": {
       "Opening": "Old Benoni",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A44": {
       "Opening": "Old Benoni Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A45": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "A46": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "A47": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "A48": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "A49": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Attack"
     },
     "A50": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "A51": {
       "Opening": "Budapest Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Budapest-Gambit"
     },
     "A52": {
       "Opening": "Budapest Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Budapest-Gambit"
     },
     "A53": {
       "Opening": "Old Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Old-Indian"
     },
     "A54": {
       "Opening": "Old Indian",
-      "Variation": "Ukrainian Variation"
+      "Variation": "Ukrainian Variation",
+      "OpeningUrl": "Old-Indian"
     },
     "A55": {
       "Opening": "Old Indian",
-      "Variation": "Main line"
+      "Variation": "Main line",
+      "OpeningUrl": "Old-Indian"
     },
     "A56": {
       "Opening": "Benoni Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A57": {
       "Opening": "Benko Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benko-Gambit"
     },
     "A58": {
       "Opening": "Benko Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benko-Gambit"
     },
     "A59": {
       "Opening": "Benko Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benko-Gambit"
     },
     "A60": {
       "Opening": "Benoni Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A61": {
       "Opening": "Benoni",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A62": {
       "Opening": "Benoni",
-      "Variation": "Fianchetto Variation"
+      "Variation": "Fianchetto Variation",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A63": {
       "Opening": "Benoni",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A64": {
       "Opening": "Benoni",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A65": {
       "Opening": "Benoni",
-      "Variation": "6.e4"
+      "Variation": "6.e4",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A66": {
       "Opening": "Benoni",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Benoni-Defense"
     },
     "A67": {
       "Opening": "Benoni",
-      "Variation": "Taimanov Variation"
+      "Variation": "Taimanov Variation",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A68": {
       "Opening": "Benoni",
-      "Variation": "Four Pawns Attack"
+      "Variation": "Four Pawns Attack",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A69": {
       "Opening": "Benoni",
-      "Variation": "Four Pawns Attack"
+      "Variation": "Four Pawns Attack",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A70": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A71": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A72": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A73": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A74": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A75": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A76": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A77": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A78": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A79": {
       "Opening": "Benoni",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Benoni-Defense"
     },
     "A80": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A81": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A82": {
       "Opening": "Dutch",
-      "Variation": "Staunton Gambit"
+      "Variation": "Staunton Gambit",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A83": {
       "Opening": "Dutch",
-      "Variation": "Staunton Gambit"
+      "Variation": "Staunton Gambit",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A84": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A85": {
       "Opening": "Dutch",
-      "Variation": ""
+      "Variation": "",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A86": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A87": {
       "Opening": "Dutch",
-      "Variation": "Leningrad"
+      "Variation": "Leningrad",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A88": {
       "Opening": "Dutch",
-      "Variation": "Leningrad"
+      "Variation": "Leningrad",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A89": {
       "Opening": "Dutch",
-      "Variation": "Leningrad"
+      "Variation": "Leningrad",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A90": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A91": {
       "Opening": "Dutch Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A92": {
       "Opening": "Dutch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Dutch-Defense"
     },
     "A93": {
       "Opening": "Dutch",
-      "Variation": "Stonewall"
+      "Variation": "Stonewall",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A94": {
       "Opening": "Dutch",
-      "Variation": "Stonewall"
+      "Variation": "Stonewall",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A95": {
       "Opening": "Dutch",
-      "Variation": "Stonewall"
+      "Variation": "Stonewall",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A96": {
       "Opening": "Dutch",
-      "Variation": "Classical Variation"
+      "Variation": "Classical Variation",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A97": {
       "Opening": "Dutch",
-      "Variation": "Ilyin-Genevsky"
+      "Variation": "Ilyin-Genevsky",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A98": {
       "Opening": "Dutch",
-      "Variation": "Ilyin-Genevsky Variation"
+      "Variation": "Ilyin-Genevsky Variation",
+      "OpeningUrl": "Dutch-Defense"
     },
     "A99": {
       "Opening": "Dutch",
-      "Variation": "Ilyin-Genevsky Variation"
+      "Variation": "Ilyin-Genevsky Variation",
+      "OpeningUrl": "Dutch-Defense"
     },
     "B00": {
       "Opening": "Uncommon King's Pawn Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Pawn-Opening"
     },
     "B01": {
       "Opening": "Scandinavian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Scandinavian-Defense"
     },
     "B02": {
       "Opening": "Alekhine's Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Alekhines-Defense"
     },
     "B03": {
       "Opening": "Alekhine's Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Alekhines-Defense"
     },
     "B04": {
       "Opening": "Alekhine's Defense",
-      "Variation": "Modern"
+      "Variation": "Modern",
+      "OpeningUrl": "Alekhines-Defense"
     },
     "B05": {
       "Opening": "Alekhine's Defense",
-      "Variation": "Modern"
+      "Variation": "Modern",
+      "OpeningUrl": "Alekhines-Defense"
     },
     "B06": {
       "Opening": "Robatsch",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "B07": {
       "Opening": "Pirc",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Pirc-Defense"
     },
     "B08": {
       "Opening": "Pirc",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Pirc-Defense"
     },
     "B09": {
       "Opening": "Pirc",
-      "Variation": "Austrian Attack"
+      "Variation": "Austrian Attack",
+      "OpeningUrl": "Pirc-Defense"
     },
     "B10": {
       "Opening": "Caro-Kann",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B11": {
       "Opening": "Caro-Kann",
-      "Variation": "Two Knights"
+      "Variation": "Two Knights",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B12": {
       "Opening": "Caro-Kann Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B13": {
       "Opening": "Caro-Kann",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B14": {
       "Opening": "Caro-Kann",
-      "Variation": "Panov-Botvinnik Attack"
+      "Variation": "Panov-Botvinnik Attack",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B15": {
       "Opening": "Caro-Kann",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B16": {
       "Opening": "Caro-Kann",
-      "Variation": "Bronstein-Larsen Variation"
+      "Variation": "Bronstein-Larsen Variation",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B17": {
       "Opening": "Caro-Kann",
-      "Variation": "Steinitz Variation"
+      "Variation": "Steinitz Variation",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B18": {
       "Opening": "Caro-Kann",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B19": {
       "Opening": "Caro-Kann",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Caro-Kann-Defense"
     },
     "B20": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B21": {
       "Opening": "Sicilian",
-      "Variation": "2.f4 and 2.d4"
+      "Variation": "2.f4 and 2.d4",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B22": {
       "Opening": "Sicilian",
-      "Variation": "Alapin"
+      "Variation": "Alapin",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B23": {
       "Opening": "Sicilian",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B24": {
       "Opening": "Sicilian",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B25": {
       "Opening": "Sicilian",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B26": {
       "Opening": "Sicilian",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B27": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B28": {
       "Opening": "Sicilian",
-      "Variation": "O'Kelly Variation"
+      "Variation": "O'Kelly Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B29": {
       "Opening": "Sicilian",
-      "Variation": "Nimzovich-Rubinstein"
+      "Variation": "Nimzovich-Rubinstein",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B30": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B31": {
       "Opening": "Sicilian",
-      "Variation": "Rossolimo Variation"
+      "Variation": "Rossolimo Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B32": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B33": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B34": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B35": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B36": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B37": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B38": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B39": {
       "Opening": "Sicilian",
-      "Variation": "Accelerated Fianchetto"
+      "Variation": "Accelerated Fianchetto",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B40": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B41": {
       "Opening": "Sicilian",
-      "Variation": "Kan"
+      "Variation": "Kan",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B42": {
       "Opening": "Sicilian",
-      "Variation": "Kan"
+      "Variation": "Kan",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B43": {
       "Opening": "Sicilian",
-      "Variation": "Kan"
+      "Variation": "Kan",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B44": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B45": {
       "Opening": "Sicilian",
-      "Variation": "Taimanov"
+      "Variation": "Taimanov",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B46": {
       "Opening": "Sicilian",
-      "Variation": "Taimanov Variation"
+      "Variation": "Taimanov Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B47": {
       "Opening": "Sicilian",
-      "Variation": "Taimanov (Bastrikov) Variation"
+      "Variation": "Taimanov (Bastrikov) Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B48": {
       "Opening": "Sicilian",
-      "Variation": "Taimanov Variation"
+      "Variation": "Taimanov Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B49": {
       "Opening": "Sicilian",
-      "Variation": "Taimanov Variation"
+      "Variation": "Taimanov Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B50": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B51": {
       "Opening": "Sicilian",
-      "Variation": "Canal-Sokolsky (Rossolimo) Attack"
+      "Variation": "Canal-Sokolsky (Rossolimo) Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B52": {
       "Opening": "Sicilian",
-      "Variation": "Canal-Sokolsky (Rossolimo) Attack"
+      "Variation": "Canal-Sokolsky (Rossolimo) Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B53": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B54": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B55": {
       "Opening": "Sicilian",
-      "Variation": "Prins Variation"
+      "Variation": "Prins Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B56": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B57": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B58": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B59": {
       "Opening": "Sicilian",
-      "Variation": "Boleslavsky Variation"
+      "Variation": "Boleslavsky Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B60": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer"
+      "Variation": "Richter-Rauzer",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B61": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer"
+      "Variation": "Richter-Rauzer",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B62": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer"
+      "Variation": "Richter-Rauzer",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B63": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B64": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B65": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B66": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B67": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B68": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B69": {
       "Opening": "Sicilian",
-      "Variation": "Richter-Rauzer Attack"
+      "Variation": "Richter-Rauzer Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B70": {
       "Opening": "Sicilian",
-      "Variation": "Dragon Variation"
+      "Variation": "Dragon Variation",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B71": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B72": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B73": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B74": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B75": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B76": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B77": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B78": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B79": {
       "Opening": "Sicilian",
-      "Variation": "Dragon"
+      "Variation": "Dragon",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B80": {
       "Opening": "Sicilian",
-      "Variation": "Scheveningen"
+      "Variation": "Scheveningen",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B81": {
       "Opening": "Sicilian",
-      "Variation": "Scheveningen"
+      "Variation": "Scheveningen",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B82": {
       "Opening": "Sicilian",
-      "Variation": "Scheveningen"
+      "Variation": "Scheveningen",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B83": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B84": {
       "Opening": "Sicilian",
-      "Variation": "Scheveningen"
+      "Variation": "Scheveningen",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B85": {
       "Opening": "Sicilian",
-      "Variation": "Scheveningen"
+      "Variation": "Scheveningen",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B86": {
       "Opening": "Sicilian",
-      "Variation": "Fischer-Sozin Attack"
+      "Variation": "Fischer-Sozin Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B87": {
       "Opening": "Sicilian",
-      "Variation": "Fischer-Sozin"
+      "Variation": "Fischer-Sozin",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B88": {
       "Opening": "Sicilian",
-      "Variation": "Fischer-Sozin Attack"
+      "Variation": "Fischer-Sozin Attack",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B89": {
       "Opening": "Sicilian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B90": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B91": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B92": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B93": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B94": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B95": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B96": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B97": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B98": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "B99": {
       "Opening": "Sicilian",
-      "Variation": "Najdorf"
+      "Variation": "Najdorf",
+      "OpeningUrl": "Sicilian-Defense"
     },
     "C00": {
       "Opening": "French Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "French-Defense"
     },
     "C01": {
       "Opening": "French",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "French-Defense"
     },
     "C02": {
       "Opening": "French",
-      "Variation": "Advance"
+      "Variation": "Advance",
+      "OpeningUrl": "French-Defense"
     },
     "C03": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C04": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C05": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C06": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C07": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C08": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C09": {
       "Opening": "French",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "French-Defense"
     },
     "C10": {
       "Opening": "French",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "French-Defense"
     },
     "C11": {
       "Opening": "French",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "French-Defense"
     },
     "C12": {
       "Opening": "French",
-      "Variation": "McCutcheon"
+      "Variation": "McCutcheon",
+      "OpeningUrl": "French-Defense"
     },
     "C13": {
       "Opening": "French",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "French-Defense"
     },
     "C14": {
       "Opening": "French",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "French-Defense"
     },
     "C15": {
       "Opening": "French",
-      "Variation": "Winawer"
+      "Variation": "Winawer",
+      "OpeningUrl": "French-Defense"
     },
     "C16": {
       "Opening": "French",
-      "Variation": "Winawer"
+      "Variation": "Winawer",
+      "OpeningUrl": "French-Defense"
     },
     "C17": {
       "Opening": "French",
-      "Variation": "Winawer"
+      "Variation": "Winawer",
+      "OpeningUrl": "French-Defense"
     },
     "C18": {
       "Opening": "French",
-      "Variation": "Winawer"
+      "Variation": "Winawer",
+      "OpeningUrl": "French-Defense"
     },
     "C19": {
       "Opening": "French",
-      "Variation": "Winawer"
+      "Variation": "Winawer",
+      "OpeningUrl": "French-Defense"
     },
     "C20": {
       "Opening": "King's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Pawn-Opening"
     },
     "C21": {
       "Opening": "Center Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Center-Game"
     },
     "C22": {
       "Opening": "Center Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Center-Game"
     },
     "C23": {
       "Opening": "Bishop's Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Bishops-Opening"
     },
     "C24": {
       "Opening": "Bishop's Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Bishops-Opening"
     },
     "C25": {
       "Opening": "Vienna",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Vienna-Game"
     },
     "C26": {
       "Opening": "Vienna",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Vienna-Game"
     },
     "C27": {
       "Opening": "Vienna Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Vienna-Game"
     },
     "C28": {
       "Opening": "Vienna Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Vienna-Game"
     },
     "C29": {
       "Opening": "Vienna Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Vienna-Game"
     },
     "C30": {
       "Opening": "King's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C31": {
       "Opening": "King's Gambit Declined",
-      "Variation": "Falkbeer Counter Gambit"
+      "Variation": "Falkbeer Counter Gambit",
+      "OpeningUrl": "Kings-Gambit"
     },
     "C32": {
       "Opening": "King's Gambit Declined",
-      "Variation": "Falkbeer Counter Gambit"
+      "Variation": "Falkbeer Counter Gambit",
+      "OpeningUrl": "Kings-Gambit"
     },
     "C33": {
       "Opening": "King's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C34": {
       "Opening": "King's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C35": {
       "Opening": "King's Gambit Accepted",
-      "Variation": "Cunningham"
+      "Variation": "Cunningham",
+      "OpeningUrl": "Kings-Gambit"
     },
     "C36": {
       "Opening": "King's Gambit Accepted",
-      "Variation": "Abbazia Defense"
+      "Variation": "Abbazia Defense",
+      "OpeningUrl": "Kings-Gambit"
     },
     "C37": {
       "Opening": "King's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C38": {
       "Opening": "King's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C39": {
       "Opening": "King's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Gambit"
     },
     "C40": {
       "Opening": "King's Knight Opening",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "C41": {
       "Opening": "Philidor Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Philidor-Defense"
     },
     "C42": {
       "Opening": "Petrov Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Petrovs-Defense"
     },
     "C43": {
       "Opening": "Petrov",
-      "Variation": "Modern Attack"
+      "Variation": "Modern Attack",
+      "OpeningUrl": "Petrovs-Defense"
     },
     "C44": {
       "Opening": "King's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Pawn-Opening"
     },
     "C45": {
       "Opening": "Scotch Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Scotch-Game"
     },
     "C46": {
       "Opening": "Three Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Three-Knights-Game"
     },
     "C47": {
       "Opening": "Four Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Four-Knights-Game"
     },
     "C48": {
       "Opening": "Four Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Four-Knights-Game"
     },
     "C49": {
       "Opening": "Four Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Four-Knights-Game"
     },
     "C50": {
       "Opening": "Giuoco Piano",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C51": {
       "Opening": "Evans Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C52": {
       "Opening": "Evans Gambit",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C53": {
       "Opening": "Giuoco Piano",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C54": {
       "Opening": "Giuoco Piano",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C55": {
       "Opening": "Two Knights Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C56": {
       "Opening": "Two Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C57": {
       "Opening": "Two Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C58": {
       "Opening": "Two Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C59": {
       "Opening": "Two Knights",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C60": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Italian-Game"
     },
     "C61": {
       "Opening": "Ruy Lopez",
-      "Variation": "Bird's Defense"
+      "Variation": "Bird's Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C62": {
       "Opening": "Ruy Lopez",
-      "Variation": "Old Steinitz Defense"
+      "Variation": "Old Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C63": {
       "Opening": "Ruy Lopez",
-      "Variation": "Schliemann Defense"
+      "Variation": "Schliemann Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C64": {
       "Opening": "Ruy Lopez",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C65": {
       "Opening": "Ruy Lopez",
-      "Variation": "Berlin Defense"
+      "Variation": "Berlin Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C66": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C67": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C68": {
       "Opening": "Ruy Lopez",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C69": {
       "Opening": "Ruy Lopez",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C70": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C71": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C72": {
       "Opening": "Ruy Lopez",
-      "Variation": "Modern Steinitz Defense"
+      "Variation": "Modern Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C73": {
       "Opening": "Ruy Lopez",
-      "Variation": "Modern Steinitz Defense"
+      "Variation": "Modern Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C74": {
       "Opening": "Ruy Lopez",
-      "Variation": "Modern Steinitz Defense"
+      "Variation": "Modern Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C75": {
       "Opening": "Ruy Lopez",
-      "Variation": "Modern Steinitz Defense"
+      "Variation": "Modern Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C76": {
       "Opening": "Ruy Lopez",
-      "Variation": "Modern Steinitz Defense"
+      "Variation": "Modern Steinitz Defense",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C77": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C78": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C79": {
       "Opening": "Ruy Lopez",
-      "Variation": "Steinitz Defense Deferred"
+      "Variation": "Steinitz Defense Deferred",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C80": {
       "Opening": "Ruy Lopez",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C81": {
       "Opening": "Ruy Lopez",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C82": {
       "Opening": "Ruy Lopez",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C83": {
       "Opening": "Ruy Lopez",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C84": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C85": {
       "Opening": "Ruy Lopez",
-      "Variation": "Exchange Variation Doubly Deferred (DERLD)"
+      "Variation": "Exchange Variation Doubly Deferred (DERLD)",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C86": {
       "Opening": "Ruy Lopez",
-      "Variation": "Worrall Attack"
+      "Variation": "Worrall Attack",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C87": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C88": {
       "Opening": "Ruy Lopez",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C89": {
       "Opening": "Ruy Lopez",
-      "Variation": "Marshall"
+      "Variation": "Marshall",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C90": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C91": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C92": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C93": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C94": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C95": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C96": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C97": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C98": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "C99": {
       "Opening": "Ruy Lopez",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Ruy-Lopez-Opening"
     },
     "D00": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "D01": {
       "Opening": "Richter-Veresov Attack",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "D02": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "D03": {
       "Opening": "Torre Attack (Tartakower Variation)",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "D04": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "D05": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "D06": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D07": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Chigorin Defense"
+      "Variation": "Chigorin Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D08": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Albin Counter Gambit"
+      "Variation": "Albin Counter Gambit",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D09": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Albin Counter Gambit"
+      "Variation": "Albin Counter Gambit",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D10": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D11": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D12": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D13": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": "Exchange Variation"
+      "Variation": "Exchange Variation",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D14": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": "Exchange Variation"
+      "Variation": "Exchange Variation",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D15": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D16": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D17": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D18": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": "Dutch"
+      "Variation": "Dutch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D19": {
       "Opening": "Queen's Gambit Declined Slav",
-      "Variation": "Dutch"
+      "Variation": "Dutch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D20": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D21": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D22": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D23": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D24": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D25": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D26": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D27": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D28": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D29": {
       "Opening": "Queen's Gambit Accepted",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D30": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D31": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D32": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D33": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D34": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Tarrasch"
+      "Variation": "Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D35": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D36": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D37": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D38": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Ragozin Variation"
+      "Variation": "Ragozin Variation",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D39": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Ragozin"
+      "Variation": "Ragozin",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D40": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Semi-Tarrasch"
+      "Variation": "Semi-Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D41": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Semi-Tarrasch"
+      "Variation": "Semi-Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D42": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Semi-Tarrasch"
+      "Variation": "Semi-Tarrasch",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D43": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D44": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D45": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D46": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D47": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D48": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": "Meran"
+      "Variation": "Meran",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D49": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
-      "Variation": "Meran"
+      "Variation": "Meran",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D50": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D51": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D52": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D53": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D54": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Anti-Neo-Orthodox Variation"
+      "Variation": "Anti-Neo-Orthodox Variation",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D55": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D56": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Gambit"
     },
     "D57": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Lasker Defense"
+      "Variation": "Lasker Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D58": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Tartakower (Makagonov-Bondarevsky) System"
+      "Variation": "Tartakower (Makagonov-Bondarevsky) System",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D59": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Tartakower"
+      "Variation": "Tartakower",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D60": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D61": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D62": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D63": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D64": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D65": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D66": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D67": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D68": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D69": {
       "Opening": "Queen's Gambit Declined",
-      "Variation": "Orthodox Defense"
+      "Variation": "Orthodox Defense",
+      "OpeningUrl": "Queens-Gambit"
     },
     "D70": {
       "Opening": "Neo-Grunfeld Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": null
     },
     "D71": {
       "Opening": "Neo-Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D72": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "5.cd"
+      "Variation": "5.cd",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D73": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "5.Nf3"
+      "Variation": "5.Nf3",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D74": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.cd Nxd5"
+      "Variation": "6.cd Nxd5",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D75": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.cd Nxd5"
+      "Variation": "6.cd Nxd5",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D76": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.cd Nxd5"
+      "Variation": "6.cd Nxd5",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D77": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.O-O"
+      "Variation": "6.O-O",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D78": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.O-O c6"
+      "Variation": "6.O-O c6",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D79": {
       "Opening": "Neo-Grunfeld",
-      "Variation": "6.O-O"
+      "Variation": "6.O-O",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D80": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D81": {
       "Opening": "Grunfeld",
-      "Variation": "Russian Variation"
+      "Variation": "Russian Variation",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D82": {
       "Opening": "Grunfeld",
-      "Variation": "4.Bf4"
+      "Variation": "4.Bf4",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D83": {
       "Opening": "Grunfeld",
-      "Variation": "Grunfeld Gambit"
+      "Variation": "Grunfeld Gambit",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D84": {
       "Opening": "Grunfeld",
-      "Variation": "Grunfeld Gambit Accepted"
+      "Variation": "Grunfeld Gambit Accepted",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D85": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D86": {
       "Opening": "Grunfeld",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D87": {
       "Opening": "Grunfeld",
-      "Variation": "Exchange"
+      "Variation": "Exchange",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D88": {
       "Opening": "Grunfeld",
-      "Variation": "Spassky Variation"
+      "Variation": "Spassky Variation",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D89": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D90": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D91": {
       "Opening": "Grunfeld",
-      "Variation": "5.Bg5"
+      "Variation": "5.Bg5",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D92": {
       "Opening": "Grunfeld",
-      "Variation": "5.Bf4"
+      "Variation": "5.Bf4",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D93": {
       "Opening": "Grunfeld",
-      "Variation": ""
+      "Variation": "",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D94": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D95": {
       "Opening": "Grunfeld",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D96": {
       "Opening": "Grunfeld",
-      "Variation": "Russian Variation"
+      "Variation": "Russian Variation",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D97": {
       "Opening": "Grunfeld",
-      "Variation": "Russian"
+      "Variation": "Russian",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D98": {
       "Opening": "Grunfeld",
-      "Variation": "Russian"
+      "Variation": "Russian",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "D99": {
       "Opening": "Grunfeld Defense",
-      "Variation": "Smyslov"
+      "Variation": "Smyslov",
+      "OpeningUrl": "Grunfeld-Defense"
     },
     "E00": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "E01": {
       "Opening": "Catalan",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E02": {
       "Opening": "Catalan",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E03": {
       "Opening": "Catalan",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E04": {
       "Opening": "Catalan",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E05": {
       "Opening": "Catalan",
-      "Variation": "Open"
+      "Variation": "Open",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E06": {
       "Opening": "Catalan",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E07": {
       "Opening": "Catalan",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E08": {
       "Opening": "Catalan",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E09": {
       "Opening": "Catalan",
-      "Variation": "Closed"
+      "Variation": "Closed",
+      "OpeningUrl": "Catalan-Opening"
     },
     "E10": {
       "Opening": "Queen's Pawn Game",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Pawn-Opening"
     },
     "E11": {
       "Opening": "Bogo-Indian Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Bogo-Indian"
     },
     "E12": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E13": {
       "Opening": "Queen's Indian",
-      "Variation": "4.Nc3"
+      "Variation": "4.Nc3",
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E14": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E15": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E16": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E17": {
       "Opening": "Queen's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E18": {
       "Opening": "Queen's Indian",
-      "Variation": "Old Main line"
+      "Variation": "Old Main line",
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E19": {
       "Opening": "Queen's Indian",
-      "Variation": "Old Main line"
+      "Variation": "Old Main line",
+      "OpeningUrl": "Queens-Indian-Defense"
     },
     "E20": {
       "Opening": "Nimzo-Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E21": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Three Knights"
+      "Variation": "Three Knights",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E22": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Spielmann Variation"
+      "Variation": "Spielmann Variation",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E23": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Spielmann"
+      "Variation": "Spielmann",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E24": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E25": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E26": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E27": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch Variation"
+      "Variation": "Samisch Variation",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E28": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch Variation"
+      "Variation": "Samisch Variation",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E29": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E30": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Leningrad"
+      "Variation": "Leningrad",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E31": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Leningrad"
+      "Variation": "Leningrad",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E32": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E33": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E34": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E35": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E36": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E37": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E38": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E39": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Classical"
+      "Variation": "Classical",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E40": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E41": {
       "Opening": "Nimzo-Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E42": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3 c5"
+      "Variation": "4.e3 c5",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E43": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Fischer Variation"
+      "Variation": "Fischer Variation",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E44": {
       "Opening": "Nimzo-Indian",
-      "Variation": "Fischer Variation"
+      "Variation": "Fischer Variation",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E45": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E46": {
       "Opening": "Nimzo-Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E47": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3 O-O 5.Bd3"
+      "Variation": "4.e3 O-O 5.Bd3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E48": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3 O-O 5.Bd3 d5"
+      "Variation": "4.e3 O-O 5.Bd3 d5",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E49": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E50": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3 O-O 5.Nf3"
+      "Variation": "4.e3 O-O 5.Nf3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E51": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E52": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E53": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E54": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E55": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E56": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E57": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E58": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E59": {
       "Opening": "Nimzo-Indian",
-      "Variation": "4.e3"
+      "Variation": "4.e3",
+      "OpeningUrl": "Nimzo-Indian"
     },
     "E60": {
       "Opening": "King's Indian Defense",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E61": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E62": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E63": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E64": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E65": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E66": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E67": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E68": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E69": {
       "Opening": "King's Indian",
-      "Variation": "Fianchetto"
+      "Variation": "Fianchetto",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E70": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E71": {
       "Opening": "King's Indian",
-      "Variation": "Makagonov System (5.h3)"
+      "Variation": "Makagonov System (5.h3)",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E72": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E73": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E74": {
       "Opening": "King's Indian",
-      "Variation": "Averbakh"
+      "Variation": "Averbakh",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E75": {
       "Opening": "King's Indian",
-      "Variation": "Averbakh"
+      "Variation": "Averbakh",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E76": {
       "Opening": "King's Indian",
-      "Variation": "Four Pawns Attack"
+      "Variation": "Four Pawns Attack",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E77": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E78": {
       "Opening": "King's Indian",
-      "Variation": "Four Pawns Attack"
+      "Variation": "Four Pawns Attack",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E79": {
       "Opening": "King's Indian",
-      "Variation": "Four Pawns Attack"
+      "Variation": "Four Pawns Attack",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E80": {
       "Opening": "King's Indian",
-      "Variation": "Samisch Variation"
+      "Variation": "Samisch Variation",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E81": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E82": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E83": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E84": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E85": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E86": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E87": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E88": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E89": {
       "Opening": "King's Indian",
-      "Variation": "Samisch"
+      "Variation": "Samisch",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E90": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E91": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E92": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E93": {
       "Opening": "King's Indian",
-      "Variation": "Petrosian System"
+      "Variation": "Petrosian System",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E94": {
       "Opening": "King's Indian",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E95": {
       "Opening": "King's Indian",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E96": {
       "Opening": "King's Indian",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E97": {
       "Opening": "King's Indian",
-      "Variation": null
+      "Variation": null,
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E98": {
       "Opening": "King's Indian",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Kings-Indian-Defense"
     },
     "E99": {
       "Opening": "King's Indian",
-      "Variation": "Orthodox"
+      "Variation": "Orthodox",
+      "OpeningUrl": "Kings-Indian-Defense"
     }
   }
 }

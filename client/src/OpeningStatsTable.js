@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import Select from "react-select";
+import { generateChessComLink } from "./chessLinkUtils";
 
 function OpeningStatsTable({ title, data, side }) {
   const [showCount, setShowCount] = useState(5);
@@ -147,10 +148,58 @@ function OpeningStatsTable({ title, data, side }) {
                   stats.ecoCode
                 )}
               </td>
-              <td>{stats.played}</td>
-              <td>{stats.won}</td>
-              <td>{stats.lost}</td>
-              <td>{stats.drawn}</td>
+              <td>
+                {stats.played > 0 ? (
+                  <a
+                    href={generateChessComLink(stats.ecoUrlString)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {stats.played}
+                  </a>
+                ) : (
+                  stats.played
+                )}
+              </td>
+              <td>
+                {stats.won > 0 ? (
+                  <a
+                    href={generateChessComLink(stats.ecoUrlString, "win")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {stats.won}
+                  </a>
+                ) : (
+                  stats.won
+                )}
+              </td>
+              <td>
+                {stats.lost > 0 ? (
+                  <a
+                    href={generateChessComLink(stats.ecoUrlString, "lost")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {stats.lost}
+                  </a>
+                ) : (
+                  stats.lost
+                )}
+              </td>
+              <td>
+                {stats.drawn > 0 ? (
+                  <a
+                    href={generateChessComLink(stats.ecoUrlString, "draw")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {stats.drawn}
+                  </a>
+                ) : (
+                  stats.drawn
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
