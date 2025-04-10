@@ -9,7 +9,7 @@ function Insights4096() {
 
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
-  const [totals, setTotals] = useState({
+  const [setTotals] = useState({
     played: 0,
     won: 0,
     lost: 0,

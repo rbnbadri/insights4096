@@ -120,25 +120,48 @@ function extractOpenings(games, username) {
 }
 
 // API Endpoint
+const { fetchGamesInRange } = require("./gameFetcher"); // Import the range fetcher
+
+// API Endpoint with optional date range
 app.get("/openings/:username", async (req, res) => {
     const username = req.params.username;
-    const year = 2025;
-    const months = [1, 2, 3]; // January to March 2025
+    const { start, end } = req.query;
 
-    let allGames = [];
+    try {
+        let allGames = [];
 
-    for (const month of months) {
-        const games = await fetchGames(username, year, month);
-        allGames = allGames.concat(games);
+        if (start && end) {
+            console.log(
+                `Fetching games for ${username} between ${start} and ${end}`,
+            );
+            allGames = await fetchGamesInRange(username, start, end);
+        } else {
+            // Default to hardcoded Jan-Mar 2025
+            const year = 2025;
+            const months = [1, 2, 3];
+            for (const month of months) {
+                const games = await fetchGames(username, year, month);
+                allGames = allGames.concat(games);
+            }
+        }
+
+        const openings = extractOpenings(allGames, username);
+
+        const totalGamesPlayed = Object.values(openings.both).reduce(
+            (sum, opening) => sum + (opening.played || 0),
+            0,
+        );
+
+        res.json({
+            status: "success",
+            timestamp: new Date().toISOString(),
+            count: totalGamesPlayed,
+            data: openings,
+        });
+    } catch (err) {
+        console.error("Error processing request:", err.message);
+        res.status(500).json({ status: "error", message: err.message });
     }
-
-    const openings = extractOpenings(allGames, username);
-
-    res.json({
-        status: "success",
-        timestamp: new Date().toISOString(),
-        data: openings,
-    });
 });
 
 app.listen(PORT, () => {
