@@ -9,7 +9,8 @@ function Insights4096() {
 
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
-  const [setTotals] = useState({
+  // eslint-disable-next-line no-unused-vars
+  const [totals, setTotals] = useState({
     played: 0,
     won: 0,
     lost: 0,
@@ -53,7 +54,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.3.2</h1>
+        <h1 className="header">Chess Insights v0.3.3</h1>
       </div>
       <div className="flex-row">
         <input

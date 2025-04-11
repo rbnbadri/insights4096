@@ -1,8 +1,27 @@
 import React, { useState, useMemo } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
+
+// Custom multi-value container to limit shown selections
+const MultiValue = ({ index, ...props }) => {
+  const maxToShow = 3;
+
+  if (index < maxToShow) {
+    return <components.MultiValue {...props} />;
+  }
+
+  if (index === maxToShow) {
+    return (
+      <components.MultiValue {...props}>
+        <span style={{ padding: "0 4px", fontWeight: "bold" }}>...</span>
+      </components.MultiValue>
+    );
+  }
+
+  return null;
+};
 
 const OpeningStatsTable = ({ title, data, totals }) => {
   const [controlOption, setControlOption] = useState("5");
@@ -24,12 +43,11 @@ const OpeningStatsTable = ({ title, data, totals }) => {
   ];
 
   const applyFilters = useMemo(() => {
-    const base = selectedOptions.length
+    return selectedOptions.length
       ? Object.entries(data).filter(([ecoName]) =>
           selectedOptions.some((opt) => opt.value === ecoName),
         )
       : Object.entries(data);
-    return base;
   }, [data, selectedOptions]);
 
   const visibleRows = useMemo(() => {
@@ -54,6 +72,21 @@ const OpeningStatsTable = ({ title, data, totals }) => {
     );
   }, [applyFilters]);
 
+  const renderStatLink = (count, ecoUrlString, resultType = null) => {
+    if (count > 0) {
+      return (
+        <a
+          href={generateChessComLink(ecoUrlString, resultType)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {count}
+        </a>
+      );
+    }
+    return count;
+  };
+
   return (
     <div className="table-wrapper">
       <table className="styled-table">
@@ -74,9 +107,7 @@ const OpeningStatsTable = ({ title, data, totals }) => {
                     isMulti
                     onChange={(options) => setSelectedOptions(options || [])}
                     classNamePrefix="react-select"
-                    styles={{
-                      menu: (provided) => ({ ...provided, zIndex: 10 }),
-                    }}
+                    components={{ MultiValue }}
                   />
                 </div>
                 <div className="date-range-dropdown">
@@ -146,58 +177,10 @@ const OpeningStatsTable = ({ title, data, totals }) => {
             <tr key={idx}>
               <td>{ecoName}</td>
               <td>{stats.ecoCode}</td>
-              <td>
-                {stats.played > 0 ? (
-                  <a
-                    href={generateChessComLink(stats.ecoUrlString)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {stats.played}
-                  </a>
-                ) : (
-                  stats.played
-                )}
-              </td>
-              <td>
-                {stats.won > 0 ? (
-                  <a
-                    href={generateChessComLink(stats.ecoUrlString, "win")}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {stats.won}
-                  </a>
-                ) : (
-                  stats.won
-                )}
-              </td>
-              <td>
-                {stats.lost > 0 ? (
-                  <a
-                    href={generateChessComLink(stats.ecoUrlString, "lost")}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {stats.lost}
-                  </a>
-                ) : (
-                  stats.lost
-                )}
-              </td>
-              <td>
-                {stats.drawn > 0 ? (
-                  <a
-                    href={generateChessComLink(stats.ecoUrlString, "draw")}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {stats.drawn}
-                  </a>
-                ) : (
-                  stats.drawn
-                )}
-              </td>
+              <td>{renderStatLink(stats.played, stats.ecoUrlString)}</td>
+              <td>{renderStatLink(stats.won, stats.ecoUrlString, "win")}</td>
+              <td>{renderStatLink(stats.lost, stats.ecoUrlString, "lost")}</td>
+              <td>{renderStatLink(stats.drawn, stats.ecoUrlString, "draw")}</td>
             </tr>
           ))}
         </tbody>

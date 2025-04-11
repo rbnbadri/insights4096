@@ -129,20 +129,20 @@ th.sortable:hover {
   padding: 10px;
   width: 300px; /* double width */
   overflow: hidden;
-  align-content: left; 
-}
-
-.react-select__multi-value {
-  color: black !important;
-  background-color: white !important;
+  align-content: center; 
+  min-height: 45px !important;
+  height: 60px !important;
+  font-size: 0.85rem;
 }
 
 .react-select__multi-value__label {
   color: black !important;
+  background-color: white !important;
 }
 
 .react-select__multi-value__remove {
   color: black !important;
+  background-color: white !important;
 }
 
 .react-select__menu {
