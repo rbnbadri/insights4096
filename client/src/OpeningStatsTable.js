@@ -1,56 +1,48 @@
 import React, { useState, useMemo } from "react";
 import Select from "react-select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
 
-function OpeningStatsTable({ title, data, side }) {
-  const [showCount, setShowCount] = useState(5);
+const OpeningStatsTable = ({ title, data, totals }) => {
+  const [controlOption, setControlOption] = useState("5");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [dateRangeOption, setDateRangeOption] = useState(null);
+  const [customStartDate, setCustomStartDate] = useState(null);
+  const [customEndDate, setCustomEndDate] = useState(null);
 
-  const handleClearFilters = () => {
-    setSelectedOptions([]);
-    setShowCount(5);
-  };
+  const openingOptions = Object.entries(data || {}).map(([ecoName]) => ({
+    value: ecoName,
+    label: ecoName,
+  }));
 
-  const uniqueEcoOptions = useMemo(() => {
-    if (!data) return [];
-    const seen = new Set();
-    return Object.entries(data)
-      .filter(([_, value]) => {
-        if (seen.has(value.ecoCode)) return false;
-        seen.add(value.ecoCode);
-        return true;
-      })
-      .map(([_, value]) => ({
-        label: value.ecoCode,
-        value: value.ecoCode,
-      }));
-  }, [data]);
+  const dateRangeOptions = [
+    { value: "current-month", label: "Current Month" },
+    { value: "last-30", label: "Last 1 Month" },
+    { value: "last-60", label: "Last 2 Months" },
+    { value: "custom", label: "Custom Range" },
+  ];
 
-  const filteredEntries = useMemo(() => {
-    if (!data) return [];
-    const entries = Object.entries(data);
+  const applyFilters = useMemo(() => {
+    const base = selectedOptions.length
+      ? Object.entries(data).filter(([ecoName]) =>
+          selectedOptions.some((opt) => opt.value === ecoName),
+        )
+      : Object.entries(data);
+    return base;
+  }, [data, selectedOptions]);
 
-    let filtered = entries;
-    if (selectedOptions.length > 0) {
-      const selectedValues = selectedOptions.map((opt) => opt.value);
-      filtered = entries.filter(([_, val]) =>
-        selectedValues.includes(val.ecoCode),
-      );
-    }
+  const visibleRows = useMemo(() => {
+    const count = parseInt(controlOption);
+    return controlOption === "all"
+      ? applyFilters
+      : applyFilters.slice(0, count);
+  }, [applyFilters, controlOption]);
 
-    return filtered
-      .sort((a, b) => b[1].played - a[1].played)
-      .slice(0, showCount);
-  }, [data, showCount, selectedOptions]);
+  const totalRows = applyFilters.length;
 
-  const { filteredTotals, totalRows } = useMemo(() => {
-    const filtered = Object.entries(data).filter(
-      ([_, val]) =>
-        selectedOptions.length === 0 ||
-        selectedOptions.some((opt) => opt.value === val.ecoCode),
-    );
-
-    const totals = filtered.reduce(
+  const totalStats = useMemo(() => {
+    return applyFilters.reduce(
       (acc, [_, val]) => {
         acc.played += val.played;
         acc.won += val.won;
@@ -60,64 +52,82 @@ function OpeningStatsTable({ title, data, side }) {
       },
       { played: 0, won: 0, lost: 0, drawn: 0 },
     );
-
-    return { filteredTotals: totals, totalRows: filtered.length };
-  }, [data, selectedOptions]);
-
-  if (!data) return null;
+  }, [applyFilters]);
 
   return (
     <div className="table-wrapper">
-      <table>
+      <table className="styled-table">
         <thead>
           <tr className="summary-row">
-            <th colSpan="6">
-              <div className="summary-header">
-                {title} (P: {filteredTotals.played}, W: {filteredTotals.won}, L:{" "}
-                {filteredTotals.lost}, D: {filteredTotals.drawn}) — Showing{" "}
-                {Object.keys(filteredEntries).length} rows out of {totalRows}
-                <Select
-                  isMulti
-                  options={uniqueEcoOptions}
-                  value={selectedOptions}
-                  onChange={(selected) => setSelectedOptions(selected)}
-                  placeholder="Filter openings"
-                  classNamePrefix="react-select"
-                  hideSelectedOptions={false}
-                  styles={{
-                    multiValue: (base, { data, index }) => {
-                      if (index < 3) return base;
-                      return { ...base, display: "none" };
-                    },
-                    valueContainer: (base) => ({
-                      ...base,
-                      position: "relative",
-                    }),
-                    indicatorsContainer: (base) => ({
-                      ...base,
-                      position: "absolute",
-                      right: 0,
-                    }),
-                  }}
-                  formatOptionLabel={(data, { context }) => {
-                    if (context === "value") {
-                      const index = selectedOptions.findIndex(
-                        (opt) => opt.value === data.value,
-                      );
-                      if (index === 2 && selectedOptions.length > 3) {
-                        return `${data.label}, ...`;
-                      }
-                      if (index >= 3) return null;
-                      return data.label;
-                    }
-                    return data.label;
-                  }}
-                />
-                <div className="summary-buttons">
-                  <button onClick={() => setShowCount(5)}>Top 5</button>
-                  <button onClick={() => setShowCount(10)}>Top 10</button>
-                  <button onClick={() => setShowCount(1000)}>Show All</button>
-                  <button onClick={handleClearFilters}>Clear Filters</button>
+            <th colSpan="10" className="summary-header">
+              <div className="summary-bar-vertical">
+                <div className="summary-text">
+                  All Games: (P: {totalStats.played}, W: {totalStats.won}, L:{" "}
+                  {totalStats.lost}, D: {totalStats.drawn})<br />
+                  Showing {visibleRows.length} rows out of {totalRows}
+                </div>
+                <div className="filter-dropdown">
+                  <Select
+                    placeholder="Filter Openings"
+                    options={openingOptions}
+                    value={selectedOptions}
+                    isMulti
+                    onChange={(options) => setSelectedOptions(options || [])}
+                    classNamePrefix="react-select"
+                    styles={{
+                      menu: (provided) => ({ ...provided, zIndex: 10 }),
+                    }}
+                  />
+                </div>
+                <div className="date-range-dropdown">
+                  <Select
+                    placeholder="Select Date Range"
+                    options={dateRangeOptions}
+                    value={dateRangeOption}
+                    onChange={setDateRangeOption}
+                    classNamePrefix="react-select"
+                  />
+                  {dateRangeOption?.value === "custom" && (
+                    <div className="date-picker-range">
+                      <DatePicker
+                        selected={customStartDate}
+                        onChange={(date) => setCustomStartDate(date)}
+                        placeholderText="Start Date"
+                        maxDate={new Date()}
+                        minDate={
+                          new Date(
+                            new Date().setFullYear(
+                              new Date().getFullYear() - 1,
+                            ),
+                          )
+                        }
+                      />
+                      <DatePicker
+                        selected={customEndDate}
+                        onChange={(date) => setCustomEndDate(date)}
+                        placeholderText="End Date"
+                        maxDate={new Date()}
+                        minDate={
+                          customStartDate ||
+                          new Date(
+                            new Date().setFullYear(
+                              new Date().getFullYear() - 1,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="summary-controls">
+                  <button onClick={() => setControlOption("5")}>Top 5</button>
+                  <button onClick={() => setControlOption("10")}>Top 10</button>
+                  <button onClick={() => setControlOption("all")}>
+                    Show All
+                  </button>
+                  <button onClick={() => setSelectedOptions([])}>
+                    Clear Filters
+                  </button>
                 </div>
               </div>
             </th>
@@ -132,28 +142,16 @@ function OpeningStatsTable({ title, data, side }) {
           </tr>
         </thead>
         <tbody>
-          {filteredEntries.map(([opening, stats], idx) => (
+          {visibleRows.map(([ecoName, stats], idx) => (
             <tr key={idx}>
-              <td>{opening}</td>
-              <td>
-                {stats.ecoUrl ? (
-                  <a
-                    href={stats.ecoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {stats.ecoCode}
-                  </a>
-                ) : (
-                  stats.ecoCode
-                )}
-              </td>
+              <td>{ecoName}</td>
+              <td>{stats.ecoCode}</td>
               <td>
                 {stats.played > 0 ? (
                   <a
                     href={generateChessComLink(stats.ecoUrlString)}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noreferrer"
                   >
                     {stats.played}
                   </a>
@@ -166,7 +164,7 @@ function OpeningStatsTable({ title, data, side }) {
                   <a
                     href={generateChessComLink(stats.ecoUrlString, "win")}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noreferrer"
                   >
                     {stats.won}
                   </a>
@@ -179,7 +177,7 @@ function OpeningStatsTable({ title, data, side }) {
                   <a
                     href={generateChessComLink(stats.ecoUrlString, "lost")}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noreferrer"
                   >
                     {stats.lost}
                   </a>
@@ -192,7 +190,7 @@ function OpeningStatsTable({ title, data, side }) {
                   <a
                     href={generateChessComLink(stats.ecoUrlString, "draw")}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noreferrer"
                   >
                     {stats.drawn}
                   </a>
@@ -206,6 +204,6 @@ function OpeningStatsTable({ title, data, side }) {
       </table>
     </div>
   );
-}
+};
 
 export default OpeningStatsTable;

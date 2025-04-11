@@ -57,10 +57,50 @@ th.sortable:hover {
 }
 
 .summary-header {
+  width: 100%;
+  background-color: #000;
+  color: white;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.summary-block {
+  margin-bottom: 8px;
+}
+
+.summary-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.summary-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.summary-numbers,
+.summary-rows {
+  font-size: 0.9rem;
+}
+
+.summary-controls,
+.filter-dropdown,
+.date-range-dropdown {
+  margin-top: 4px;
+}
+
+.date-picker-range {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 10px;
+  margin-top: 8px;
+}
+
+.separator {
+  border-top: 1px solid #ccc;
+  width: 100%;
+  margin: 8px 0;
 }
 
 .summary-buttons button {
@@ -69,11 +109,6 @@ th.sortable:hover {
   cursor: pointer;
   text-align: left;
   padding: 10px;
-}
-
-.filter-dropdown {
-  margin-top: 15px;
-  max-width: 70%;
 }
 
 .control-buttons {
@@ -98,8 +133,8 @@ th.sortable:hover {
 }
 
 .react-select__multi-value {
-  background-color: white !important;
   color: black !important;
+  background-color: white !important;
 }
 
 .react-select__multi-value__label {
@@ -111,8 +146,8 @@ th.sortable:hover {
 }
 
 .react-select__menu {
-  background-color: white !important;
   color: black !important;
+  background-color: white !important;
   width: 300px;
   z-index: 10;
   max-height: 200px;
@@ -120,8 +155,8 @@ th.sortable:hover {
 }
 
 .react-select__option {
-  background-color: white !important;
   color: black !important;
+  background-color: white !important;
   cursor: pointer;
 }
 
@@ -131,4 +166,14 @@ th.sortable:hover {
 
 .react-select__placeholder {
   color: black !important;
+}
+
+.summary-bar-vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
 }
