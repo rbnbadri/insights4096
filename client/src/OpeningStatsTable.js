@@ -1,67 +1,122 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Select, { components } from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
+import DateRangeSelector from "./DateRangeSelector";
 
-// Custom multi-value container to limit shown selections
-const MultiValue = ({ index, ...props }) => {
-  const maxToShow = 3;
-
-  if (index < maxToShow) {
-    return <components.MultiValue {...props} />;
-  }
-
-  if (index === maxToShow) {
-    return (
-      <components.MultiValue {...props}>
-        <span style={{ padding: "0 4px", fontWeight: "bold" }}>...</span>
-      </components.MultiValue>
-    );
-  }
-
-  return null;
-};
-
-const OpeningStatsTable = ({ title, data, totals }) => {
-  const [controlOption, setControlOption] = useState("5");
+const OpeningStatsTable = ({
+  data = {},
+  title = "All Games",
+  totals = {},
+  onDateRangeChange,
+}) => {
+  const [sortColumn, setSortColumn] = useState("played");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [dateRangeOption, setDateRangeOption] = useState(null);
+  const [viewLimit, setViewLimit] = useState(5);
+
+  const [dateRangeOption, setDateRangeOption] = useState("last-30");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [customStartDate, setCustomStartDate] = useState(null);
   const [customEndDate, setCustomEndDate] = useState(null);
 
-  const openingOptions = Object.entries(data || {}).map(([ecoName]) => ({
-    value: ecoName,
-    label: ecoName,
-  }));
+  // Default date range logic
+  const getDefaultDateRange = () => {
+    const today = new Date();
+    const oneMonthAgo = new Date(today);
+    oneMonthAgo.setDate(today.getDate() - 30);
+    return {
+      startDate: oneMonthAgo.toISOString().split("T")[0],
+      endDate: today.toISOString().split("T")[0],
+    };
+  };
 
-  const dateRangeOptions = [
-    { value: "current-month", label: "Current Month" },
-    { value: "last-30", label: "Last 1 Month" },
-    { value: "last-60", label: "Last 2 Months" },
-    { value: "custom", label: "Custom Range" },
-  ];
+  const handleSearch = () => {
+    let startDate, endDate;
 
-  const applyFilters = useMemo(() => {
-    return selectedOptions.length
-      ? Object.entries(data).filter(([ecoName]) =>
-          selectedOptions.some((opt) => opt.value === ecoName),
+    if (dateRangeOption === "custom" && customStartDate && customEndDate) {
+      startDate = customStartDate.toISOString().split("T")[0];
+      endDate = customEndDate.toISOString().split("T")[0];
+    } else {
+      const defaults = getDefaultDateRange();
+      startDate = defaults.startDate;
+      endDate = defaults.endDate;
+    }
+
+    if (onDateRangeChange) {
+      onDateRangeChange(startDate, endDate);
+    }
+  };
+
+  const handleSort = (column) => {
+    if (column === sortColumn) {
+      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    } else {
+      setSortColumn(column);
+      setSortOrder("desc");
+    }
+  };
+
+  useEffect(() => {
+    const today = new Date();
+    const oneMonthAgo = new Date(today);
+    oneMonthAgo.setDate(today.getDate() - 30);
+
+    const defaultStart = oneMonthAgo.toISOString().split("T")[0];
+    const defaultEnd = today.toISOString().split("T")[0];
+
+    setStartDate(defaultStart);
+    setEndDate(defaultEnd);
+
+    if (data) {
+      const options = Object.keys(data).map((key) => ({
+        value: key,
+        label: data[key].ecoCode || key,
+      }));
+      setFilterOptions(options);
+    }
+  }, [data]);
+
+  const filteredEntries = useMemo(() => {
+    const entries = Object.entries(data);
+    const filtered = selectedOptions.length
+      ? entries.filter(([name]) =>
+          selectedOptions.some((opt) => opt.value === name),
         )
-      : Object.entries(data);
-  }, [data, selectedOptions]);
+      : entries;
 
-  const visibleRows = useMemo(() => {
-    const count = parseInt(controlOption);
-    return controlOption === "all"
-      ? applyFilters
-      : applyFilters.slice(0, count);
-  }, [applyFilters, controlOption]);
+    const sorted = filtered.sort(([_, a], [__, b]) => {
+      const order = sortOrder === "asc" ? 1 : -1;
+      return (a[sortColumn] - b[sortColumn]) * order;
+    });
 
-  const totalRows = applyFilters.length;
+    return Object.fromEntries(sorted.slice(0, viewLimit));
+  }, [data, selectedOptions, sortColumn, sortOrder, viewLimit]);
 
-  const totalStats = useMemo(() => {
-    return applyFilters.reduce(
-      (acc, [_, val]) => {
+  const clearFilters = () => {
+    setSelectedOptions([]);
+    setViewLimit(5);
+  };
+
+  // const summary = useMemo(() => {
+  //   return Object.values(filteredEntries).reduce(
+  //     (acc, val) => {
+  //       acc.played += val.played;
+  //       acc.won += val.won;
+  //       acc.lost += val.lost;
+  //       acc.drawn += val.drawn;
+  //       return acc;
+  //     },
+  //     { played: 0, won: 0, lost: 0, drawn: 0 },
+  //   );
+  // }, [filteredEntries]);
+
+  const fullSummary = useMemo(() => {
+    return Object.values(data).reduce(
+      (acc, val) => {
         acc.played += val.played;
         acc.won += val.won;
         acc.lost += val.lost;
@@ -70,9 +125,25 @@ const OpeningStatsTable = ({ title, data, totals }) => {
       },
       { played: 0, won: 0, lost: 0, drawn: 0 },
     );
-  }, [applyFilters]);
+  }, [data]);
 
-  const renderStatLink = (count, ecoUrlString, resultType = null) => {
+  const totalRows = Object.keys(data).length;
+  const visibleRows = Object.keys(filteredEntries).length;
+
+  const MultiValue = ({ index, getValue, ...props }) => {
+    const maxToShow = 3;
+    if (index < maxToShow) return <components.MultiValue {...props} />;
+    if (index === maxToShow) {
+      return (
+        <components.MultiValue {...props}>
+          <span style={{ paddingLeft: "4px" }}>...</span>
+        </components.MultiValue>
+      );
+    }
+    return null;
+  };
+
+  const renderLinkedCell = (count, resultType, ecoUrlString) => {
     if (count > 0) {
       return (
         <a
@@ -89,98 +160,100 @@ const OpeningStatsTable = ({ title, data, totals }) => {
 
   return (
     <div className="table-wrapper">
-      <table className="styled-table">
+      <table className="chess-table">
         <thead>
           <tr className="summary-row">
-            <th colSpan="10" className="summary-header">
+            <th colSpan="10">
               <div className="summary-bar-vertical">
                 <div className="summary-text">
-                  All Games: (P: {totalStats.played}, W: {totalStats.won}, L:{" "}
-                  {totalStats.lost}, D: {totalStats.drawn})<br />
-                  Showing {visibleRows.length} rows out of {totalRows}
+                  All Games: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
+                  {fullSummary.lost}, D: {fullSummary.drawn})<br />
+                  Showing {visibleRows} rows out of {totalRows}
                 </div>
                 <div className="filter-dropdown">
                   <Select
-                    placeholder="Filter Openings"
-                    options={openingOptions}
+                    options={filterOptions}
+                    isMultitota
+                    placeholder="Filter openings"
                     value={selectedOptions}
-                    isMulti
-                    onChange={(options) => setSelectedOptions(options || [])}
+                    onChange={setSelectedOptions}
                     classNamePrefix="react-select"
                     components={{ MultiValue }}
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        minHeight: "30px",
+                        fontSize: "12px",
+                      }),
+                    }}
                   />
                 </div>
                 <div className="date-range-dropdown">
-                  <Select
-                    placeholder="Select Date Range"
-                    options={dateRangeOptions}
-                    value={dateRangeOption}
-                    onChange={setDateRangeOption}
-                    classNamePrefix="react-select"
+                  <DateRangeSelector
+                    dateRangeOption={dateRangeOption}
+                    setDateRangeOption={setDateRangeOption}
+                    customStartDate={customStartDate}
+                    customEndDate={customEndDate}
+                    setCustomStartDate={setCustomStartDate}
+                    setCustomEndDate={setCustomEndDate}
                   />
-                  {dateRangeOption?.value === "custom" && (
-                    <div className="date-picker-range">
-                      <DatePicker
-                        selected={customStartDate}
-                        onChange={(date) => setCustomStartDate(date)}
-                        placeholderText="Start Date"
-                        maxDate={new Date()}
-                        minDate={
-                          new Date(
-                            new Date().setFullYear(
-                              new Date().getFullYear() - 1,
-                            ),
-                          )
-                        }
-                      />
-                      <DatePicker
-                        selected={customEndDate}
-                        onChange={(date) => setCustomEndDate(date)}
-                        placeholderText="End Date"
-                        maxDate={new Date()}
-                        minDate={
-                          customStartDate ||
-                          new Date(
-                            new Date().setFullYear(
-                              new Date().getFullYear() - 1,
-                            ),
-                          )
-                        }
-                      />
-                    </div>
-                  )}
+                  <button onClick={handleSearch} className="search-button">
+                    Search
+                  </button>
                 </div>
-                <div className="summary-controls">
-                  <button onClick={() => setControlOption("5")}>Top 5</button>
-                  <button onClick={() => setControlOption("10")}>Top 10</button>
-                  <button onClick={() => setControlOption("all")}>
+                <div className="summary-buttons">
+                  <button onClick={() => setViewLimit(5)}>Show 5</button>
+                  <button onClick={() => setViewLimit(10)}>Show 10</button>
+                  <button onClick={() => setViewLimit(totalRows)}>
                     Show All
                   </button>
-                  <button onClick={() => setSelectedOptions([])}>
-                    Clear Filters
-                  </button>
+                  <button onClick={clearFilters}>Clear Filters</button>
                 </div>
               </div>
             </th>
           </tr>
           <tr>
-            <th>Opening Name</th>
+            <th className="sortable" onClick={() => handleSort("name")}>
+              Opening Name
+            </th>
             <th>Opening Name with Eco</th>
-            <th>Played</th>
-            <th>Won</th>
-            <th>Lost</th>
-            <th>Drawn</th>
+            <th className="sortable" onClick={() => handleSort("played")}>
+              Played
+            </th>
+            <th className="sortable" onClick={() => handleSort("won")}>
+              Won
+            </th>
+            <th className="sortable" onClick={() => handleSort("lost")}>
+              Lost
+            </th>
+            <th className="sortable" onClick={() => handleSort("drawn")}>
+              Drawn
+            </th>
           </tr>
         </thead>
         <tbody>
-          {visibleRows.map(([ecoName, stats], idx) => (
-            <tr key={idx}>
-              <td>{ecoName}</td>
-              <td>{stats.ecoCode}</td>
-              <td>{renderStatLink(stats.played, stats.ecoUrlString)}</td>
-              <td>{renderStatLink(stats.won, stats.ecoUrlString, "win")}</td>
-              <td>{renderStatLink(stats.lost, stats.ecoUrlString, "lost")}</td>
-              <td>{renderStatLink(stats.drawn, stats.ecoUrlString, "draw")}</td>
+          {Object.entries(filteredEntries).map(([name, stats]) => (
+            <tr key={name}>
+              <td>{name}</td>
+              <td>
+                <a
+                  href={generateChessComLink(stats.ecoUrlString)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {stats.ecoCode}
+                </a>
+              </td>
+              <td>
+                {renderLinkedCell(stats.played, null, stats.ecoUrlString)}
+              </td>
+              <td>{renderLinkedCell(stats.won, "win", stats.ecoUrlString)}</td>
+              <td>
+                {renderLinkedCell(stats.lost, "lost", stats.ecoUrlString)}
+              </td>
+              <td>
+                {renderLinkedCell(stats.drawn, "draw", stats.ecoUrlString)}
+              </td>
             </tr>
           ))}
         </tbody>
