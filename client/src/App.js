@@ -9,19 +9,11 @@ function Insights4096() {
 
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [totals, setTotals] = useState({
-    played: 0,
-    won: 0,
-    lost: 0,
-    drawn: 0,
-  });
   const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => setUsername(e.target.value);
-
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+
+  const handleChange = (e) => setUsername(e.target.value);
 
   const handleSubmit = async (start = startDate, end = endDate) => {
     if (!username) return;
@@ -35,22 +27,13 @@ function Insights4096() {
       const response = await fetch(url);
       const result = await response.json();
       const gamedata = result.data;
-      const bothData = gamedata?.["both"];
 
-      const total = Object.values(bothData).reduce(
-        (acc, item) => {
-          acc.played += item.played;
-          acc.won += item.won;
-          acc.lost += item.lost;
-          acc.drawn += item.drawn;
-          return acc;
-        },
-        { played: 0, won: 0, lost: 0, drawn: 0 },
-      );
-
-      setFilteredData(gamedata);
+      setFilteredData({
+        ...gamedata["both"],
+        startDate: start,
+        endDate: end,
+      });
       setSubmitted(true);
-      setTotals(total);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -71,7 +54,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.4.0</h1>
+        <h1 className="header">Chess Insights v0.4.1</h1>
       </div>
       <div className="flex-row">
         <input
@@ -83,15 +66,15 @@ function Insights4096() {
         <button onClick={() => handleSubmit()}>Search</button>
       </div>
 
-      {submitted && filteredData?.both ? (
+      {submitted && filteredData ? (
         <OpeningStatsTable
           title="All Openings"
-          data={filteredData.both}
+          data={filteredData}
           side="both"
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);
-            handleSubmit(start, end); // ✅ use directly passed values
+            handleSubmit(start, end);
           }}
         />
       ) : submitted ? (
