@@ -4,13 +4,27 @@ import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
 import DateRangeSelector from "./DateRangeSelector";
 
-const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
+const OpeningStatsTable = ({
+  data = {},
+  onDateRangeChange,
+  loading,
+  onResetToCachedOneMonth,
+  resetToDefaultRange,
+  fullResetTrigger,
+}) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
+  const [dateRangeOption, setDateRangeOption] = useState("last-30");
+
+  useEffect(() => {
+    if (resetToDefaultRange) {
+      setDateRangeOption("last-30");
+    }
+  }, [resetToDefaultRange]);
 
   const handleSort = (column) => {
     if (column === sortColumn) {
@@ -32,6 +46,14 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
       setFilterOptions(options);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (fullResetTrigger) {
+      setSelectedOptions([]);
+      setViewLimit(5);
+      setShowingFilteredSummary(false);
+    }
+  }, [fullResetTrigger]);
 
   const filteredEntries = useMemo(() => {
     const entries = Object.entries(data);
@@ -81,7 +103,13 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
     );
   }, [filteredEntries]);
 
-  const totalRows = Object.keys(data).length;
+  const totalRows =
+    selectedOptions.length > 0
+      ? selectedOptions.length
+      : Object.entries(data).filter(
+          ([key]) => !["startDate", "endDate"].includes(key),
+        ).length;
+
   const visibleRows = Object.keys(filteredEntries).length;
 
   const MultiValue = ({ index, getValue, ...props }) => {
@@ -195,6 +223,8 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
                   <div className="date-range-dropdown">
                     <DateRangeSelector
                       onDateRangeResolved={onDateRangeChange}
+                      dateRangeOption={dateRangeOption}
+                      setDateRangeOption={setDateRangeOption}
                     />
                   </div>
                   <div className="summary-buttons">
@@ -228,6 +258,7 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
                     <button
                       onClick={() => {
                         clearFilters();
+                        if (onResetToCachedOneMonth) onResetToCachedOneMonth();
                         setShowingFilteredSummary(false);
                       }}
                     >

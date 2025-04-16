@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,8 +10,20 @@ const dateRangeOptions = [
   { value: "custom", label: "Custom Range" },
 ];
 
-const DateRangeSelector = ({ onDateRangeResolved }) => {
-  const [dateRangeOption, setDateRangeOption] = useState("last-30");
+const DateRangeSelector = ({
+  onDateRangeResolved,
+  resetToDefaultRange,
+  dateRangeOption,
+  setDateRangeOption,
+}) => {
+  useEffect(() => {
+    if (resetToDefaultRange) {
+      setDateRangeOption("last-30");
+      setCustomStartDate(null);
+      setCustomEndDate(null);
+    }
+  }, [resetToDefaultRange]);
+
   const [customStartDate, setCustomStartDate] = useState(null);
   const [customEndDate, setCustomEndDate] = useState(null);
 

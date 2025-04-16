@@ -3,6 +3,21 @@ import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 
 function Insights4096() {
+  const handleResetToCachedOneMonth = () => {
+    if (cachedOneMonthData) {
+      setFilteredData({
+        ...cachedOneMonthData.data,
+        startDate: cachedOneMonthData.startDate,
+        endDate: cachedOneMonthData.endDate,
+      });
+      setStartDate(cachedOneMonthData.startDate);
+      setEndDate(cachedOneMonthData.endDate);
+      setSubmitted(true);
+      setResetToDefaultRange(true);
+      setTimeout(() => setResetToDefaultRange(false), 100); // Reset flag
+    }
+  };
+
   useEffect(() => {
     document.title = "Insights4096";
   }, []);
@@ -13,6 +28,9 @@ function Insights4096() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [cachedOneMonthData, setCachedOneMonthData] = useState(null);
+  const [resetToDefaultRange, setResetToDefaultRange] = useState(false);
+  const [fullResetTrigger, setFullResetTrigger] = useState(false);
 
   const handleChange = (e) => setUsername(e.target.value);
 
@@ -35,6 +53,27 @@ function Insights4096() {
         startDate: start,
         endDate: end,
       });
+
+      const today = new Date();
+      const oneMonthAgo = new Date(today);
+      oneMonthAgo.setDate(today.getDate() - 30);
+      const defaultStart = oneMonthAgo.toISOString().split("T")[0];
+      const defaultEnd = today.toISOString().split("T")[0];
+      if (start === defaultStart && end === defaultEnd) {
+        setCachedOneMonthData({
+          data: { ...gamedata["both"] },
+          startDate: defaultStart,
+          endDate: defaultEnd,
+        });
+      }
+
+      if (start === defaultStart && end === defaultEnd) {
+        setCachedOneMonthData({
+          data: { ...gamedata["both"] },
+          startDate: defaultStart,
+          endDate: defaultEnd,
+        });
+      }
       setSubmitted(true);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -58,7 +97,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.4.2</h1>
+        <h1 className="header">Chess Insights v0.4.4</h1>
       </div>
       <div className="flex-row">
         <input
@@ -67,11 +106,38 @@ function Insights4096() {
           onChange={handleChange}
           placeholder="Enter ChessDotCom username"
         />
-        <button onClick={() => handleSubmit()}>Search</button>
+        <button
+          onClick={() => {
+            const today = new Date();
+            const oneMonthAgo = new Date(today);
+            oneMonthAgo.setDate(today.getDate() - 30);
+            const defaultStart = oneMonthAgo.toISOString().split("T")[0];
+            const defaultEnd = today.toISOString().split("T")[0];
+
+            setStartDate(defaultStart);
+            setEndDate(defaultEnd);
+
+            // 🔁 Trigger table and dropdown reset
+            setResetToDefaultRange(true);
+            setFullResetTrigger(true);
+
+            // 🔁 Reset these triggers back so they can be used again
+            setTimeout(() => {
+              setResetToDefaultRange(false);
+              setFullResetTrigger(false);
+            }, 100);
+
+            handleSubmit(defaultStart, defaultEnd);
+          }}
+        >
+          Search
+        </button>
       </div>
 
       {submitted && filteredData ? (
         <OpeningStatsTable
+          onResetToCachedOneMonth={handleResetToCachedOneMonth}
+          resetToDefaultRange={resetToDefaultRange}
           data={filteredData}
           loading={loading}
           onDateRangeChange={(start, end) => {
@@ -79,6 +145,7 @@ function Insights4096() {
             setEndDate(end);
             handleSubmit(start, end);
           }}
+          fullResetTrigger={fullResetTrigger}
         />
       ) : submitted ? (
         <p>No data found for the provided search.</p>
