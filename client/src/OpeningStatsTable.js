@@ -10,6 +10,7 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
+  const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
 
   const handleSort = (column) => {
     if (column === sortColumn) {
@@ -66,6 +67,19 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
       { played: 0, won: 0, lost: 0, drawn: 0 },
     );
   }, [data]);
+
+  const filteredSummary = useMemo(() => {
+    return Object.entries(filteredEntries).reduce(
+      (acc, [_, val]) => {
+        acc.played += val.played;
+        acc.won += val.won;
+        acc.lost += val.lost;
+        acc.drawn += val.drawn;
+        return acc;
+      },
+      { played: 0, won: 0, lost: 0, drawn: 0 },
+    );
+  }, [filteredEntries]);
 
   const totalRows = Object.keys(data).length;
   const visibleRows = Object.keys(filteredEntries).length;
@@ -130,8 +144,24 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
               <th colSpan="10">
                 <div className="summary-bar-vertical">
                   <div className="summary-text">
-                    All Games: (P: {fullSummary.played}, W: {fullSummary.won},
-                    L: {fullSummary.lost}, D: {fullSummary.drawn})<br />
+                    {" "}
+                    {showingFilteredSummary ? (
+                      <>
+                        {" "}
+                        Filtered Games: (P: {filteredSummary.played}, W:{" "}
+                        {filteredSummary.won}, L: {filteredSummary.lost}, D:{" "}
+                        {filteredSummary.drawn})<br /> All Games: (P:{" "}
+                        {fullSummary.played}, W: {fullSummary.won}, L:{" "}
+                        {fullSummary.lost}, D: {fullSummary.drawn})<br />{" "}
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        All Games: (P: {fullSummary.played}, W:{" "}
+                        {fullSummary.won}, L: {fullSummary.lost}, D:{" "}
+                        {fullSummary.drawn})<br />{" "}
+                      </>
+                    )}{" "}
                     Showing {visibleRows} rows out of {totalRows}
                   </div>
                   <div className="filter-dropdown">
@@ -140,7 +170,17 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
                       isMulti
                       placeholder="Filter openings"
                       value={selectedOptions}
-                      onChange={setSelectedOptions}
+                      onChange={(newOptions, actionMeta) => {
+                        if (
+                          actionMeta.action === "select-option" ||
+                          actionMeta.action === "remove-value"
+                        ) {
+                          setShowingFilteredSummary(true);
+                        } else if (actionMeta.action === "clear") {
+                          setShowingFilteredSummary(false);
+                        }
+                        setSelectedOptions(newOptions || []);
+                      }}
                       classNamePrefix="react-select"
                       components={{ MultiValue }}
                       styles={{
@@ -158,12 +198,41 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
                     />
                   </div>
                   <div className="summary-buttons">
-                    <button onClick={() => setViewLimit(5)}>Show 5</button>
-                    <button onClick={() => setViewLimit(10)}>Show 10</button>
-                    <button onClick={() => setViewLimit(totalRows)}>
+                    <button
+                      onClick={() => {
+                        setViewLimit(5);
+                        setShowingFilteredSummary(true);
+                      }}
+                    >
+                      Show 5
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setViewLimit(10);
+                        setShowingFilteredSummary(true);
+                      }}
+                    >
+                      Show 10
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setViewLimit(totalRows);
+                        setShowingFilteredSummary(selectedOptions.length > 0);
+                      }}
+                    >
                       Show All
                     </button>
-                    <button onClick={clearFilters}>Clear Filters</button>
+
+                    <button
+                      onClick={() => {
+                        clearFilters();
+                        setShowingFilteredSummary(false);
+                      }}
+                    >
+                      Clear Filters
+                    </button>
                   </div>
                 </div>
               </th>
