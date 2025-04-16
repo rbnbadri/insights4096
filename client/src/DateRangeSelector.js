@@ -42,7 +42,10 @@ const DateRangeSelector = ({ onDateRangeResolved }) => {
   };
 
   return (
-    <div className="date-range-dropdown">
+    <div
+      className="date-range-dropdown-row"
+      style={{ display: "flex", alignItems: "center", gap: "10px" }}
+    >
       <Select
         placeholder="Select Date Range"
         options={dateRangeOptions}
@@ -50,7 +53,6 @@ const DateRangeSelector = ({ onDateRangeResolved }) => {
         onChange={(opt) => setDateRangeOption(opt.value)}
         classNamePrefix="react-select"
       />
-
       {dateRangeOption === "custom" && (
         <div className="date-picker-range">
           <DatePicker

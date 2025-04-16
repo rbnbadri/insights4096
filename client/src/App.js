@@ -12,11 +12,13 @@ function Insights4096() {
   const [submitted, setSubmitted] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => setUsername(e.target.value);
 
   const handleSubmit = async (start = startDate, end = endDate) => {
     if (!username) return;
+    setLoading(true);
 
     const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
     const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
@@ -36,6 +38,8 @@ function Insights4096() {
       setSubmitted(true);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +58,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.4.1</h1>
+        <h1 className="header">Chess Insights v0.4.2</h1>
       </div>
       <div className="flex-row">
         <input
@@ -68,9 +72,8 @@ function Insights4096() {
 
       {submitted && filteredData ? (
         <OpeningStatsTable
-          title="All Openings"
           data={filteredData}
-          side="both"
+          loading={loading}
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);

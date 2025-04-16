@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
 import DateRangeSelector from "./DateRangeSelector";
 
-const OpeningStatsTable = ({ data = {}, onDateRangeChange }) => {
+const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
   const [filterOptions, setFilterOptions] = useState([]);
@@ -104,95 +104,119 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange }) => {
   };
 
   return (
-    <div className="table-wrapper">
-      <table className="chess-table">
-        <thead>
-          <tr className="summary-row">
-            <th colSpan="10">
-              <div className="summary-bar-vertical">
-                <div className="summary-text">
-                  All Games: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
-                  {fullSummary.lost}, D: {fullSummary.drawn})<br />
-                  Showing {visibleRows} rows out of {totalRows}
+    <div>
+      <div className="table-wrapper" style={{ position: "relative" }}>
+        {loading && (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              padding: "12px 20px",
+              borderRadius: "6px",
+              fontWeight: "bold",
+              boxShadow: "0 0 6px rgba(0,0,0,0.1)",
+              zIndex: 10,
+            }}
+          >
+            Loading data...
+          </div>
+        )}
+        <table className="chess-table" style={{ opacity: loading ? 0.5 : 1 }}>
+          <thead>
+            <tr className="summary-row">
+              <th colSpan="10">
+                <div className="summary-bar-vertical">
+                  <div className="summary-text">
+                    All Games: (P: {fullSummary.played}, W: {fullSummary.won},
+                    L: {fullSummary.lost}, D: {fullSummary.drawn})<br />
+                    Showing {visibleRows} rows out of {totalRows}
+                  </div>
+                  <div className="filter-dropdown">
+                    <Select
+                      options={filterOptions}
+                      isMultitota
+                      placeholder="Filter openings"
+                      value={selectedOptions}
+                      onChange={setSelectedOptions}
+                      classNamePrefix="react-select"
+                      components={{ MultiValue }}
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          minHeight: "30px",
+                          fontSize: "12px",
+                        }),
+                      }}
+                    />
+                  </div>
+                  <div className="date-range-dropdown">
+                    <DateRangeSelector
+                      onDateRangeResolved={onDateRangeChange}
+                    />
+                  </div>
+                  <div className="summary-buttons">
+                    <button onClick={() => setViewLimit(5)}>Show 5</button>
+                    <button onClick={() => setViewLimit(10)}>Show 10</button>
+                    <button onClick={() => setViewLimit(totalRows)}>
+                      Show All
+                    </button>
+                    <button onClick={clearFilters}>Clear Filters</button>
+                  </div>
                 </div>
-                <div className="filter-dropdown">
-                  <Select
-                    options={filterOptions}
-                    isMultitota
-                    placeholder="Filter openings"
-                    value={selectedOptions}
-                    onChange={setSelectedOptions}
-                    classNamePrefix="react-select"
-                    components={{ MultiValue }}
-                    styles={{
-                      control: (base) => ({
-                        ...base,
-                        minHeight: "30px",
-                        fontSize: "12px",
-                      }),
-                    }}
-                  />
-                </div>
-                <div className="date-range-dropdown">
-                  <DateRangeSelector onDateRangeResolved={onDateRangeChange} />
-                </div>
-                <div className="summary-buttons">
-                  <button onClick={() => setViewLimit(5)}>Show 5</button>
-                  <button onClick={() => setViewLimit(10)}>Show 10</button>
-                  <button onClick={() => setViewLimit(totalRows)}>
-                    Show All
-                  </button>
-                  <button onClick={clearFilters}>Clear Filters</button>
-                </div>
-              </div>
-            </th>
-          </tr>
-          <tr>
-            <th className="sortable" onClick={() => handleSort("name")}>
-              Opening Name
-            </th>
-            <th>Opening Name with Eco</th>
-            <th className="sortable" onClick={() => handleSort("played")}>
-              Played
-            </th>
-            <th className="sortable" onClick={() => handleSort("won")}>
-              Won
-            </th>
-            <th className="sortable" onClick={() => handleSort("lost")}>
-              Lost
-            </th>
-            <th className="sortable" onClick={() => handleSort("drawn")}>
-              Drawn
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(filteredEntries).map(([name, stats]) => (
-            <tr key={name}>
-              <td>{name}</td>
-              <td>
-                <a
-                  href={generateChessComLink(stats.ecoUrlString)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {stats.ecoCode}
-                </a>
-              </td>
-              <td>
-                {renderLinkedCell(stats.played, null, stats.ecoUrlString)}
-              </td>
-              <td>{renderLinkedCell(stats.won, "win", stats.ecoUrlString)}</td>
-              <td>
-                {renderLinkedCell(stats.lost, "lost", stats.ecoUrlString)}
-              </td>
-              <td>
-                {renderLinkedCell(stats.drawn, "draw", stats.ecoUrlString)}
-              </td>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            <tr>
+              <th className="sortable" onClick={() => handleSort("name")}>
+                Opening Name
+              </th>
+              <th>Opening Name with Eco</th>
+              <th className="sortable" onClick={() => handleSort("played")}>
+                Played
+              </th>
+              <th className="sortable" onClick={() => handleSort("won")}>
+                Won
+              </th>
+              <th className="sortable" onClick={() => handleSort("lost")}>
+                Lost
+              </th>
+              <th className="sortable" onClick={() => handleSort("drawn")}>
+                Drawn
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(filteredEntries).map(([name, stats]) => (
+              <tr key={name}>
+                <td>{name}</td>
+                <td>
+                  <a
+                    href={generateChessComLink(stats.ecoUrlString)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {stats.ecoCode}
+                  </a>
+                </td>
+                <td>
+                  {renderLinkedCell(stats.played, null, stats.ecoUrlString)}
+                </td>
+                <td>
+                  {renderLinkedCell(stats.won, "win", stats.ecoUrlString)}
+                </td>
+                <td>
+                  {renderLinkedCell(stats.lost, "lost", stats.ecoUrlString)}
+                </td>
+                <td>
+                  {renderLinkedCell(stats.drawn, "draw", stats.ecoUrlString)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
