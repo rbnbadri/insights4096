@@ -23,22 +23,19 @@ function Insights4096() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (start = startDate, end = endDate) => {
     if (!username) return;
 
     const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
-    const url =
-      startDate && endDate
-        ? `${baseUrl}?start=${startDate}&end=${endDate}`
-        : baseUrl;
+    const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
+
+    console.log("Fetching data from:", url);
 
     try {
-      console.log("Fetching data from:", url);
       const response = await fetch(url);
       const result = await response.json();
       const gamedata = result.data;
       const bothData = gamedata?.["both"];
-      console.log(bothData);
 
       const total = Object.values(bothData).reduce(
         (acc, item) => {
@@ -74,7 +71,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.3.5</h1>
+        <h1 className="header">Chess Insights v0.3.6</h1>
       </div>
       <div className="flex-row">
         <input
@@ -83,7 +80,7 @@ function Insights4096() {
           onChange={handleChange}
           placeholder="Enter ChessDotCom username"
         />
-        <button onClick={handleSubmit}>Search</button>
+        <button onClick={() => handleSubmit()}>Search</button>
       </div>
 
       {submitted && filteredData?.both ? (
@@ -91,8 +88,11 @@ function Insights4096() {
           title="All Openings"
           data={filteredData.both}
           side="both"
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
+          onDateRangeChange={(start, end) => {
+            setStartDate(start);
+            setEndDate(end);
+            handleSubmit(start, end); // ✅ use directly passed values
+          }}
         />
       ) : submitted ? (
         <p>No data found for the provided search.</p>

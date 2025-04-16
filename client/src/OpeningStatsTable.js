@@ -35,18 +35,31 @@ const OpeningStatsTable = ({
   };
 
   const handleSearch = () => {
+    const today = new Date();
     let startDate, endDate;
 
     if (dateRangeOption === "custom" && customStartDate && customEndDate) {
       startDate = customStartDate.toISOString().split("T")[0];
       endDate = customEndDate.toISOString().split("T")[0];
+    } else if (dateRangeOption === "current-month") {
+      const start = new Date(today.getFullYear(), today.getMonth(), 1);
+      startDate = start.toISOString().split("T")[0];
+      endDate = today.toISOString().split("T")[0];
+    } else if (dateRangeOption === "last-60") {
+      const start = new Date(today);
+      start.setDate(today.getDate() - 60);
+      startDate = start.toISOString().split("T")[0];
+      endDate = today.toISOString().split("T")[0];
     } else {
-      const defaults = getDefaultDateRange();
-      startDate = defaults.startDate;
-      endDate = defaults.endDate;
+      // default to last 30 days
+      const start = new Date(today);
+      start.setDate(today.getDate() - 30);
+      startDate = start.toISOString().split("T")[0];
+      endDate = today.toISOString().split("T")[0];
     }
 
     if (onDateRangeChange) {
+      console.log("Sending new dates: ", startDate, endDate);
       onDateRangeChange(startDate, endDate);
     }
   };
