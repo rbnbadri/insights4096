@@ -1,35 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Select, { components } from "react-select";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { generateChessComLink } from "./chessLinkUtils";
 import DateRangeSelector from "./DateRangeSelector";
 
-const OpeningStatsTable = ({
-  data = {},
-  title = "All Games",
-  totals = {},
-  onDateRangeChange,
-}) => {
+const OpeningStatsTable = ({ data = {}, onDateRangeChange }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
-
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
-  // Default date range logic
-  const getDefaultDateRange = () => {
-    const today = new Date();
-    const oneMonthAgo = new Date(today);
-    oneMonthAgo.setDate(today.getDate() - 30);
-    return {
-      startDate: oneMonthAgo.toISOString().split("T")[0],
-      endDate: today.toISOString().split("T")[0],
-    };
-  };
 
   const handleSort = (column) => {
     if (column === sortColumn) {
@@ -41,21 +21,13 @@ const OpeningStatsTable = ({
   };
 
   useEffect(() => {
-    const today = new Date();
-    const oneMonthAgo = new Date(today);
-    oneMonthAgo.setDate(today.getDate() - 30);
-
-    const defaultStart = oneMonthAgo.toISOString().split("T")[0];
-    const defaultEnd = today.toISOString().split("T")[0];
-
-    setStartDate(defaultStart);
-    setEndDate(defaultEnd);
-
     if (data) {
-      const options = Object.keys(data).map((key) => ({
-        value: key,
-        label: data[key].ecoCode || key,
-      }));
+      const options = Object.keys(data)
+        .filter((key) => !["startDate", "endDate"].includes(key))
+        .map((key) => ({
+          value: key,
+          label: data[key].ecoCode || key,
+        }));
       setFilterOptions(options);
     }
   }, [data]);
@@ -80,19 +52,6 @@ const OpeningStatsTable = ({
     setSelectedOptions([]);
     setViewLimit(5);
   };
-
-  // const summary = useMemo(() => {
-  //   return Object.values(filteredEntries).reduce(
-  //     (acc, val) => {
-  //       acc.played += val.played;
-  //       acc.won += val.won;
-  //       acc.lost += val.lost;
-  //       acc.drawn += val.drawn;
-  //       return acc;
-  //     },rend
-  //     { played: 0, won: 0, lost: 0, drawn: 0 },
-  //   );
-  // }, [filteredEntries]);
 
   const fullSummary = useMemo(() => {
     return Object.entries(data).reduce(

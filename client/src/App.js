@@ -9,12 +9,6 @@ function Insights4096() {
 
   const [username, setUsername] = useState("");
   const [filteredData, setFilteredData] = useState(null);
-  const [totals, setTotals] = useState({
-    played: 0,
-    won: 0,
-    lost: 0,
-    drawn: 0,
-  });
   const [submitted, setSubmitted] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -33,18 +27,6 @@ function Insights4096() {
       const response = await fetch(url);
       const result = await response.json();
       const gamedata = result.data;
-      const bothData = gamedata?.["both"];
-
-      const total = Object.values(bothData).reduce(
-        (acc, item) => {
-          acc.played += item.played;
-          acc.won += item.won;
-          acc.lost += item.lost;
-          acc.drawn += item.drawn;
-          return acc;
-        },
-        { played: 0, won: 0, lost: 0, drawn: 0 },
-      );
 
       setFilteredData({
         ...gamedata["both"],
@@ -52,7 +34,6 @@ function Insights4096() {
         endDate: end,
       });
       setSubmitted(true);
-      setTotals(total);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
