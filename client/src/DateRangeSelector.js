@@ -30,7 +30,7 @@ const DateRangeSelector = ({
         classNamePrefix="react-select"
       />
 
-      {dateRangeOption?.value === "custom" && (
+      {dateRangeOption === "custom" && (
         <div className="date-picker-range">
           <DatePicker
             selected={customStartDate}
