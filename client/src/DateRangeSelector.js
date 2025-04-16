@@ -42,19 +42,35 @@ const DateRangeSelector = ({ onDateRangeResolved }) => {
   };
 
   return (
-    <div
-      className="date-range-dropdown-row"
-      style={{ display: "flex", alignItems: "center", gap: "10px" }}
-    >
-      <Select
-        placeholder="Select Date Range"
-        options={dateRangeOptions}
-        value={dateRangeOptions.find((opt) => opt.value === dateRangeOption)}
-        onChange={(opt) => setDateRangeOption(opt.value)}
-        classNamePrefix="react-select"
-      />
+    <div className="date-range-selector">
+      {/* Row: dropdown + button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Select
+            placeholder="Select Date Range"
+            options={dateRangeOptions}
+            value={dateRangeOptions.find(
+              (opt) => opt.value === dateRangeOption,
+            )}
+            onChange={(opt) => setDateRangeOption(opt.value)}
+            classNamePrefix="react-select"
+          />
+        </div>
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
+      </div>
+
+      {/* Row: start + end pickers */}
       {dateRangeOption === "custom" && (
-        <div className="date-picker-range">
+        <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
           <DatePicker
             selected={customStartDate}
             onChange={(date) => setCustomStartDate(date)}
@@ -76,10 +92,6 @@ const DateRangeSelector = ({ onDateRangeResolved }) => {
           />
         </div>
       )}
-
-      <button onClick={handleSearch} className="search-button">
-        Search
-      </button>
     </div>
   );
 };

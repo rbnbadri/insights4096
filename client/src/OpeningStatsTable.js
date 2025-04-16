@@ -137,7 +137,7 @@ const OpeningStatsTable = ({ data = {}, onDateRangeChange, loading }) => {
                   <div className="filter-dropdown">
                     <Select
                       options={filterOptions}
-                      isMultitota
+                      isMulti
                       placeholder="Filter openings"
                       value={selectedOptions}
                       onChange={setSelectedOptions}
