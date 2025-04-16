@@ -158,12 +158,15 @@ const OpeningStatsTable = ({
 
   const renderLinkedCell = (count, resultType, ecoUrlString) => {
     if (count > 0) {
+      const startFormatted = new Date(startDate).toLocaleDateString("en-US");
+      const endFormatted = new Date(endDate).toLocaleDateString("en-US");
+
+      const baseLink = generateChessComLink(ecoUrlString, resultType);
+      const dateQuery = `&endDate%5Bdate%5D=${encodeURIComponent(endFormatted)}&startDate%5Bdate%5D=${encodeURIComponent(startFormatted)}`;
+      const fullLink = baseLink + dateQuery;
+
       return (
-        <a
-          href={generateChessComLink(ecoUrlString, resultType)}
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={fullLink} target="_blank" rel="noreferrer">
           {count}
         </a>
       );
