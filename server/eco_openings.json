@@ -1555,52 +1555,52 @@
     "D10": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D11": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D12": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D13": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": "Exchange Variation",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D14": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": "Exchange Variation",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D15": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D16": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D17": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D18": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": "Dutch",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D19": {
       "Opening": "Queen's Gambit Declined Slav",
       "Variation": "Dutch",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Slav-Defense"
     },
     "D20": {
       "Opening": "Queen's Gambit Accepted",
@@ -1665,17 +1665,17 @@
     "D32": {
       "Opening": "Queen's Gambit Declined",
       "Variation": "Tarrasch",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Tarrasch-Defense"
     },
     "D33": {
       "Opening": "Queen's Gambit Declined",
       "Variation": "Tarrasch",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Tarrasch-Defense"
     },
     "D34": {
       "Opening": "Queen's Gambit Declined",
       "Variation": "Tarrasch",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Tarrasch-Defense"
     },
     "D35": {
       "Opening": "Queen's Gambit Declined",
@@ -1720,37 +1720,37 @@
     "D43": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D44": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D45": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D46": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D47": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": null,
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D48": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": "Meran",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D49": {
       "Opening": "Queen's Gambit Declined Semi-Slav",
       "Variation": "Meran",
-      "OpeningUrl": "Queens-Gambit"
+      "OpeningUrl": "Semi-Slav-Defense"
     },
     "D50": {
       "Opening": "Queen's Gambit Declined",

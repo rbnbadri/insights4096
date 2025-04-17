@@ -58,12 +58,19 @@ function extractOpenings(games, username) {
                     ? "white"
                     : "black";
 
-            // Extract ECO code from PGN
+            // Extract ECO code from PGN and override if needed
             let ecoCodeString = "NA: NA";
             let ecoUrlString = null;
+
             try {
                 const ecoMatch = game.pgn.match(/\[ECO\s+"([A-E][0-9]{2})"\]/);
-                const ecoCode = ecoMatch ? ecoMatch[1] : null;
+                let ecoCode = ecoMatch ? ecoMatch[1] : null;
+
+                // Force override for Scotch Game
+                if (ecoMain.includes("Scotch Game")) {
+                    ecoCode = "C45";
+                }
+
                 if (ecoCode && ecoData[ecoCode] && ecoData[ecoCode].Opening) {
                     ecoCodeString = `${ecoCode}: ${ecoData[ecoCode].Opening}`;
                     ecoUrlString = ecoData[ecoCode].OpeningUrl;

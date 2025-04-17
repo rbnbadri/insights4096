@@ -298,11 +298,7 @@ const OpeningStatsTable = ({
               <tr key={name}>
                 <td>{name}</td>
                 <td>
-                  <a
-                    href={generateChessComLink(stats.ecoUrlString)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={stats.ecoUrl} target="_blank" rel="noreferrer">
                     {stats.ecoCode}
                   </a>
                 </td>
