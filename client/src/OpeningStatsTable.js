@@ -37,13 +37,14 @@ const OpeningStatsTable = ({
 
   useEffect(() => {
     if (data) {
-      const options = Object.keys(data)
-        .filter((key) => !["startDate", "endDate"].includes(key))
-        .map((key) => ({
+      const sortedOptions = Object.entries(data)
+        .filter(([key]) => !["startDate", "endDate"].includes(key))
+        .sort(([, a], [, b]) => b.played - a.played) // Sort by highest played
+        .map(([key, val]) => ({
           value: key,
-          label: data[key].ecoCode || key,
+          label: val.ecoCode || key,
         }));
-      setFilterOptions(options);
+      setFilterOptions(sortedOptions);
     }
   }, [data]);
 
@@ -143,6 +144,11 @@ const OpeningStatsTable = ({
       );
     }
     return count;
+  };
+
+  const renderSortIndicator = (column) => {
+    if (column !== sortColumn) return null;
+    return sortOrder === "asc" ? " ↑" : " ↓";
   };
 
   return (
@@ -270,20 +276,20 @@ const OpeningStatsTable = ({
             </tr>
             <tr>
               <th className="sortable" onClick={() => handleSort("name")}>
-                Opening Name
+                Opening Name{renderSortIndicator("name")}
               </th>
               <th>Opening Name with Eco</th>
               <th className="sortable" onClick={() => handleSort("played")}>
-                Played
+                Played{renderSortIndicator("played")}
               </th>
               <th className="sortable" onClick={() => handleSort("won")}>
-                Won
+                Won{renderSortIndicator("won")}
               </th>
               <th className="sortable" onClick={() => handleSort("lost")}>
-                Lost
+                Lost{renderSortIndicator("lost")}
               </th>
               <th className="sortable" onClick={() => handleSort("drawn")}>
-                Drawn
+                Drawn{renderSortIndicator("drawn")}
               </th>
             </tr>
           </thead>
