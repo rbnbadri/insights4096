@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { components } from "react-select";
 
 const dateRangeOptions = [
   { value: "current-month", label: "Current Month" },
@@ -15,6 +16,7 @@ const DateRangeSelector = ({
   resetToDefaultRange,
   dateRangeOption,
   setDateRangeOption,
+  testId = "date range dropdown", // default fallback
 }) => {
   useEffect(() => {
     if (resetToDefaultRange) {
@@ -26,6 +28,16 @@ const DateRangeSelector = ({
 
   const [customStartDate, setCustomStartDate] = useState(null);
   const [customEndDate, setCustomEndDate] = useState(null);
+
+  const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
+    <components.Control
+      {...rest}
+      innerRef={innerRef}
+      innerProps={{ ...innerProps, "data-test-id": testId }}
+    >
+      {children}
+    </components.Control>
+  );
 
   const handleSearch = () => {
     const today = new Date();
@@ -73,6 +85,7 @@ const DateRangeSelector = ({
             )}
             onChange={(opt) => setDateRangeOption(opt.value)}
             classNamePrefix="react-select"
+            components={{ Control: CustomControl }}
           />
         </div>
         <button onClick={handleSearch} className="search-button">

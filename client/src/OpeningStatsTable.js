@@ -1,3 +1,5 @@
+// OpeningStatsTable.js with testing identifiers added
+
 import React, { useEffect, useState, useMemo } from "react";
 import Select, { components } from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,6 +13,7 @@ const OpeningStatsTable = ({
   onResetToCachedOneMonth,
   resetToDefaultRange,
   fullResetTrigger,
+  testId = "Openings filter",
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -19,6 +22,16 @@ const OpeningStatsTable = ({
   const [viewLimit, setViewLimit] = useState(5);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
+
+  const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
+    <components.Control
+      {...rest}
+      innerRef={innerRef}
+      innerProps={{ ...innerProps, "data-test-id": testId }}
+    >
+      {children}
+    </components.Control>
+  );
 
   useEffect(() => {
     if (resetToDefaultRange) {
@@ -39,7 +52,7 @@ const OpeningStatsTable = ({
     if (data) {
       const sortedOptions = Object.entries(data)
         .filter(([key]) => !["startDate", "endDate"].includes(key))
-        .sort(([, a], [, b]) => b.played - a.played) // Sort by highest played
+        .sort(([, a], [, b]) => b.played - a.played)
         .map(([key, val]) => ({
           value: key,
           label: val.ecoCode || key,
@@ -178,24 +191,21 @@ const OpeningStatsTable = ({
               <th colSpan="10">
                 <div className="summary-bar-vertical">
                   <div className="summary-text">
-                    {" "}
                     {showingFilteredSummary ? (
                       <>
-                        {" "}
                         Filtered Games: (P: {filteredSummary.played}, W:{" "}
                         {filteredSummary.won}, L: {filteredSummary.lost}, D:{" "}
                         {filteredSummary.drawn})<br /> All Games: (P:{" "}
                         {fullSummary.played}, W: {fullSummary.won}, L:{" "}
-                        {fullSummary.lost}, D: {fullSummary.drawn})<br />{" "}
+                        {fullSummary.lost}, D: {fullSummary.drawn})<br />
                       </>
                     ) : (
                       <>
-                        {" "}
                         All Games: (P: {fullSummary.played}, W:{" "}
                         {fullSummary.won}, L: {fullSummary.lost}, D:{" "}
-                        {fullSummary.drawn})<br />{" "}
+                        {fullSummary.drawn})<br />
                       </>
-                    )}{" "}
+                    )}
                     Showing {visibleRows} rows out of {totalRows}
                   </div>
                   <div className="filter-dropdown">
@@ -216,7 +226,7 @@ const OpeningStatsTable = ({
                         setSelectedOptions(newOptions || []);
                       }}
                       classNamePrefix="react-select"
-                      components={{ MultiValue }}
+                      components={{ MultiValue, Control: CustomControl }}
                       styles={{
                         control: (base) => ({
                           ...base,
@@ -231,6 +241,7 @@ const OpeningStatsTable = ({
                       onDateRangeResolved={onDateRangeChange}
                       dateRangeOption={dateRangeOption}
                       setDateRangeOption={setDateRangeOption}
+                      testId="Date range selector - both"
                     />
                   </div>
                   <div className="summary-buttons">
@@ -242,7 +253,6 @@ const OpeningStatsTable = ({
                     >
                       Show 5
                     </button>
-
                     <button
                       onClick={() => {
                         setViewLimit(10);
@@ -251,7 +261,6 @@ const OpeningStatsTable = ({
                     >
                       Show 10
                     </button>
-
                     <button
                       onClick={() => {
                         setViewLimit(totalRows);
@@ -260,7 +269,6 @@ const OpeningStatsTable = ({
                     >
                       Show All
                     </button>
-
                     <button
                       onClick={() => {
                         clearFilters();
@@ -274,7 +282,7 @@ const OpeningStatsTable = ({
                 </div>
               </th>
             </tr>
-            <tr>
+            <tr data-test-id="Table header for both openings">
               <th className="sortable" onClick={() => handleSort("name")}>
                 Opening Name{renderSortIndicator("name")}
               </th>
@@ -295,7 +303,7 @@ const OpeningStatsTable = ({
           </thead>
           <tbody>
             {Object.entries(filteredEntries).map(([name, stats]) => (
-              <tr key={name}>
+              <tr key={name} data-test-id="Chess data row">
                 <td>{name}</td>
                 <td>
                   <a href={stats.ecoUrl} target="_blank" rel="noreferrer">
