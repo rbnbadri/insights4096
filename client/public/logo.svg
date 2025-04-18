@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- White background -->
+  <rect width="100" height="100" fill="white"></rect>
+
+  <!-- Rook base and body -->
+  <rect x="25" y="25" width="30" height="10" fill="black"></rect>
+  <rect x="30" y="35" width="20" height="30" fill="black"></rect>
+  <rect x="25" y="65" width="30" height="10" fill="black"></rect>
+  <rect x="20" y="75" width="40" height="10" fill="black"></rect>
+
+  <!-- Rook disjointed top (crenellations) -->
+  <rect x="25" y="15" width="6" height="8" fill="black"></rect>
+  <rect x="37" y="15" width="6" height="8" fill="black"></rect>
+  <rect x="49" y="15" width="6" height="8" fill="black"></rect>
+
+  <!-- Bar chart -->
+  <rect x="70" y="60" width="6" height="25" fill="black"></rect>
+  <rect x="78" y="50" width="6" height="35" fill="black"></rect>
+  <rect x="86" y="40" width="6" height="45" fill="black"></rect>
+
+  <!-- Ascending line with arrow -->
+  <polyline points="73,60 81,50 89,40" fill="none" stroke="black" stroke-width="2"></polyline>
+  <polygon points="87,42 91,42 89,38" fill="black"></polygon>
+</svg>
