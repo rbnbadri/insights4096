@@ -15,16 +15,6 @@
   margin: 0;
 }
 
-.openings-header {
-  background-color: #444;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-  max-width: 70%;
-  text-align: left;
-  margin-bottom: 10px;
-}
-
 .table-wrapper {
   width: 85%;
 }
@@ -56,35 +46,6 @@ th.sortable:hover {
   background-color: #ddd;
 }
 
-.summary-header {
-  width: 100%;
-  background-color: #000;
-  color: white;
-  padding: 12px;
-  box-sizing: border-box;
-}
-
-.summary-block {
-  margin-bottom: 8px;
-}
-
-.summary-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-}
-
-.summary-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-}
-
-.summary-numbers,
-.summary-rows {
-  font-size: 0.9rem;
-}
-
 .summary-controls,
 .filter-dropdown,
 .date-range-dropdown {
@@ -109,16 +70,6 @@ th.sortable:hover {
   cursor: pointer;
   text-align: left;
   padding: 10px;
-}
-
-.control-buttons {
-  display: flex;
-  gap: 5px;
-}
-
-.dropdown-container {
-  margin: 10px 0;
-  width: 300px;
 }
 
 .react-select__control {
