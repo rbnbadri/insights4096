@@ -23,13 +23,15 @@
   padding: 0;
 }
 
-.summary-row th {
-  color: white !important;
-  background-color: black !important;
-  font-weight: bold;
-  text-align: left;
-  padding: 10px;
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 12px;
 }
+
 
 table {
   border-collapse: collapse;
@@ -71,13 +73,14 @@ th.sortable:hover {
 }
 
 .summary-buttons button {
+  flex-shrink: 0;
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   text-align: left;
   background-color: white;
   color: black;
-  border: 1px solid #ccc;
+  border: 1px solid black; /* ⬅️ Make border solid black */
 }
 
 .react-select__control {
@@ -166,4 +169,14 @@ th.sortable:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
+}
+
+.summary-select {
+  flex: 1;
+  min-width: 250px;
+}
+
+.date-range-wrapper {
+  flex: 1;
+  min-width: 250px;
 }

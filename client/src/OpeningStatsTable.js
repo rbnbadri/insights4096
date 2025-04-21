@@ -16,8 +16,8 @@ const OpeningStatsTable = ({
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder] = useState("desc");
-  const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [filterOptions, setFilterOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
   const [showBottomControls, setShowBottomControls] = useState(false);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
@@ -94,11 +94,6 @@ const OpeningStatsTable = ({
     );
   }, [filteredEntries]);
 
-  const renderSortIndicator = (column) => {
-    if (column !== sortColumn) return null;
-    return sortOrder === "asc" ? " ↑" : " ↓";
-  };
-
   const totalRows = selectedOptions.length
     ? selectedOptions.length
     : Object.entries(data).filter(
@@ -133,49 +128,62 @@ const OpeningStatsTable = ({
     if (onResetToCachedOneMonth) onResetToCachedOneMonth();
   };
 
-  const summaryBarProps = {
+  const summaryData = {
     summaryLabel,
     fullSummary,
     filteredSummary,
+  };
+
+  const filterProps = {
     selectedOptions,
     setSelectedOptions,
     filterOptions,
     showingFilteredSummary,
     setShowingFilteredSummary,
+  };
+
+  const dateRangeProps = {
     dateRangeOption,
     setDateRangeOption,
     onDateRangeChange,
     onResetToCachedOneMonth,
-    totalRows,
-    visibleRows,
-    testId,
-    color,
+  };
+
+  const controlProps = {
     handleShow5,
     handleShow10,
     handleShowAll,
     handleClearFilters,
   };
 
+  const tableMetrics = {
+    totalRows,
+    visibleRows,
+    testId,
+    color,
+  };
+
   return (
     <div data-test-id={`Openings table - ${color || "both"}`}>
-      <SummaryBar {...summaryBarProps} />
+      <SummaryBar
+        summaryData={summaryData}
+        filterProps={filterProps}
+        dateRangeProps={dateRangeProps}
+        controlProps={controlProps}
+        tableMetrics={tableMetrics}
+      />
       <OpeningTable
         color={color}
         loading={loading}
         filteredEntries={filteredEntries}
-        renderSortIndicator={renderSortIndicator}
+        renderSortIndicator={(col) => (col === sortColumn ? " ↓" : null)}
         setSortColumn={setSortColumn}
         startDate={data.startDate}
         endDate={data.endDate}
       />
       {showBottomControls && (
         <div className="summary-bar-bottom">
-          <ControlButtons
-            handleShow5={handleShow5}
-            handleShow10={handleShow10}
-            handleShowAll={handleShowAll}
-            handleClearFilters={handleClearFilters}
-          />
+          <ControlButtons {...controlProps} />
         </div>
       )}
     </div>
