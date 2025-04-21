@@ -1,5 +1,3 @@
-// OpeningStatsTable.js with testing identifiers added
-
 import React, { useEffect, useState, useMemo } from "react";
 import Select, { components } from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +11,9 @@ const OpeningStatsTable = ({
   onResetToCachedOneMonth,
   resetToDefaultRange,
   fullResetTrigger,
-  testId = "Openings filter",
+  color = null,
+  summaryLabel = "All Games",
+  testId = `Openings filter- {color}`,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -39,15 +39,6 @@ const OpeningStatsTable = ({
     }
   }, [resetToDefaultRange]);
 
-  const handleSort = (column) => {
-    if (column === sortColumn) {
-      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-    } else {
-      setSortColumn(column);
-      setSortOrder("desc");
-    }
-  };
-
   useEffect(() => {
     if (data) {
       const sortedOptions = Object.entries(data)
@@ -70,7 +61,9 @@ const OpeningStatsTable = ({
   }, [fullResetTrigger]);
 
   const filteredEntries = useMemo(() => {
-    const entries = Object.entries(data);
+    const entries = Object.entries(data).filter(
+      ([k]) => !["startDate", "endDate"].includes(k),
+    );
     const filtered = selectedOptions.length
       ? entries.filter(([name]) =>
           selectedOptions.some((opt) => opt.value === name),
@@ -117,15 +110,6 @@ const OpeningStatsTable = ({
     );
   }, [filteredEntries]);
 
-  const totalRows =
-    selectedOptions.length > 0
-      ? selectedOptions.length
-      : Object.entries(data).filter(
-          ([key]) => !["startDate", "endDate"].includes(key),
-        ).length;
-
-  const visibleRows = Object.keys(filteredEntries).length;
-
   const MultiValue = ({ index, getValue, ...props }) => {
     const maxToShow = 3;
     if (index < maxToShow) return <components.MultiValue {...props} />;
@@ -145,13 +129,10 @@ const OpeningStatsTable = ({
         "en-US",
       );
       const endFormatted = new Date(data.endDate).toLocaleDateString("en-US");
-
-      const baseLink = generateChessComLink(ecoUrlString, resultType);
+      const baseLink = generateChessComLink(ecoUrlString, resultType, color);
       const dateQuery = `&endDate%5Bdate%5D=${encodeURIComponent(endFormatted)}&startDate%5Bdate%5D=${encodeURIComponent(startFormatted)}`;
-      const fullLink = baseLink + dateQuery;
-
       return (
-        <a href={fullLink} target="_blank" rel="noreferrer">
+        <a href={baseLink + dateQuery} target="_blank" rel="noreferrer">
           {count}
         </a>
       );
@@ -164,139 +145,131 @@ const OpeningStatsTable = ({
     return sortOrder === "asc" ? " ↑" : " ↓";
   };
 
+  const totalRows = selectedOptions.length
+    ? selectedOptions.length
+    : Object.entries(data).filter(
+        ([key]) => !["startDate", "endDate"].includes(key),
+      ).length;
+
+  const visibleRows = Object.keys(filteredEntries).length;
+
   return (
     <div>
-      <div className="table-wrapper" style={{ position: "relative" }}>
-        {loading && (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              padding: "12px 20px",
-              borderRadius: "6px",
-              fontWeight: "bold",
-              boxShadow: "0 0 6px rgba(0,0,0,0.1)",
-              zIndex: 10,
+      {/* Toolbar section placed outside the table */}
+      <div className="summary-bar-vertical">
+        <div className="summary-text">
+          {showingFilteredSummary ? (
+            <>
+              Filtered {summaryLabel}: (P: {filteredSummary.played}, W:{" "}
+              {filteredSummary.won}, L: {filteredSummary.lost}, D:{" "}
+              {filteredSummary.drawn})<br />
+              {summaryLabel}: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
+              {fullSummary.lost}, D: {fullSummary.drawn})<br />
+            </>
+          ) : (
+            <>
+              {summaryLabel}: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
+              {fullSummary.lost}, D: {fullSummary.drawn})<br />
+            </>
+          )}
+          Showing {visibleRows} rows out of {totalRows}
+        </div>
+
+        <div className="filter-dropdown">
+          <Select
+            options={filterOptions}
+            isMulti
+            placeholder="Filter openings"
+            value={selectedOptions}
+            onChange={(newOptions, actionMeta) => {
+              if (
+                ["select-option", "remove-value"].includes(actionMeta.action)
+              ) {
+                setShowingFilteredSummary(true);
+              } else if (actionMeta.action === "clear") {
+                setShowingFilteredSummary(false);
+              }
+              setSelectedOptions(newOptions || []);
+            }}
+            classNamePrefix="react-select"
+            components={{ MultiValue, Control: CustomControl }}
+            styles={{
+              control: (base) => ({
+                ...base,
+                minHeight: "30px",
+                fontSize: "12px",
+              }),
+            }}
+            data-test-id={testId}
+          />
+        </div>
+
+        <div className="date-range-dropdown">
+          <DateRangeSelector
+            onDateRangeResolved={onDateRangeChange}
+            dateRangeOption={dateRangeOption}
+            setDateRangeOption={setDateRangeOption}
+            testId={`date range selector - ${color || "all"}`}
+          />
+        </div>
+
+        <div className="summary-buttons">
+          <button
+            onClick={() => {
+              setViewLimit(5);
+              setShowingFilteredSummary(true);
             }}
           >
-            Loading data...
-          </div>
-        )}
+            Show 5
+          </button>
+          <button
+            onClick={() => {
+              setViewLimit(10);
+              setShowingFilteredSummary(true);
+            }}
+          >
+            Show 10
+          </button>
+          <button
+            onClick={() => {
+              setViewLimit(totalRows);
+              setShowingFilteredSummary(selectedOptions.length > 0);
+            }}
+          >
+            Show All
+          </button>
+          <button
+            onClick={() => {
+              clearFilters();
+              if (onResetToCachedOneMonth) onResetToCachedOneMonth();
+              setShowingFilteredSummary(false);
+            }}
+          >
+            Clear Filters
+          </button>
+        </div>
+      </div>
+
+      {/* Table section */}
+      <div className="table-wrapper" style={{ position: "relative" }}>
+        {loading && <div className="loading-overlay">Loading data...</div>}
         <table className="chess-table" style={{ opacity: loading ? 0.5 : 1 }}>
           <thead>
-            <tr className="summary-row">
-              <th colSpan="10">
-                <div className="summary-bar-vertical">
-                  <div className="summary-text">
-                    {showingFilteredSummary ? (
-                      <>
-                        Filtered Games: (P: {filteredSummary.played}, W:{" "}
-                        {filteredSummary.won}, L: {filteredSummary.lost}, D:{" "}
-                        {filteredSummary.drawn})<br /> All Games: (P:{" "}
-                        {fullSummary.played}, W: {fullSummary.won}, L:{" "}
-                        {fullSummary.lost}, D: {fullSummary.drawn})<br />
-                      </>
-                    ) : (
-                      <>
-                        All Games: (P: {fullSummary.played}, W:{" "}
-                        {fullSummary.won}, L: {fullSummary.lost}, D:{" "}
-                        {fullSummary.drawn})<br />
-                      </>
-                    )}
-                    Showing {visibleRows} rows out of {totalRows}
-                  </div>
-                  <div className="filter-dropdown">
-                    <Select
-                      options={filterOptions}
-                      isMulti
-                      placeholder="Filter openings"
-                      value={selectedOptions}
-                      onChange={(newOptions, actionMeta) => {
-                        if (
-                          actionMeta.action === "select-option" ||
-                          actionMeta.action === "remove-value"
-                        ) {
-                          setShowingFilteredSummary(true);
-                        } else if (actionMeta.action === "clear") {
-                          setShowingFilteredSummary(false);
-                        }
-                        setSelectedOptions(newOptions || []);
-                      }}
-                      classNamePrefix="react-select"
-                      components={{ MultiValue, Control: CustomControl }}
-                      styles={{
-                        control: (base) => ({
-                          ...base,
-                          minHeight: "30px",
-                          fontSize: "12px",
-                        }),
-                      }}
-                    />
-                  </div>
-                  <div className="date-range-dropdown">
-                    <DateRangeSelector
-                      onDateRangeResolved={onDateRangeChange}
-                      dateRangeOption={dateRangeOption}
-                      setDateRangeOption={setDateRangeOption}
-                      testId="Date range selector - both"
-                    />
-                  </div>
-                  <div className="summary-buttons">
-                    <button
-                      onClick={() => {
-                        setViewLimit(5);
-                        setShowingFilteredSummary(true);
-                      }}
-                    >
-                      Show 5
-                    </button>
-                    <button
-                      onClick={() => {
-                        setViewLimit(10);
-                        setShowingFilteredSummary(true);
-                      }}
-                    >
-                      Show 10
-                    </button>
-                    <button
-                      onClick={() => {
-                        setViewLimit(totalRows);
-                        setShowingFilteredSummary(selectedOptions.length > 0);
-                      }}
-                    >
-                      Show All
-                    </button>
-                    <button
-                      onClick={() => {
-                        clearFilters();
-                        if (onResetToCachedOneMonth) onResetToCachedOneMonth();
-                        setShowingFilteredSummary(false);
-                      }}
-                    >
-                      Clear Filters
-                    </button>
-                  </div>
-                </div>
-              </th>
-            </tr>
-            <tr data-test-id="Table header for both openings">
-              <th className="sortable" onClick={() => handleSort("name")}>
+            <tr data-test-id={`Table header for ${color || "all"} openings`}>
+              <th className="sortable" onClick={() => setSortColumn("name")}>
                 Opening Name{renderSortIndicator("name")}
               </th>
               <th>Opening Name with Eco</th>
-              <th className="sortable" onClick={() => handleSort("played")}>
+              <th className="sortable" onClick={() => setSortColumn("played")}>
                 Played{renderSortIndicator("played")}
               </th>
-              <th className="sortable" onClick={() => handleSort("won")}>
+              <th className="sortable" onClick={() => setSortColumn("won")}>
                 Won{renderSortIndicator("won")}
               </th>
-              <th className="sortable" onClick={() => handleSort("lost")}>
+              <th className="sortable" onClick={() => setSortColumn("lost")}>
                 Lost{renderSortIndicator("lost")}
               </th>
-              <th className="sortable" onClick={() => handleSort("drawn")}>
+              <th className="sortable" onClick={() => setSortColumn("drawn")}>
                 Drawn{renderSortIndicator("drawn")}
               </th>
             </tr>
