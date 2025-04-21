@@ -16,7 +16,7 @@ const OpeningStatsTable = ({
   testId = `Openings filter- {color}`,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
-  const [sortOrder, setSortOrder] = useState("desc");
+  const [sortOrder] = useState("desc");
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
@@ -154,8 +154,7 @@ const OpeningStatsTable = ({
   const visibleRows = Object.keys(filteredEntries).length;
 
   return (
-    <div>
-      {/* Toolbar section placed outside the table */}
+    <div data-test-id={`Openings table - ${color || "both"}`}>
       <div className="summary-bar-vertical">
         <div className="summary-text">
           {showingFilteredSummary ? (
