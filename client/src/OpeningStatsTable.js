@@ -13,7 +13,7 @@ const OpeningStatsTable = ({
   fullResetTrigger,
   color = null,
   summaryLabel = "All Games",
-  testId = "Openings filter",
+  testId = `Openings filter- {color}`,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -22,6 +22,16 @@ const OpeningStatsTable = ({
   const [viewLimit, setViewLimit] = useState(5);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
+
+  const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
+    <components.Control
+      {...rest}
+      innerRef={innerRef}
+      innerProps={{ ...innerProps, "data-test-id": testId }}
+    >
+      {children}
+    </components.Control>
+  );
 
   useEffect(() => {
     if (resetToDefaultRange) {
@@ -182,7 +192,7 @@ const OpeningStatsTable = ({
               setSelectedOptions(newOptions || []);
             }}
             classNamePrefix="react-select"
-            components={{ MultiValue }}
+            components={{ MultiValue, Control: CustomControl }}
             styles={{
               control: (base) => ({
                 ...base,
