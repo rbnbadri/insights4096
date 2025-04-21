@@ -1,6 +1,7 @@
 import React from "react";
 import Select, { components } from "react-select";
 import DateRangeSelector from "./DateRangeSelector";
+import ControlButtons from "./ControlButtons";
 
 const SummaryBar = ({
   summaryLabel,
@@ -15,12 +16,14 @@ const SummaryBar = ({
   setDateRangeOption,
   onDateRangeChange,
   onResetToCachedOneMonth,
-  viewLimit,
-  setViewLimit,
   totalRows,
   visibleRows,
   testId,
   color,
+  handleShow5,
+  handleShow10,
+  handleShowAll,
+  handleClearFilters,
 }) => {
   const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
     <components.Control
@@ -43,13 +46,6 @@ const SummaryBar = ({
       );
     }
     return null;
-  };
-
-  const clearFilters = () => {
-    setSelectedOptions([]);
-    setViewLimit(5);
-    setShowingFilteredSummary(false);
-    if (onResetToCachedOneMonth) onResetToCachedOneMonth();
   };
 
   return (
@@ -108,33 +104,12 @@ const SummaryBar = ({
         />
       </div>
 
-      <div className="summary-buttons">
-        <button
-          onClick={() => {
-            setViewLimit(5);
-            setShowingFilteredSummary(true);
-          }}
-        >
-          Show 5
-        </button>
-        <button
-          onClick={() => {
-            setViewLimit(10);
-            setShowingFilteredSummary(true);
-          }}
-        >
-          Show 10
-        </button>
-        <button
-          onClick={() => {
-            setViewLimit(totalRows);
-            setShowingFilteredSummary(selectedOptions.length > 0);
-          }}
-        >
-          Show All
-        </button>
-        <button onClick={clearFilters}>Clear Filters</button>
-      </div>
+      <ControlButtons
+        handleShow5={handleShow5}
+        handleShow10={handleShow10}
+        handleShowAll={handleShowAll}
+        handleClearFilters={handleClearFilters}
+      />
     </div>
   );
 };

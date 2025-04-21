@@ -157,3 +157,13 @@ th.sortable:hover {
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
+
+.summary-bar-bottom {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding-left: 8px; /* aligns with left edge of table content */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}

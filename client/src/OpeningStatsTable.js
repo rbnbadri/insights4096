@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
+import ControlButtons from "./ControlButtons";
 
 const OpeningStatsTable = ({
   data = {},
@@ -18,6 +19,7 @@ const OpeningStatsTable = ({
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
+  const [showBottomControls, setShowBottomControls] = useState(false);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
 
@@ -42,6 +44,7 @@ const OpeningStatsTable = ({
     if (fullResetTrigger) {
       setSelectedOptions([]);
       setViewLimit(5);
+      setShowBottomControls(false);
       setShowingFilteredSummary(false);
     }
   }, [fullResetTrigger]);
@@ -104,30 +107,58 @@ const OpeningStatsTable = ({
 
   const visibleRows = Object.keys(filteredEntries).length;
 
+  const handleShow5 = () => {
+    setViewLimit(5);
+    setShowBottomControls(false);
+    setShowingFilteredSummary(true);
+  };
+
+  const handleShow10 = () => {
+    setViewLimit(10);
+    setShowBottomControls(true);
+    setShowingFilteredSummary(true);
+  };
+
+  const handleShowAll = () => {
+    setViewLimit(totalRows);
+    setShowBottomControls(true);
+    setShowingFilteredSummary(selectedOptions.length > 0);
+  };
+
+  const handleClearFilters = () => {
+    setSelectedOptions([]);
+    setViewLimit(5);
+    setShowBottomControls(false);
+    setShowingFilteredSummary(false);
+    if (onResetToCachedOneMonth) onResetToCachedOneMonth();
+  };
+
+  const summaryBarProps = {
+    summaryLabel,
+    fullSummary,
+    filteredSummary,
+    selectedOptions,
+    setSelectedOptions,
+    filterOptions,
+    showingFilteredSummary,
+    setShowingFilteredSummary,
+    dateRangeOption,
+    setDateRangeOption,
+    onDateRangeChange,
+    onResetToCachedOneMonth,
+    totalRows,
+    visibleRows,
+    testId,
+    color,
+    handleShow5,
+    handleShow10,
+    handleShowAll,
+    handleClearFilters,
+  };
+
   return (
     <div data-test-id={`Openings table - ${color || "both"}`}>
-      <SummaryBar
-        {...{
-          summaryLabel,
-          fullSummary,
-          filteredSummary,
-          selectedOptions,
-          setSelectedOptions,
-          filterOptions,
-          showingFilteredSummary,
-          setShowingFilteredSummary,
-          dateRangeOption,
-          setDateRangeOption,
-          onDateRangeChange,
-          onResetToCachedOneMonth,
-          viewLimit,
-          setViewLimit,
-          totalRows,
-          visibleRows,
-          testId,
-          color,
-        }}
-      />
+      <SummaryBar {...summaryBarProps} />
       <OpeningTable
         color={color}
         loading={loading}
@@ -137,6 +168,16 @@ const OpeningStatsTable = ({
         startDate={data.startDate}
         endDate={data.endDate}
       />
+      {showBottomControls && (
+        <div className="summary-bar-bottom">
+          <ControlButtons
+            handleShow5={handleShow5}
+            handleShow10={handleShow10}
+            handleShowAll={handleShowAll}
+            handleClearFilters={handleClearFilters}
+          />
+        </div>
+      )}
     </div>
   );
 };
