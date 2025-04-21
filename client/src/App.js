@@ -110,7 +110,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.6.0</h1>
+        <h1 className="header">Chess Insights v0.7.0</h1>
       </div>
       <div className="flex-row">
         <input
