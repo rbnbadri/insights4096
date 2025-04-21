@@ -16,7 +16,11 @@
 }
 
 .table-wrapper {
-  width: 85%;
+  width: 100%;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .summary-row th {
@@ -30,6 +34,8 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 th, td {
@@ -69,7 +75,9 @@ th.sortable:hover {
   font-size: 14px;
   cursor: pointer;
   text-align: left;
-  padding: 10px;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
 }
 
 .react-select__control {
@@ -78,7 +86,7 @@ th.sortable:hover {
   border: 1px solid black !important;
   text-align: left;
   padding: 10px;
-  width: 300px; /* double width */
+  width: 300px;
   overflow: hidden;
   align-content: center; 
   min-height: 45px !important;
@@ -126,5 +134,26 @@ th.sortable:hover {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
+  width: calc(100% - 2px); /* Fix spacing caused by border */
+  background-color: black;
+  color: white;
+  padding: 12px;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+
+.chess-table {
   width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 8px 8px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }

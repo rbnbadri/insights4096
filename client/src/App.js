@@ -3,18 +3,24 @@ import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 
 function Insights4096() {
-  const handleResetToCachedOneMonth = () => {
-    if (cachedOneMonthData) {
-      setFilteredData({
-        ...cachedOneMonthData.data,
-        startDate: cachedOneMonthData.startDate,
-        endDate: cachedOneMonthData.endDate,
-      });
-      setStartDate(cachedOneMonthData.startDate);
-      setEndDate(cachedOneMonthData.endDate);
+  const handleResetToCachedOneMonth = (color) => {
+    const cache =
+      color === "white"
+        ? cachedOneMonthWhite
+        : color === "black"
+          ? cachedOneMonthBlack
+          : cachedOneMonthBoth;
+
+    if (cache) {
+      setFilteredData((prev) => ({
+        ...prev,
+        [color]: cache.data,
+      }));
+      setStartDate(cache.startDate);
+      setEndDate(cache.endDate);
       setSubmitted(true);
       setResetToDefaultRange(true);
-      setTimeout(() => setResetToDefaultRange(false), 100); // Reset flag
+      setTimeout(() => setResetToDefaultRange(false), 100);
     }
   };
 
@@ -28,7 +34,9 @@ function Insights4096() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [cachedOneMonthData, setCachedOneMonthData] = useState(null);
+  const [cachedOneMonthWhite, setCachedOneMonthWhite] = useState(null);
+  const [cachedOneMonthBlack, setCachedOneMonthBlack] = useState(null);
+  const [cachedOneMonthBoth, setCachedOneMonthBoth] = useState(null);
   const [resetToDefaultRange, setResetToDefaultRange] = useState(false);
   const [fullResetTrigger, setFullResetTrigger] = useState(false);
 
@@ -49,7 +57,7 @@ function Insights4096() {
       const gamedata = result.data;
 
       setFilteredData({
-        ...gamedata["both"],
+        ...gamedata,
         startDate: start,
         endDate: end,
       });
@@ -60,19 +68,24 @@ function Insights4096() {
       const defaultStart = oneMonthAgo.toISOString().split("T")[0];
       const defaultEnd = today.toISOString().split("T")[0];
       if (start === defaultStart && end === defaultEnd) {
-        setCachedOneMonthData({
-          data: { ...gamedata["both"] },
-          startDate: defaultStart,
-          endDate: defaultEnd,
-        });
-      }
-
-      if (start === defaultStart && end === defaultEnd) {
-        setCachedOneMonthData({
-          data: { ...gamedata["both"] },
-          startDate: defaultStart,
-          endDate: defaultEnd,
-        });
+        if (gamedata.white)
+          setCachedOneMonthWhite({
+            data: { ...gamedata.white },
+            startDate: defaultStart,
+            endDate: defaultEnd,
+          });
+        if (gamedata.black)
+          setCachedOneMonthBlack({
+            data: { ...gamedata.black },
+            startDate: defaultStart,
+            endDate: defaultEnd,
+          });
+        if (gamedata.both)
+          setCachedOneMonthBoth({
+            data: { ...gamedata.both },
+            startDate: defaultStart,
+            endDate: defaultEnd,
+          });
       }
       setSubmitted(true);
     } catch (error) {
@@ -97,7 +110,7 @@ function Insights4096() {
   return (
     <div className="App">
       <div className="flex-row">
-        <h1 className="header">Chess Insights v0.5.2</h1>
+        <h1 className="header">Chess Insights v0.6.0</h1>
       </div>
       <div className="flex-row">
         <input
@@ -134,21 +147,28 @@ function Insights4096() {
         </button>
       </div>
 
-      {submitted && filteredData ? (
+      {submitted && filteredData?.white ? (
         <OpeningStatsTable
-          onResetToCachedOneMonth={handleResetToCachedOneMonth}
-          resetToDefaultRange={resetToDefaultRange}
-          data={filteredData}
+          data={{
+            ...filteredData.white,
+            startDate,
+            endDate,
+          }}
+          color="white"
+          summaryLabel="White Games"
+          testId="Openings filter- white"
           loading={loading}
+          resetToDefaultRange={resetToDefaultRange}
+          fullResetTrigger={fullResetTrigger}
+          onResetToCachedOneMonth={() => handleResetToCachedOneMonth("white")}
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);
             handleSubmit(start, end);
           }}
-          fullResetTrigger={fullResetTrigger}
         />
       ) : submitted ? (
-        <p>No data found for the provided search.</p>
+        <p>No white games found.</p>
       ) : null}
     </div>
   );

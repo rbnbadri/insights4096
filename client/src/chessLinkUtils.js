@@ -1,4 +1,4 @@
-export function generateChessComLink(ecoUrlString, resultType) {
+export function generateChessComLink(ecoUrlString, resultType, color) {
   const baseUrl =
     "https://www.chess.com/games/archive?gameOwner=my_game&gameType=live&gameTypeslive%5B%5D=rapid";
 
@@ -9,5 +9,7 @@ export function generateChessComLink(ecoUrlString, resultType) {
   const resultParam =
     resultType && resultType !== "played" ? `&gameResult=${resultType}` : "";
 
-  return `${baseUrl}${resultParam}&opening=${encodedOpening}&timeSort=desc`;
+  const colorParam = color ? `&color=${color}` : "";
+
+  return `${baseUrl}${resultParam}${colorParam}&opening=${encodedOpening}&timeSort=desc`;
 }
