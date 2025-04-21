@@ -134,3 +134,5 @@ dist
 
 .DS_Store
 *.log
+
+kill_ports.sh

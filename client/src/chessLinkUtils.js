@@ -9,7 +9,7 @@ export function generateChessComLink(ecoUrlString, resultType, color) {
   const resultParam =
     resultType && resultType !== "played" ? `&gameResult=${resultType}` : "";
 
-  const colorParam = color ? `&color=${color}` : "";
+  const colorParam = color === "both" ? "" : `&color=${color}`;
 
   return `${baseUrl}${resultParam}${colorParam}&opening=${encodedOpening}&timeSort=desc`;
 }
