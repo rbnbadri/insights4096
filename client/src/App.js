@@ -22,6 +22,7 @@ function Insights4096() {
   const [resetToDefaultRange, setResetToDefaultRange] = useState(false);
   const [fullResetTrigger, setFullResetTrigger] = useState(false);
   const [expandedTable, setExpandedTable] = useState(null);
+  const [isOwnUsername, setIsOwnUsername] = useState(true);
 
   useEffect(() => {
     document.title = "Insights4096";
@@ -101,6 +102,7 @@ function Insights4096() {
   };
 
   const renderTable = (color, summaryLabel) => {
+    const enteredUsername = isOwnUsername ? null : username;
     return submitted && filteredData?.[color] ? (
       <div className="table-section">
         <OpeningStatsTable
@@ -123,6 +125,8 @@ function Insights4096() {
             setEndDate(end);
             handleSubmit(start, end, color);
           }}
+          isOwnUsername={isOwnUsername}
+          enteredUsername={enteredUsername}
         />
       </div>
     ) : submitted ? (
@@ -134,7 +138,7 @@ function Insights4096() {
     <div className="App">
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.8.0</h1>
+        <h1 className="header">Chess Insights v0.8.2</h1>
       </div>
 
       <div className="flex-row">
@@ -167,6 +171,15 @@ function Insights4096() {
         >
           Search
         </button>
+        <label>
+          <input
+            type="checkbox"
+            checked={isOwnUsername}
+            onChange={(e) => setIsOwnUsername(e.target.checked)}
+            style={{ marginLeft: "10px", marginRight: "4px" }}
+          />
+          This is my username
+        </label>
       </div>
 
       {renderTable("white", "White Games")}

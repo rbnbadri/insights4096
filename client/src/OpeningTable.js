@@ -9,12 +9,18 @@ const OpeningTable = ({
   startDate,
   endDate,
   handleSortColumn,
+  enteredUsername,
 }) => {
   const renderLinkedCell = (count, resultType, ecoUrlString) => {
     if (count > 0 && startDate && endDate) {
       const startFormatted = new Date(startDate).toLocaleDateString("en-US");
       const endFormatted = new Date(endDate).toLocaleDateString("en-US");
-      const baseLink = generateChessComLink(ecoUrlString, resultType, color);
+      const baseLink = generateChessComLink(
+        ecoUrlString,
+        resultType,
+        color,
+        enteredUsername,
+      );
       const dataTestId = `${resultType ? resultType : "played"}-count`;
       const dateQuery = `&endDate%5Bdate%5D=${encodeURIComponent(endFormatted)}&startDate%5Bdate%5D=${encodeURIComponent(startFormatted)}`;
       return (
@@ -70,14 +76,36 @@ const OpeningTable = ({
                 </a>
               </td>
               <td>
-                {renderLinkedCell(stats.played, null, stats.ecoUrlString)}
+                {renderLinkedCell(
+                  stats.played,
+                  null,
+                  stats.ecoUrlString,
+                  enteredUsername,
+                )}
               </td>
-              <td>{renderLinkedCell(stats.won, "win", stats.ecoUrlString)}</td>
               <td>
-                {renderLinkedCell(stats.lost, "lost", stats.ecoUrlString)}
+                {renderLinkedCell(
+                  stats.won,
+                  "win",
+                  stats.ecoUrlString,
+                  enteredUsername,
+                )}
               </td>
               <td>
-                {renderLinkedCell(stats.drawn, "draw", stats.ecoUrlString)}
+                {renderLinkedCell(
+                  stats.lost,
+                  "lost",
+                  stats.ecoUrlString,
+                  enteredUsername,
+                )}
+              </td>
+              <td>
+                {renderLinkedCell(
+                  stats.drawn,
+                  "draw",
+                  stats.ecoUrlString,
+                  enteredUsername,
+                )}
               </td>
             </tr>
           ))}

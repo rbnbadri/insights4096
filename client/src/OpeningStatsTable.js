@@ -13,6 +13,8 @@ const OpeningStatsTable = ({
   color = null,
   summaryLabel = "All Games",
   testId = `Openings filter- ${color}`,
+  isOwnUsername,
+  enteredUsername,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -195,6 +197,7 @@ const OpeningStatsTable = ({
           startDate={data.startDate}
           endDate={data.endDate}
           handleSortColumn={handleSortColumn}
+          enteredUsername={enteredUsername}
         />
       </div>
 
