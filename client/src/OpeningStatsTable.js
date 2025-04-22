@@ -15,7 +15,7 @@ const OpeningStatsTable = ({
   testId = `Openings filter- ${color}`,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
-  const [sortOrder] = useState("desc");
+  const [sortOrder, setSortOrder] = useState("desc");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [filterOptions, setFilterOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
@@ -48,6 +48,15 @@ const OpeningStatsTable = ({
       setShowingFilteredSummary(false);
     }
   }, [fullResetTrigger]);
+
+  const handleSortColumn = (col) => {
+    if (col === sortColumn) {
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      setSortColumn(col);
+      setSortOrder("desc");
+    }
+  };
 
   const filteredEntries = useMemo(() => {
     const entries = Object.entries(data).filter(
@@ -164,23 +173,31 @@ const OpeningStatsTable = ({
   };
 
   return (
-    <div data-test-id={`Openings table - ${color || "both"}`}>
-      <SummaryBar
-        summaryData={summaryData}
-        filterProps={filterProps}
-        dateRangeProps={dateRangeProps}
-        controlProps={controlProps}
-        tableMetrics={tableMetrics}
-      />
-      <OpeningTable
-        color={color}
-        loading={loading}
-        filteredEntries={filteredEntries}
-        renderSortIndicator={(col) => (col === sortColumn ? " ↓" : null)}
-        setSortColumn={setSortColumn}
-        startDate={data.startDate}
-        endDate={data.endDate}
-      />
+    <div
+      data-test-id={`Openings table - ${color || "both"}`}
+      className="table-section"
+    >
+      <div className="table-wrapper">
+        <SummaryBar
+          summaryData={summaryData}
+          filterProps={filterProps}
+          dateRangeProps={dateRangeProps}
+          controlProps={controlProps}
+          tableMetrics={tableMetrics}
+        />
+        <OpeningTable
+          color={color}
+          loading={loading}
+          filteredEntries={filteredEntries}
+          renderSortIndicator={(col) =>
+            col === sortColumn ? (sortOrder === "asc" ? " ↑" : " ↓") : ""
+          }
+          startDate={data.startDate}
+          endDate={data.endDate}
+          handleSortColumn={handleSortColumn}
+        />
+      </div>
+
       {showBottomControls && (
         <div className="summary-bar-bottom">
           <ControlButtons {...controlProps} />

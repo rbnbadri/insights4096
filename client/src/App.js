@@ -9,7 +9,11 @@ function Insights4096() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState({
+    white: false,
+    black: false,
+    both: false,
+  });
 
   const [cachedOneMonthWhite, setCachedOneMonthWhite] = useState(null);
   const [cachedOneMonthBlack, setCachedOneMonthBlack] = useState(null);
@@ -32,10 +36,10 @@ function Insights4096() {
 
   const handleChange = (e) => setUsername(e.target.value);
 
-  const handleSubmit = async (start = startDate, end = endDate) => {
+  const handleSubmit = async (start = startDate, end = endDate, section) => {
     if (!username) return;
 
-    setLoading(true);
+    setLoadingState((prev) => ({ ...prev, [section]: true }));
     const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
     const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
 
@@ -71,7 +75,7 @@ function Insights4096() {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false);
+      setLoadingState((prev) => ({ ...prev, [section]: false }));
     }
   };
 
@@ -108,7 +112,7 @@ function Insights4096() {
           color={color}
           summaryLabel={summaryLabel}
           testId={`Openings filter- ${color}`}
-          loading={loading}
+          loading={loadingState[color]}
           resetToDefaultRange={resetToDefaultRange}
           fullResetTrigger={fullResetTrigger}
           expandedTable={expandedTable}
@@ -117,7 +121,7 @@ function Insights4096() {
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);
-            handleSubmit(start, end);
+            handleSubmit(start, end, color);
           }}
         />
       </div>

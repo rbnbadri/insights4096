@@ -6,9 +6,9 @@ const OpeningTable = ({
   loading,
   filteredEntries,
   renderSortIndicator,
-  setSortColumn,
   startDate,
   endDate,
+  handleSortColumn,
 }) => {
   const renderLinkedCell = (count, resultType, ecoUrlString) => {
     if (count > 0 && startDate && endDate) {
@@ -37,20 +37,23 @@ const OpeningTable = ({
       <table className="chess-table" style={{ opacity: loading ? 0.5 : 1 }}>
         <thead>
           <tr data-test-id={`Table header for ${color || "all"} openings`}>
-            <th className="sortable" onClick={() => setSortColumn("name")}>
+            <th
+              className="opening-name-cell"
+              onClick={() => handleSortColumn("name")}
+            >
               Opening Name{renderSortIndicator("name")}
             </th>
             <th>Opening Name with Eco</th>
-            <th className="sortable" onClick={() => setSortColumn("played")}>
+            <th className="sortable" onClick={() => handleSortColumn("played")}>
               Played{renderSortIndicator("played")}
             </th>
-            <th className="sortable" onClick={() => setSortColumn("won")}>
+            <th className="sortable" onClick={() => handleSortColumn("won")}>
               Won{renderSortIndicator("won")}
             </th>
-            <th className="sortable" onClick={() => setSortColumn("lost")}>
+            <th className="sortable" onClick={() => handleSortColumn("lost")}>
               Lost{renderSortIndicator("lost")}
             </th>
-            <th className="sortable" onClick={() => setSortColumn("drawn")}>
+            <th className="sortable" onClick={() => handleSortColumn("drawn")}>
               Drawn{renderSortIndicator("drawn")}
             </th>
           </tr>
@@ -58,8 +61,10 @@ const OpeningTable = ({
         <tbody>
           {Object.entries(filteredEntries).map(([name, stats]) => (
             <tr key={name} data-test-id="Chess data row">
-              <td>{name}</td>
-              <td>
+              <td className="opening-name-cell" title={name}>
+                {name}
+              </td>
+              <td className="eco-code">
                 <a href={stats.ecoUrl} target="_blank" rel="noreferrer">
                   {stats.ecoCode}
                 </a>

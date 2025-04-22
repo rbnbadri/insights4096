@@ -17,11 +17,13 @@
 
 .table-wrapper {
   width: 100%;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  margin: 0;
+  max-width: 1100px;
+  margin: 0;              /* removed auto centering */
   padding: 0;
+  border: none;
+  box-sizing: border-box;
 }
+
 
 .summary-row {
   display: flex;
@@ -132,23 +134,27 @@ th.sortable:hover {
 
 .summary-bar-vertical {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
-  width: calc(100% - 2px); /* Fix spacing caused by border */
   background-color: black;
   color: white;
-  padding: 12px;
-  box-sizing: border-box;
+  padding: 12px 10px 6px 10px; /* tighter bottom spacing */
   margin: 0;
   border: none;
   border-radius: 0;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
 }
+
+
+/* .summary-bar-vertical {
+  width: 100%; 
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding-left: 0;
+  padding-right: 0;
+} */
+
 
 .chess-table {
   width: 100%;
@@ -196,4 +202,20 @@ th.sortable:hover {
 
 .table-section {
   margin-bottom: 40px; /* extra space between tables */
+}
+
+/* Ellipsis for long opening names */
+.opening-name-cell {
+  max-width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Optional: ECO code column max-width */
+.eco-code {
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
