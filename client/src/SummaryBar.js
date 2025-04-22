@@ -1,27 +1,37 @@
 import React from "react";
 import Select, { components } from "react-select";
+import ControlButtons from "./ControlButtons";
 import DateRangeSelector from "./DateRangeSelector";
 
 const SummaryBar = ({
-  summaryLabel,
-  fullSummary,
-  filteredSummary,
-  selectedOptions,
-  setSelectedOptions,
-  filterOptions,
-  showingFilteredSummary,
-  setShowingFilteredSummary,
-  dateRangeOption,
-  setDateRangeOption,
-  onDateRangeChange,
-  onResetToCachedOneMonth,
-  viewLimit,
-  setViewLimit,
-  totalRows,
-  visibleRows,
-  testId,
-  color,
+  summaryData,
+  filterProps,
+  dateRangeProps,
+  controlProps,
+  tableMetrics,
 }) => {
+  const { summaryLabel, fullSummary, filteredSummary } = summaryData;
+
+  const {
+    selectedOptions,
+    setSelectedOptions,
+    filterOptions,
+    showingFilteredSummary,
+    setShowingFilteredSummary,
+  } = filterProps;
+
+  const {
+    dateRangeOption,
+    setDateRangeOption,
+    onDateRangeChange,
+    onResetToCachedOneMonth,
+  } = dateRangeProps;
+
+  const { handleShow5, handleShow10, handleShowAll, handleClearFilters } =
+    controlProps;
+
+  const { totalRows, visibleRows, testId, color } = tableMetrics;
+
   const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
     <components.Control
       {...rest}
@@ -45,13 +55,6 @@ const SummaryBar = ({
     return null;
   };
 
-  const clearFilters = () => {
-    setSelectedOptions([]);
-    setViewLimit(5);
-    setShowingFilteredSummary(false);
-    if (onResetToCachedOneMonth) onResetToCachedOneMonth();
-  };
-
   return (
     <div className="summary-bar-vertical">
       <div className="summary-text">
@@ -71,12 +74,10 @@ const SummaryBar = ({
         )}
         Showing {visibleRows} rows out of {totalRows}
       </div>
-
       <div className="filter-dropdown">
         <Select
-          options={filterOptions}
           isMulti
-          placeholder="Filter openings"
+          options={filterOptions}
           value={selectedOptions}
           onChange={(newOptions, actionMeta) => {
             if (["select-option", "remove-value"].includes(actionMeta.action)) {
@@ -86,55 +87,28 @@ const SummaryBar = ({
             }
             setSelectedOptions(newOptions || []);
           }}
-          classNamePrefix="react-select"
           components={{ MultiValue, Control: CustomControl }}
-          styles={{
-            control: (base) => ({
-              ...base,
-              minHeight: "30px",
-              fontSize: "12px",
-            }),
-          }}
-          data-test-id={testId}
+          placeholder="Filter openings..."
+          className="react-select-container"
+          classNamePrefix="react-select"
+          inputId={testId}
         />
       </div>
-
       <div className="date-range-dropdown">
         <DateRangeSelector
-          onDateRangeResolved={onDateRangeChange}
           dateRangeOption={dateRangeOption}
           setDateRangeOption={setDateRangeOption}
-          testId={`date range selector - ${color || "all"}`}
+          onDateRangeChange={onDateRangeChange}
+          onResetToCachedOneMonth={onResetToCachedOneMonth}
+          testId={`date range selector - ${color || "both"}`}
         />
       </div>
-
-      <div className="summary-buttons">
-        <button
-          onClick={() => {
-            setViewLimit(5);
-            setShowingFilteredSummary(true);
-          }}
-        >
-          Show 5
-        </button>
-        <button
-          onClick={() => {
-            setViewLimit(10);
-            setShowingFilteredSummary(true);
-          }}
-        >
-          Show 10
-        </button>
-        <button
-          onClick={() => {
-            setViewLimit(totalRows);
-            setShowingFilteredSummary(selectedOptions.length > 0);
-          }}
-        >
-          Show All
-        </button>
-        <button onClick={clearFilters}>Clear Filters</button>
-      </div>
+      <ControlButtons
+        handleShow5={handleShow5}
+        handleShow10={handleShow10}
+        handleShowAll={handleShowAll}
+        handleClearFilters={handleClearFilters}
+      />
     </div>
   );
 };

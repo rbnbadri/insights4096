@@ -12,7 +12,7 @@ const dateRangeOptions = [
 ];
 
 const DateRangeSelector = ({
-  onDateRangeResolved,
+  onDateRangeChange,
   resetToDefaultRange,
   dateRangeOption,
   setDateRangeOption,
@@ -62,7 +62,7 @@ const DateRangeSelector = ({
       endDate = today.toISOString().split("T")[0];
     }
 
-    onDateRangeResolved(startDate, endDate);
+    onDateRangeChange(startDate, endDate);
   };
 
   return (

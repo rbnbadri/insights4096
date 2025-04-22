@@ -23,13 +23,15 @@
   padding: 0;
 }
 
-.summary-row th {
-  color: white !important;
-  background-color: black !important;
-  font-weight: bold;
-  text-align: left;
-  padding: 10px;
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 12px;
 }
+
 
 table {
   border-collapse: collapse;
@@ -39,7 +41,7 @@ table {
 }
 
 th, td {
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 8px;
   text-align: left;
 }
@@ -71,13 +73,14 @@ th.sortable:hover {
 }
 
 .summary-buttons button {
+  flex-shrink: 0;
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   text-align: left;
   background-color: white;
   color: black;
-  border: 1px solid #ccc;
+  border: 1px solid black; /* ⬅️ Make border solid black */
 }
 
 .react-select__control {
@@ -156,4 +159,41 @@ th.sortable:hover {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+}
+
+.summary-bar-bottom {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding-left: 8px; /* aligns with left edge of table content */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-select {
+  flex: 1;
+  min-width: 250px;
+}
+
+.date-range-wrapper {
+  flex: 1;
+  min-width: 250px;
+}
+
+.header-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.table-section {
+  margin-bottom: 40px; /* extra space between tables */
 }
