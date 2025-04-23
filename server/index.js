@@ -45,10 +45,14 @@ function extractOpenings(games, username) {
     let rapidCount = 0;
 
     games.forEach((game) => {
-        if (game.time_class === "rapid" && game.eco && game.pgn) {
+        if (game.time_class === "rapid" && game.pgn) {
             rapidCount++;
 
-            const ecoUrl = game.eco;
+            let ecoUrl = null;
+            const ecoUrlMatch = game.pgn.match(/\[ECOUrl\s+"(.*?)"\]/);
+            if (ecoUrlMatch) {
+                ecoUrl = ecoUrlMatch[1];
+            }
             const ecoUrlParts = ecoUrl.split("/");
             const lastPart = ecoUrlParts[ecoUrlParts.length - 1];
             const ecoMain = lastPart.split(/[.\d]/)[0].replace(/-/g, " ");
@@ -70,7 +74,7 @@ function extractOpenings(games, username) {
                 if (ecoMain.includes("Scotch Game")) {
                     ecoCode = "C45";
                 }
-
+                ecoUrl = ecoCode;
                 if (ecoCode && ecoData[ecoCode] && ecoData[ecoCode].Opening) {
                     ecoCodeString = `${ecoCode}: ${ecoData[ecoCode].Opening}`;
                     ecoUrlString = ecoData[ecoCode].OpeningUrl;
