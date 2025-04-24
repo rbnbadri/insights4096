@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 import logo from "./logo.png";
+import { fetchOpenings } from "./api/fetchOpenings";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
@@ -49,13 +50,15 @@ function Insights4096() {
     if (!username) return;
 
     setLoadingState((prev) => ({ ...prev, [section]: true }));
-    const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
-    const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
 
     try {
-      const response = await fetch(url);
-      const result = await response.json();
-      const gamedata = result.data;
+      const gamedata = await fetchOpenings(
+        username,
+        start,
+        end,
+        setCachedOneMonthWhite,
+        setCachedOneMonthBlack,
+      );
 
       setFilteredData({
         white: gamedata.white,
@@ -63,19 +66,6 @@ function Insights4096() {
         startDate: start,
         endDate: end,
       });
-
-      const today = new Date();
-      const oneMonthAgo = new Date(today);
-      oneMonthAgo.setDate(today.getDate() - 30);
-      const defaultStart = oneMonthAgo.toISOString().split("T")[0];
-      const defaultEnd = today.toISOString().split("T")[0];
-
-      if (start === defaultStart && end === defaultEnd) {
-        if (gamedata.white)
-          setCachedOneMonthWhite({ data: gamedata.white, startDate, endDate });
-        if (gamedata.black)
-          setCachedOneMonthBlack({ data: gamedata.black, startDate, endDate });
-      }
 
       setSubmitted(true);
     } catch (error) {
