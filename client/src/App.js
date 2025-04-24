@@ -12,17 +12,21 @@ function Insights4096() {
   const [loadingState, setLoadingState] = useState({
     white: false,
     black: false,
-    both: false,
   });
 
   const [cachedOneMonthWhite, setCachedOneMonthWhite] = useState(null);
   const [cachedOneMonthBlack, setCachedOneMonthBlack] = useState(null);
-  const [cachedOneMonthBoth, setCachedOneMonthBoth] = useState(null);
 
   const [resetToDefaultRange, setResetToDefaultRange] = useState(false);
   const [fullResetTrigger, setFullResetTrigger] = useState(false);
   const [expandedTable, setExpandedTable] = useState(null);
   const [isOwnUsername, setIsOwnUsername] = useState(true);
+
+  const [selectedColor, setSelectedColor] = useState("white");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
+  const [sortColumn, setSortColumn] = useState("played");
+  const [sortDirection, setSortDirection] = useState("desc");
 
   useEffect(() => {
     document.title = "Insights4096";
@@ -37,7 +41,11 @@ function Insights4096() {
 
   const handleChange = (e) => setUsername(e.target.value);
 
-  const handleSubmit = async (start = startDate, end = endDate, section) => {
+  const handleSubmit = async (
+    start = startDate,
+    end = endDate,
+    section = selectedColor,
+  ) => {
     if (!username) return;
 
     setLoadingState((prev) => ({ ...prev, [section]: true }));
@@ -52,7 +60,6 @@ function Insights4096() {
       setFilteredData({
         white: gamedata.white,
         black: gamedata.black,
-        both: gamedata.both,
         startDate: start,
         endDate: end,
       });
@@ -68,8 +75,6 @@ function Insights4096() {
           setCachedOneMonthWhite({ data: gamedata.white, startDate, endDate });
         if (gamedata.black)
           setCachedOneMonthBlack({ data: gamedata.black, startDate, endDate });
-        if (gamedata.both)
-          setCachedOneMonthBoth({ data: gamedata.both, startDate, endDate });
       }
 
       setSubmitted(true);
@@ -81,12 +86,7 @@ function Insights4096() {
   };
 
   const handleResetToCachedOneMonth = (color) => {
-    const cache =
-      color === "white"
-        ? cachedOneMonthWhite
-        : color === "black"
-          ? cachedOneMonthBlack
-          : cachedOneMonthBoth;
+    const cache = color === "white" ? cachedOneMonthWhite : cachedOneMonthBlack;
 
     if (cache) {
       setFilteredData((prev) => ({
@@ -127,6 +127,15 @@ function Insights4096() {
           }}
           isOwnUsername={isOwnUsername}
           enteredUsername={enteredUsername}
+          username={username}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
+          showingFilteredSummary={showingFilteredSummary}
+          setShowingFilteredSummary={setShowingFilteredSummary}
+          sortColumn={sortColumn}
+          setSortColumn={setSortColumn}
+          sortDirection={sortDirection}
+          setSortDirection={setSortDirection}
         />
       </div>
     ) : submitted ? (
@@ -138,7 +147,7 @@ function Insights4096() {
     <div className="App">
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.8.2</h1>
+        <h1 className="header">Chess Insights v0.8.5</h1>
       </div>
 
       <div className="flex-row">
@@ -166,7 +175,7 @@ function Insights4096() {
               setFullResetTrigger(false);
             }, 100);
 
-            handleSubmit(defaultStart, defaultEnd);
+            handleSubmit(defaultStart, defaultEnd, selectedColor);
           }}
         >
           Search
@@ -182,9 +191,29 @@ function Insights4096() {
         </label>
       </div>
 
-      {renderTable("white", "White Games")}
-      {renderTable("black", "Black Games")}
-      {renderTable("both", "All Games")}
+      <div className="color-toggle-buttons">
+        {["white", "black"].map((color) => (
+          <button
+            key={color}
+            className={selectedColor === color ? "active" : ""}
+            onClick={() => {
+              setSelectedColor(color);
+              setSelectedOptions([]);
+              setShowingFilteredSummary(false);
+              setSortColumn("played");
+              setSortDirection("desc");
+              handleResetToCachedOneMonth(color);
+            }}
+          >
+            {color.charAt(0).toUpperCase() + color.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {renderTable(
+        selectedColor,
+        `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} Games`,
+      )}
     </div>
   );
 }

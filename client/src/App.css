@@ -137,8 +137,8 @@ th.sortable:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  background-color: black;
-  color: white;
+  background-color: black !important;
+  color: white !important;
   padding: 12px 10px 6px 10px; /* tighter bottom spacing */
   margin: 0;
   border: none;
@@ -218,4 +218,24 @@ th.sortable:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.color-toggle-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.color-toggle-buttons button {
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.color-toggle-buttons button.active {
+  background-color: black;
+  color: white;
 }

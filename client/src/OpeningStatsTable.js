@@ -13,8 +13,8 @@ const OpeningStatsTable = ({
   color = null,
   summaryLabel = "All Games",
   testId = `Openings filter- ${color}`,
-  isOwnUsername,
-  enteredUsername,
+  isOwnUsername = { isOwnUsername },
+  enteredUsername = { enteredUsername },
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
