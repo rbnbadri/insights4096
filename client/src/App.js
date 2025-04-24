@@ -2,104 +2,42 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 import logo from "./logo.png";
+import { fetchOpenings } from "./api/fetchOpenings";
+import useOpeningState from "./hooks/useOpeningState";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
-  const [filteredData, setFilteredData] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [loadingState, setLoadingState] = useState({
-    white: false,
-    black: false,
-    both: false,
-  });
-
-  const [cachedOneMonthWhite, setCachedOneMonthWhite] = useState(null);
-  const [cachedOneMonthBlack, setCachedOneMonthBlack] = useState(null);
-  const [cachedOneMonthBoth, setCachedOneMonthBoth] = useState(null);
-
-  const [resetToDefaultRange, setResetToDefaultRange] = useState(false);
-  const [fullResetTrigger, setFullResetTrigger] = useState(false);
-  const [expandedTable, setExpandedTable] = useState(null);
   const [isOwnUsername, setIsOwnUsername] = useState(true);
-
-  useEffect(() => {
-    document.title = "Insights4096";
-
-    const today = new Date();
-    const oneMonthAgo = new Date(today);
-    oneMonthAgo.setDate(today.getDate() - 30);
-
-    setStartDate(oneMonthAgo.toISOString().split("T")[0]);
-    setEndDate(today.toISOString().split("T")[0]);
-  }, []);
 
   const handleChange = (e) => setUsername(e.target.value);
 
-  const handleSubmit = async (start = startDate, end = endDate, section) => {
-    if (!username) return;
-
-    setLoadingState((prev) => ({ ...prev, [section]: true }));
-    const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
-    const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
-
-    try {
-      const response = await fetch(url);
-      const result = await response.json();
-      const gamedata = result.data;
-
-      setFilteredData({
-        white: gamedata.white,
-        black: gamedata.black,
-        both: gamedata.both,
-        startDate: start,
-        endDate: end,
-      });
-
-      const today = new Date();
-      const oneMonthAgo = new Date(today);
-      oneMonthAgo.setDate(today.getDate() - 30);
-      const defaultStart = oneMonthAgo.toISOString().split("T")[0];
-      const defaultEnd = today.toISOString().split("T")[0];
-
-      if (start === defaultStart && end === defaultEnd) {
-        if (gamedata.white)
-          setCachedOneMonthWhite({ data: gamedata.white, startDate, endDate });
-        if (gamedata.black)
-          setCachedOneMonthBlack({ data: gamedata.black, startDate, endDate });
-        if (gamedata.both)
-          setCachedOneMonthBoth({ data: gamedata.both, startDate, endDate });
-      }
-
-      setSubmitted(true);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoadingState((prev) => ({ ...prev, [section]: false }));
-    }
-  };
-
-  const handleResetToCachedOneMonth = (color) => {
-    const cache =
-      color === "white"
-        ? cachedOneMonthWhite
-        : color === "black"
-          ? cachedOneMonthBlack
-          : cachedOneMonthBoth;
-
-    if (cache) {
-      setFilteredData((prev) => ({
-        ...prev,
-        [color]: cache.data,
-      }));
-      setStartDate(cache.startDate);
-      setEndDate(cache.endDate);
-      setSubmitted(true);
-      setResetToDefaultRange(true);
-      setTimeout(() => setResetToDefaultRange(false), 100);
-    }
-  };
+  const {
+    filteredData,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    submitted,
+    loadingState,
+    resetToDefaultRange,
+    fullResetTrigger,
+    setFullResetTrigger,
+    expandedTable,
+    setExpandedTable,
+    selectedColor,
+    setSelectedColor,
+    selectedOptions,
+    setSelectedOptions,
+    showingFilteredSummary,
+    setShowingFilteredSummary,
+    sortColumn,
+    setSortColumn,
+    sortDirection,
+    setSortDirection,
+    handleSubmit,
+    handleResetToCachedOneMonth,
+    setResetToDefaultRange,
+  } = useOpeningState(username);
 
   const renderTable = (color, summaryLabel) => {
     const enteredUsername = isOwnUsername ? null : username;
@@ -127,6 +65,15 @@ function Insights4096() {
           }}
           isOwnUsername={isOwnUsername}
           enteredUsername={enteredUsername}
+          username={username}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
+          showingFilteredSummary={showingFilteredSummary}
+          setShowingFilteredSummary={setShowingFilteredSummary}
+          sortColumn={sortColumn}
+          setSortColumn={setSortColumn}
+          sortDirection={sortDirection}
+          setSortDirection={setSortDirection}
         />
       </div>
     ) : submitted ? (
@@ -138,7 +85,7 @@ function Insights4096() {
     <div className="App">
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.8.2</h1>
+        <h1 className="header">Chess Insights v0.8.5</h1>
       </div>
 
       <div className="flex-row">
@@ -166,7 +113,7 @@ function Insights4096() {
               setFullResetTrigger(false);
             }, 100);
 
-            handleSubmit(defaultStart, defaultEnd);
+            handleSubmit(defaultStart, defaultEnd, selectedColor);
           }}
         >
           Search
@@ -181,10 +128,43 @@ function Insights4096() {
           This is my username
         </label>
       </div>
+      {submitted && (
+        <div className="color-toggle-buttons">
+          {["white", "black"].map((color) => (
+            <button
+              key={color}
+              className={selectedColor === color ? "active" : ""}
+              onClick={() => {
+                setSelectedColor(color);
+                setSelectedOptions([]); // ✅ Reset filters
+                setShowingFilteredSummary(false);
+                setSortColumn("played");
+                setSortDirection("desc");
 
-      {renderTable("white", "White Games")}
-      {renderTable("black", "Black Games")}
-      {renderTable("both", "All Games")}
+                // ✅ Trigger full reset so OpeningStatsTable clears filters
+                setFullResetTrigger(true);
+                setTimeout(() => setFullResetTrigger(false), 100);
+
+                // ✅ Retain current date range for the new color
+                if (filteredData?.startDate && filteredData?.endDate) {
+                  handleSubmit(
+                    filteredData.startDate,
+                    filteredData.endDate,
+                    color,
+                  );
+                }
+              }}
+            >
+              {color.charAt(0).toUpperCase() + color.slice(1)}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {renderTable(
+        selectedColor,
+        `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} Games`,
+      )}
     </div>
   );
 }
