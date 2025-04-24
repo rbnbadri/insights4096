@@ -190,25 +190,38 @@ function Insights4096() {
           This is my username
         </label>
       </div>
+      {submitted && (
+        <div className="color-toggle-buttons">
+          {["white", "black"].map((color) => (
+            <button
+              key={color}
+              className={selectedColor === color ? "active" : ""}
+              onClick={() => {
+                setSelectedColor(color);
+                setSelectedOptions([]); // ✅ Reset filters
+                setShowingFilteredSummary(false);
+                setSortColumn("played");
+                setSortDirection("desc");
 
-      <div className="color-toggle-buttons">
-        {["white", "black"].map((color) => (
-          <button
-            key={color}
-            className={selectedColor === color ? "active" : ""}
-            onClick={() => {
-              setSelectedColor(color);
-              setSelectedOptions([]);
-              setShowingFilteredSummary(false);
-              setSortColumn("played");
-              setSortDirection("desc");
-              handleResetToCachedOneMonth(color);
-            }}
-          >
-            {color.charAt(0).toUpperCase() + color.slice(1)}
-          </button>
-        ))}
-      </div>
+                // ✅ Trigger full reset so OpeningStatsTable clears filters
+                setFullResetTrigger(true);
+                setTimeout(() => setFullResetTrigger(false), 100);
+
+                // ✅ Retain current date range for the new color
+                if (filteredData?.startDate && filteredData?.endDate) {
+                  handleSubmit(
+                    filteredData.startDate,
+                    filteredData.endDate,
+                    color,
+                  );
+                }
+              }}
+            >
+              {color.charAt(0).toUpperCase() + color.slice(1)}
+            </button>
+          ))}
+        </div>
+      )}
 
       {renderTable(
         selectedColor,
