@@ -86,7 +86,7 @@ const OpeningTable = ({
               <td>
                 {renderLinkedCell(
                   stats.won,
-                  "win",
+                  "won",
                   stats.ecoUrlString,
                   enteredUsername,
                 )}

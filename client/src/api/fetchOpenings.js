@@ -5,7 +5,7 @@ export async function fetchOpenings(
   setCacheWhite,
   setCacheBlack
 ) {
-  const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
+  const baseUrl = `https://fc511c5e-ad91-434b-b376-03734aabba98-00-15nynkqgkr4sv.sisko.replit.dev/openings/${username}`;
   const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
 
   const response = await fetch(url);
