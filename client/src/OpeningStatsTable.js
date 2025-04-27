@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
 import ControlButtons from "./ControlButtons";
+import TopOpeningsDownloadLinks from "./TopOpeningsDownloadLinks";
 
 const OpeningStatsTable = ({
   data = {},
@@ -15,6 +16,7 @@ const OpeningStatsTable = ({
   testId = `Openings filter- ${color}`,
   isOwnUsername = { isOwnUsername },
   enteredUsername = { enteredUsername },
+  username = { username }
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -31,8 +33,7 @@ const OpeningStatsTable = ({
 
   useEffect(() => {
     if (data) {
-      const sortedOptions = Object.entries(data)
-        .filter(([key]) => !["startDate", "endDate"].includes(key))
+      const sortedOptions = Object.entries(data[color])
         .sort(([, a], [, b]) => b.played - a.played)
         .map(([key, val]) => ({
           value: key,
@@ -61,9 +62,7 @@ const OpeningStatsTable = ({
   };
 
   const filteredEntries = useMemo(() => {
-    const entries = Object.entries(data).filter(
-      ([k]) => !["startDate", "endDate"].includes(k),
-    );
+    const entries = Object.entries(data[color]);
     const filtered = selectedOptions.length
       ? entries.filter(([name]) =>
           selectedOptions.some((opt) => opt.value === name),
@@ -79,9 +78,8 @@ const OpeningStatsTable = ({
   }, [data, selectedOptions, sortColumn, sortOrder, viewLimit]);
 
   const fullSummary = useMemo(() => {
-    return Object.entries(data).reduce(
+    return Object.entries(data[color]).reduce(
       (acc, [key, val]) => {
-        if (["startDate", "endDate"].includes(key)) return acc;
         acc.played += val.played;
         acc.won += val.won;
         acc.lost += val.lost;
@@ -107,9 +105,7 @@ const OpeningStatsTable = ({
 
   const totalRows = selectedOptions.length
     ? selectedOptions.length
-    : Object.entries(data).filter(
-        ([key]) => !["startDate", "endDate"].includes(key),
-      ).length;
+    : Object.entries(data[color]).length;
 
   const visibleRows = Object.keys(filteredEntries).length;
 
@@ -200,12 +196,17 @@ const OpeningStatsTable = ({
           enteredUsername={enteredUsername}
         />
       </div>
-
       {showBottomControls && (
         <div className="summary-bar-bottom">
           <ControlButtons {...controlProps} />
         </div>
       )}
+      <TopOpeningsDownloadLinks
+        openingsData={data}
+        startDate={data.startDate}
+        endDate={data.endDate}
+        username={username}
+      />
     </div>
   );
 };

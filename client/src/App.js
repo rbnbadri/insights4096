@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 import logo from "./logo.png";
-import { fetchOpenings } from "./api/fetchOpenings";
 import useOpeningState from "./hooks/useOpeningState";
 
 function Insights4096() {
@@ -45,7 +44,7 @@ function Insights4096() {
       <div className="table-section">
         <OpeningStatsTable
           data={{
-            ...filteredData[color],
+            ...filteredData,
             startDate,
             endDate,
           }}
@@ -85,7 +84,7 @@ function Insights4096() {
     <div className="App">
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.8.5</h1>
+        <h1 className="header">Chess Insights v0.9.0</h1>
       </div>
 
       <div className="flex-row">

@@ -1,3 +1,5 @@
+import { BACKEND_URL } from "../apiConfig";
+
 export async function fetchOpenings(
   username,
   start,
@@ -5,7 +7,7 @@ export async function fetchOpenings(
   setCacheWhite,
   setCacheBlack,
 ) {
-  const baseUrl = `https://insights4096-backend.onrender.com/openings/${username}`;
+  const baseUrl = `${BACKEND_URL}/openings/${username}`;
   const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
 
   const response = await fetch(url);

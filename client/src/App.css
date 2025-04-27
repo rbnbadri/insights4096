@@ -17,7 +17,7 @@
 
 .table-wrapper {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0;              /* removed auto centering */
   padding: 0;
   border: none;
@@ -145,17 +145,6 @@ th.sortable:hover {
   border-radius: 0;
 }
 
-
-/* .summary-bar-vertical {
-  width: 100%; 
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  padding-left: 0;
-  padding-right: 0;
-} */
-
-
 .chess-table {
   width: 100%;
   border-collapse: collapse;
@@ -165,6 +154,7 @@ th.sortable:hover {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
 .summary-bar-bottom {
@@ -238,4 +228,133 @@ th.sortable:hover {
 .color-toggle-buttons button.active {
   background-color: black;
   color: white;
+}
+
+/* .top-openings-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  border: 2px solid black;
+  margin-bottom: 20px;
+} */
+
+.top-openings-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  border: 2px solid black;
+  margin: 0 auto; /* ✅ ADD this */
+  padding: 0 10px; /* ✅ ADD this */
+  box-sizing: border-box; /* ✅ ensure correct width calculations */
+}
+
+.top-openings-header {
+  display: flex;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.top-openings-header-half {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.top-openings-header-half:first-child {
+  border-right: 2px solid white; /* ✅ New: white vertical separator */
+}
+
+
+.top-openings-half {
+  flex: 1; /* ✅ Force 50% width exactly */
+  padding: 10px;
+  border-right: 1px solid black;
+}
+
+
+.top-openings-half:last-child {
+  border-right: none;
+}
+
+.top-openings-subheader {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.top-opening-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: black;
+  width: 100%;
+}
+
+.top-opening-name {
+  flex: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.top-opening-percent {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  min-width: 0;
+}
+
+.top-opening-link {
+  flex: 3;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.top-opening-link a {
+  font-size: 14px;
+  text-decoration: underline;
+  color: blue;
+}
+
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+
+.red-icon {
+  color: red;
+  margin-right: 4px;
+}
+
+.green-icon {
+  color: green;
+  margin-right: 4px;
+}
+
+.header-separator {
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+  background-color: white;
+  margin: 0 10px;
 }
