@@ -18,7 +18,7 @@
 .table-wrapper {
   width: 100%;
   max-width: 1400px;
-  margin: 0;              /* removed auto centering */
+  margin: 0;              
   padding: 0;
   border: none;
   box-sizing: border-box;
@@ -66,7 +66,7 @@ th.sortable:hover {
   text-align: left;
   background-color: white;
   color: black;
-  border: 1px solid black; /* ⬅️ Make border solid black */
+  border: 1px solid black; 
   align-items: center;
 }
 
@@ -124,7 +124,7 @@ th.sortable:hover {
   gap: 12px;
   background-color: black !important;
   color: white !important;
-  padding: 12px 10px 6px 10px; /* tighter bottom spacing */
+  padding: 12px 10px 6px 10px; 
   margin: 0;
   border: none;
   border-radius: 0;
@@ -145,7 +145,7 @@ th.sortable:hover {
 .summary-bar-bottom {
   margin-top: 12px;
   margin-bottom: 20px;
-  padding-left: 8px; /* aligns with left edge of table content */
+  padding-left: 8px; 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -166,7 +166,7 @@ th.sortable:hover {
 }
 
 .table-section {
-  margin-bottom: 40px; /* extra space between tables */
+  margin-bottom: 40px; 
 }
 
 /* Ellipsis for long opening names */
@@ -212,25 +212,10 @@ th.sortable:hover {
   align-items: flex-start;
   background-color: white;
   border: 2px solid black;
-  margin: 0 auto; /* ✅ ADD this */
-  padding: 0 10px; /* ✅ ADD this */
-  box-sizing: border-box; /* ✅ ensure correct width calculations */
-}
-
-/* .top-openings-header-half {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
+  margin: 0 auto; 
+  padding: 0 10px; 
   box-sizing: border-box; 
-  min-width: 0;
-} */
-
-/* .top-openings-half {
-  flex: 1; 
-  padding: 10px;
-  border-right: 1px solid black;
 }
- */
 
 .top-openings-half:last-child {
   border-right: none;
@@ -246,21 +231,6 @@ th.sortable:hover {
   padding: 2px 0; /* ✅ add slight vertical breathing room */
 }
 
-/* .top-opening-name {
-  flex: 4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  min-width: 0;
-} */
-
-/* .top-opening-percent {
-  flex: 1;
-  text-align: center;
-  font-size: 14px;
-  min-width: 0;
-} */
-
 .top-opening-percent {
   flex: 0 0 80px; /* fixed width for % */
   text-align: center;
@@ -269,14 +239,6 @@ th.sortable:hover {
   font-weight: 500;
   padding-left: 4px;
 }
-
-/* .top-opening-link {
-  flex: 3;
-  text-align: right;
-  overflow: hidden;
-  white-space: nowrap;
-  min-width: 0;
-} */
 
 .top-opening-link {
   flex: 1; /* fill remaining space */
@@ -358,17 +320,6 @@ th.sortable:hover {
   font-weight: 500;
 }
 
-/* .top-opening-insufficient-data {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 4px 8px;
-  background-color: #f9f9f9;
-  color: #003366;
-  font-size: 18px;
-  font-weight: 500;
-} */
-
 .top-opening-insufficient-data {
   display: flex;
   align-items: center;
@@ -434,8 +385,8 @@ th.sortable:hover {
 }
 
 .top-opening-name {
-  flex: 0 0 375px; 
-  max-width: 375px;
+  flex: 0 0 350px; 
+  max-width: 350px;
   min-width: 0;
   display: flex;
   align-items: center;
