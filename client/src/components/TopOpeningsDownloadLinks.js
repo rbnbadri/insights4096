@@ -1,7 +1,7 @@
 // TopOpeningsDownloadLinks.js
 import React from "react";
-import "./App.css";
-import { RenderEligibleOpeningsSection } from "./components/RenderEligibleOpeningsSection";
+import "../App.css";
+import { RenderEligibleOpeningsSection } from "./RenderEligibleOpeningsSection";
 
 const TopOpeningsDownloadLinks = ({
   openingsData,

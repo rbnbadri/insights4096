@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
 import ControlButtons from "./ControlButtons";
-import TopOpeningsDownloadLinks from "./TopOpeningsDownloadLinks";
+import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
 
 const OpeningStatsTable = ({
   data = {},
@@ -16,7 +16,7 @@ const OpeningStatsTable = ({
   testId = `Openings filter- ${color}`,
   isOwnUsername = { isOwnUsername },
   enteredUsername = { enteredUsername },
-  username = { username }
+  username = { username },
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
