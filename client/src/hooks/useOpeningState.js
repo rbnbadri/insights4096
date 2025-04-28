@@ -66,19 +66,29 @@ export default function useOpeningState(username) {
     }
   };
 
-  const handleResetToCachedOneMonth = (color) => {
-    const cache = color === "white" ? cachedOneMonthWhite : cachedOneMonthBlack;
-    if (cache) {
+  const handleResetToCachedOneMonth = () => {
+    if (cachedOneMonthWhite) {
       setFilteredData((prev) => ({
         ...prev,
-        [color]: cache.data,
+        white: cachedOneMonthWhite.data,
       }));
-      setStartDate(cache.startDate);
-      setEndDate(cache.endDate);
-      setSubmitted(true);
-      setResetToDefaultRange(true);
-      setTimeout(() => setResetToDefaultRange(false), 100);
     }
+
+    if (cachedOneMonthBlack) {
+      setFilteredData((prev) => ({
+        ...prev,
+        black: cachedOneMonthBlack.data,
+      }));
+    }
+
+    if (cachedOneMonthWhite?.startDate && cachedOneMonthWhite?.endDate) {
+      setStartDate(cachedOneMonthWhite.startDate);
+      setEndDate(cachedOneMonthWhite.endDate);
+    }
+
+    setSubmitted(true);
+    setResetToDefaultRange(true);
+    setTimeout(() => setResetToDefaultRange(false), 100);
   };
 
   return {

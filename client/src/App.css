@@ -25,16 +25,6 @@
 }
 
 
-.summary-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 12px;
-}
-
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -68,12 +58,6 @@ th.sortable:hover {
   margin-top: 8px;
 }
 
-.separator {
-  border-top: 1px solid #ccc;
-  width: 100%;
-  margin: 8px 0;
-}
-
 .summary-buttons button {
   flex-shrink: 0;
   padding: 5px 10px;
@@ -83,6 +67,7 @@ th.sortable:hover {
   background-color: white;
   color: black;
   border: 1px solid black; /* ⬅️ Make border solid black */
+  align-items: center;
 }
 
 .react-select__control {
@@ -167,16 +152,6 @@ th.sortable:hover {
   gap: 10px;
 }
 
-.summary-select {
-  flex: 1;
-  min-width: 250px;
-}
-
-.date-range-wrapper {
-  flex: 1;
-  min-width: 250px;
-}
-
 .header-with-logo {
   display: flex;
   align-items: center;
@@ -252,7 +227,7 @@ th.sortable:hover {
   box-sizing: border-box; /* ✅ ensure correct width calculations */
 }
 
-.top-openings-header {
+/* .top-openings-header {
   display: flex;
   width: 100%;
   background-color: black;
@@ -264,7 +239,7 @@ th.sortable:hover {
   text-align: center;
   margin-top: 20px;
 }
-
+ */
 .top-openings-header-half {
   flex: 1;
   text-align: center;
@@ -285,14 +260,6 @@ th.sortable:hover {
 
 .top-openings-half:last-child {
   border-right: none;
-}
-
-.top-openings-subheader {
-  font-weight: bold;
-  margin-bottom: 8px;
-  font-size: 16px;
-  color: black;
-  text-align: center;
 }
 
 .top-opening-row {
@@ -351,10 +318,59 @@ th.sortable:hover {
   margin-right: 4px;
 }
 
-.header-separator {
-  display: inline-block;
-  width: 2px;
-  height: 20px;
+.date-range-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   background-color: white;
-  margin: 0 10px;
+  color: black;
+  border: 1px solid black;
+  padding: 5px 10px;
+  height: 45px;
+  font-size: 0.85rem;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* .search-button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;
+  align-items: center;
+} */
+
+.search-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  height: 34px; /* same height as summary buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-text {
+  padding: 6px 0; /* Minor addition */
+  font-size: 0.95rem;
+  font-weight: 500;
 }

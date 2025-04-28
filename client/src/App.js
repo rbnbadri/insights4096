@@ -56,7 +56,7 @@ function Insights4096() {
           fullResetTrigger={fullResetTrigger}
           expandedTable={expandedTable}
           setExpandedTable={setExpandedTable}
-          onResetToCachedOneMonth={() => handleResetToCachedOneMonth(color)}
+          onResetToCachedOneMonth={() => handleResetToCachedOneMonth()}
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);

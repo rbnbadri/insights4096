@@ -1,8 +1,7 @@
 // TopOpeningsDownloadLinks.js
 import React from "react";
 import "./App.css";
-import { FaExclamationTriangle, FaCheckCircle } from "react-icons/fa";
-import { BACKEND_URL } from "./apiConfig";
+import { RenderEligibleOpeningsSection } from "./components/RenderEligibleOpeningsSection";
 
 const TopOpeningsDownloadLinks = ({
   openingsData,
@@ -15,10 +14,17 @@ const TopOpeningsDownloadLinks = ({
   }
 
   const calculateWinPercentage = (entry) => {
+    if (
+      !entry ||
+      typeof entry.won !== "number" ||
+      typeof entry.lost !== "number"
+    ) {
+      return 0;
+    }
     const wins = entry.won;
     const losses = entry.lost;
     if (wins + losses === 0) return 0;
-    return ((wins * 100) / (wins + losses)).toFixed(2);
+    return Number(((wins * 100) / (wins + losses)).toFixed(2));
   };
 
   const filterEligibleOpenings = (entries) =>
@@ -34,65 +40,6 @@ const TopOpeningsDownloadLinks = ({
   const whiteOpenings = filterEligibleOpenings(openingsData.white);
   const blackOpenings = filterEligibleOpenings(openingsData.black);
 
-  const getDownloadUrl = (openingName, gameResult, color) => {
-    const ecoFormatted = openingName.replace(/ /g, "-");
-    return `${BACKEND_URL}/pgns/${username}?color=${color}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}&gameResult=${gameResult}`;
-  };
-
-  const renderOpeningRow = (opening, position, color) => {
-    const { name, winPercent } = opening;
-    const isHighest = position === 2;
-    const textColor = isHighest ? "green-text" : "red-text";
-    const icon = isHighest ? (
-      <FaCheckCircle className="green-icon" />
-    ) : (
-      <FaExclamationTriangle className="red-icon" />
-    );
-    const resultType = isHighest ? "win" : "lost";
-    return (
-      <div
-        className="top-opening-row"
-        data-test-id={`top-opening-row-${color}`}
-        key={name}
-      >
-        <div
-          className={`top-opening-name ${textColor}`}
-          data-test-id={`top-opening-name-${color}`}
-          title={name}
-        >
-          {icon} {name}
-        </div>
-        <div
-          className={`top-opening-percent ${textColor}`}
-          data-test-id={`top-opening-percent-${color}`}
-        >
-          {winPercent}%
-        </div>
-        <div className="top-opening-link">
-          <a
-            href={getDownloadUrl(name, resultType, color)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download PGN for {resultType} games
-          </a>
-        </div>
-      </div>
-    );
-  };
-
-  const renderOpeningsSection = (openings, color) => (
-    <div className="top-openings-half">
-      {openings.length > 0 && (
-        <>
-          {renderOpeningRow(openings[0], 0, color)}
-          {renderOpeningRow(openings[1], 1, color)}
-          {renderOpeningRow(openings[openings.length - 1], 2, color)}
-        </>
-      )}
-    </div>
-  );
-
   return (
     <div className="table-wrapper">
       <div className="summary-bar-vertical">
@@ -104,8 +51,20 @@ const TopOpeningsDownloadLinks = ({
         </div>
       </div>
       <div className="top-openings-section">
-        {renderOpeningsSection(whiteOpenings, "white")}
-        {renderOpeningsSection(blackOpenings, "black")}
+        <RenderEligibleOpeningsSection
+          openings={whiteOpenings}
+          color="white"
+          startDate={startDate}
+          endDate={endDate}
+          username={username}
+        />
+        <RenderEligibleOpeningsSection
+          openings={blackOpenings}
+          color="black"
+          startDate={startDate}
+          endDate={endDate}
+          username={username}
+        />
       </div>
     </div>
   );
