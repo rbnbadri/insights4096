@@ -84,7 +84,7 @@ export const RenderEligibleOpeningsSection = ({
   const renderRowsForOpenings = () => {
     if (!openings || openings.length === 0) {
       const dummyOpening = {
-        name: "Insufficient data to show trends",
+        name: "Insufficient data to show trends.",
         winPercent: null,
       };
       return renderOpeningRow(dummyOpening, "noData");
@@ -141,9 +141,5 @@ export const RenderEligibleOpeningsSection = ({
     }
   };
 
-  return (
-    <div className="top-openings-half">
-      <div className="top-opening-rows">{renderRowsForOpenings()}</div>
-    </div>
-  );
+  return <div className="top-openings-half">{renderRowsForOpenings()}</div>;
 };

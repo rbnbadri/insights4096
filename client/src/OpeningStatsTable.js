@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
-import ControlButtons from "./ControlButtons";
-import TopOpeningsDownloadLinks from "./TopOpeningsDownloadLinks";
+import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 const OpeningStatsTable = ({
   data = {},
@@ -16,14 +16,13 @@ const OpeningStatsTable = ({
   testId = `Openings filter- ${color}`,
   isOwnUsername = { isOwnUsername },
   enteredUsername = { enteredUsername },
-  username = { username }
+  username = { username },
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [filterOptions, setFilterOptions] = useState([]);
   const [viewLimit, setViewLimit] = useState(5);
-  const [showBottomControls, setShowBottomControls] = useState(false);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
 
@@ -47,7 +46,6 @@ const OpeningStatsTable = ({
     if (fullResetTrigger) {
       setSelectedOptions([]);
       setViewLimit(5);
-      setShowBottomControls(false);
       setShowingFilteredSummary(false);
     }
   }, [fullResetTrigger]);
@@ -111,26 +109,22 @@ const OpeningStatsTable = ({
 
   const handleShow5 = () => {
     setViewLimit(5);
-    setShowBottomControls(false);
     setShowingFilteredSummary(true);
   };
 
   const handleShow10 = () => {
     setViewLimit(10);
-    setShowBottomControls(true);
     setShowingFilteredSummary(true);
   };
 
   const handleShowAll = () => {
     setViewLimit(totalRows);
-    setShowBottomControls(true);
     setShowingFilteredSummary(selectedOptions.length > 0);
   };
 
   const handleClearFilters = () => {
     setSelectedOptions([]);
     setViewLimit(5);
-    setShowBottomControls(false);
     setShowingFilteredSummary(false);
     if (onResetToCachedOneMonth) onResetToCachedOneMonth();
   };
@@ -196,17 +190,13 @@ const OpeningStatsTable = ({
           enteredUsername={enteredUsername}
         />
       </div>
-      {showBottomControls && (
-        <div className="summary-bar-bottom">
-          <ControlButtons {...controlProps} />
-        </div>
-      )}
       <TopOpeningsDownloadLinks
         openingsData={data}
         startDate={data.startDate}
         endDate={data.endDate}
         username={username}
       />
+      <ScrollToTopButton />
     </div>
   );
 };

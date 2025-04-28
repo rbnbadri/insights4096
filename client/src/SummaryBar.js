@@ -60,11 +60,11 @@ const SummaryBar = ({
       <div className="summary-text">
         {showingFilteredSummary ? (
           <>
+            {summaryLabel}: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
+            {fullSummary.lost}, D: {fullSummary.drawn})<br />
             Filtered {summaryLabel}: (P: {filteredSummary.played}, W:{" "}
             {filteredSummary.won}, L: {filteredSummary.lost}, D:{" "}
             {filteredSummary.drawn})<br />
-            {summaryLabel}: (P: {fullSummary.played}, W: {fullSummary.won}, L:{" "}
-            {fullSummary.lost}, D: {fullSummary.drawn})<br />
           </>
         ) : (
           <>
