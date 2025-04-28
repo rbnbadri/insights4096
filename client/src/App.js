@@ -84,7 +84,7 @@ function Insights4096() {
     <div className="App">
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.9.0</h1>
+        <h1 className="header">Chess Insights v0.9.1</h1>
       </div>
 
       <div className="flex-row">

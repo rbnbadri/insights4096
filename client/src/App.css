@@ -205,16 +205,6 @@ th.sortable:hover {
   color: white;
 }
 
-/* .top-openings-section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: white;
-  border: 2px solid black;
-  margin-bottom: 20px;
-} */
-
 .top-openings-section {
   width: 100%;
   display: flex;
@@ -227,19 +217,6 @@ th.sortable:hover {
   box-sizing: border-box; /* ✅ ensure correct width calculations */
 }
 
-/* .top-openings-header {
-  display: flex;
-  width: 100%;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-  justify-content: center;
-  text-align: center;
-  margin-top: 20px;
-}
- */
 .top-openings-header-half {
   flex: 1;
   text-align: center;
@@ -344,17 +321,6 @@ th.sortable:hover {
   font-size: 18px;
   font-weight: bold;
 }
-
-/* .search-button {
-  background-color: white;
-  border: 1px solid black;
-  color: black;
-  padding: 6px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 8px;
-  align-items: center;
-} */
 
 .search-button {
   padding: 5px 10px;
