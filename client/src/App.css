@@ -408,3 +408,24 @@ th.sortable:hover {
 .light-red-text {
   color: #FF6666; /* Light reddish color */
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #007bff; /* Bootstrap blue */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  z-index: 100;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
