@@ -25,16 +25,6 @@
 }
 
 
-.summary-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 12px;
-}
-
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -68,12 +58,6 @@ th.sortable:hover {
   margin-top: 8px;
 }
 
-.separator {
-  border-top: 1px solid #ccc;
-  width: 100%;
-  margin: 8px 0;
-}
-
 .summary-buttons button {
   flex-shrink: 0;
   padding: 5px 10px;
@@ -83,6 +67,7 @@ th.sortable:hover {
   background-color: white;
   color: black;
   border: 1px solid black; /* ⬅️ Make border solid black */
+  align-items: center;
 }
 
 .react-select__control {
@@ -167,16 +152,6 @@ th.sortable:hover {
   gap: 10px;
 }
 
-.summary-select {
-  flex: 1;
-  min-width: 250px;
-}
-
-.date-range-wrapper {
-  flex: 1;
-  min-width: 250px;
-}
-
 .header-with-logo {
   display: flex;
   align-items: center;
@@ -230,16 +205,6 @@ th.sortable:hover {
   color: white;
 }
 
-/* .top-openings-section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: white;
-  border: 2px solid black;
-  margin-bottom: 20px;
-} */
-
 .top-openings-section {
   width: 100%;
   display: flex;
@@ -252,79 +217,75 @@ th.sortable:hover {
   box-sizing: border-box; /* ✅ ensure correct width calculations */
 }
 
-.top-openings-header {
-  display: flex;
-  width: 100%;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-  justify-content: center;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.top-openings-header-half {
+/* .top-openings-header-half {
   flex: 1;
   text-align: center;
-  position: relative;
-}
+  padding: 10px;
+  box-sizing: border-box; 
+  min-width: 0;
+} */
 
-.top-openings-header-half:first-child {
-  border-right: 2px solid white; /* ✅ New: white vertical separator */
-}
-
-
-.top-openings-half {
-  flex: 1; /* ✅ Force 50% width exactly */
+/* .top-openings-half {
+  flex: 1; 
   padding: 10px;
   border-right: 1px solid black;
 }
-
+ */
 
 .top-openings-half:last-child {
   border-right: none;
 }
 
-.top-openings-subheader {
-  font-weight: bold;
-  margin-bottom: 8px;
-  font-size: 16px;
-  color: black;
-  text-align: center;
-}
-
 .top-opening-row {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px; /* tighter, instead of 8px */
   font-size: 14px;
   color: black;
   width: 100%;
+  padding: 2px 0; /* ✅ add slight vertical breathing room */
 }
 
-.top-opening-name {
+/* .top-opening-name {
   flex: 4;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
-}
+} */
 
-.top-opening-percent {
+/* .top-opening-percent {
   flex: 1;
   text-align: center;
   font-size: 14px;
   min-width: 0;
+} */
+
+.top-opening-percent {
+  flex: 0 0 80px; /* fixed width for % */
+  text-align: center;
+  font-size: 14px;
+  min-width: 0;
+  font-weight: 500;
+  padding-left: 4px;
 }
 
-.top-opening-link {
+/* .top-opening-link {
   flex: 3;
   text-align: right;
   overflow: hidden;
   white-space: nowrap;
   min-width: 0;
+} */
+
+.top-opening-link {
+  flex: 1; /* fill remaining space */
+  text-align: right; /* align download links nicely */
+  padding-left: 20px; /* small gap between % and download link */
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+  font-weight: 500;
 }
 
 .top-opening-link a {
@@ -351,10 +312,148 @@ th.sortable:hover {
   margin-right: 4px;
 }
 
-.header-separator {
-  display: inline-block;
-  width: 2px;
-  height: 20px;
+.date-range-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   background-color: white;
-  margin: 0 10px;
+  color: black;
+  border: 1px solid black;
+  padding: 5px 10px;
+  height: 45px;
+  font-size: 0.85rem;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.search-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  height: 34px; /* same height as summary buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-text {
+  padding: 6px 0; /* Minor addition */
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* .top-opening-insufficient-data {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 8px;
+  background-color: #f9f9f9;
+  color: #003366;
+  font-size: 18px;
+  font-weight: 500;
+} */
+
+.top-opening-insufficient-data {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ center nicely */
+  padding: 4px 8px;
+  background-color: #f9f9f9;
+  color: #003366;
+  font-size: 16px; /* ✅ a little less bold than 18px now */
+  font-weight: 500;
+}
+
+.top-opening-insufficient-data .icon {
+  margin-right: 8px;
+  color: #cc3300; /* Warning color for the icon only */
+  font-size: 18px;
+}
+
+/* .top-openings-header-half, */
+.top-openings-half {
+  flex: 0 0 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  min-width: 0;
+}
+
+.top-openings-header {
+  display: flex;
+  width: 100%;
+}
+
+.top-openings-header-half {
+  flex: 0 0 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  min-width: 0;
+  text-align: center;
+}
+
+.top-openings-header-half:first-child {
+  text-align: center;
+  border-right: 2px solid white;
+}
+
+.top-openings-header-half:last-child {
+  text-align: center;
+}
+
+.top-openings-header-half:hover {
+  background-color: #222; /* subtle dark grey background */
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.top-openings-half:first-child {
+  border-right: 2px solid black;
+}
+
+
+.top-opening-download {
+  overflow-wrap: anywhere;
+}
+
+.top-opening-name {
+  flex: 0 0 375px; 
+  max-width: 375px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.top-opening-name-text {
+  max-width: 300px; /* visible text limit */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.yellow-icon {
+  color: #FFCC00; /* Yellow */
+  margin-right: 4px;
+}
+
+.light-red-text {
+  color: #FF6666; /* Light reddish color */
 }

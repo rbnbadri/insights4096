@@ -66,7 +66,7 @@ const DateRangeSelector = ({
   };
 
   return (
-    <div className="date-range-selector">
+    <div>
       {/* Row: dropdown + button */}
       <div
         style={{
