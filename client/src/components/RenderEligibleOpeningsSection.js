@@ -32,8 +32,8 @@ export const RenderEligibleOpeningsSection = ({
       textColor = "red-text";
       resultType = "lost";
     } else if (badgeType === "noData") {
-      icon = <FaExclamationTriangle className="black-icon" />;
-      textColor = "black-text";
+      icon = <FaExclamationTriangle className="yellow-icon" />;
+      textColor = "light-red-text";
       resultType = "";
     }
 
@@ -43,12 +43,29 @@ export const RenderEligibleOpeningsSection = ({
         data-test-id={`top-opening-row-${color}`}
         key={name}
       >
-        <div className={`top-opening-name ${textColor}`} title={name}>
-          {icon} {name}
+        <div
+          className={`top-opening-name ${textColor}`}
+          data-test-id={`top-opening-name-${color}`}
+          title={name}
+        >
+          <div
+            className="top-opening-name-text"
+            data-test-id={`top-opening-name-text-${color}`}
+          >
+            {icon} {name}
+          </div>
         </div>
-        <div className={`top-opening-percent ${textColor}`}>{winPercent}%</div>
+        <div
+          className={`top-opening-percent ${textColor}`}
+          data-test-id={`top-opening-percent-${color}`}
+        >
+          {winPercent !== null ? `${winPercent.toFixed(2)}%` : "NA"}
+        </div>
         {resultType ? (
-          <div className="top-opening-link">
+          <div
+            className="top-opening-link"
+            data-test-id={`top-opening-link-${color}`}
+          >
             <a
               href={getDownloadUrl(name, resultType)}
               target="_blank"
@@ -66,19 +83,11 @@ export const RenderEligibleOpeningsSection = ({
 
   const renderRowsForOpenings = () => {
     if (!openings || openings.length === 0) {
-      return (
-        <div
-          className="top-opening-row"
-          style={{
-            justifyContent: "center",
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >
-          <FaExclamationTriangle className="black-icon" />
-          Insufficient number of games to show trends
-        </div>
-      );
+      const dummyOpening = {
+        name: "Insufficient data to show trends",
+        winPercent: null,
+      };
+      return renderOpeningRow(dummyOpening, "noData");
     }
 
     switch (openings.length) {

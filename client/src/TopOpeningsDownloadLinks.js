@@ -43,11 +43,13 @@ const TopOpeningsDownloadLinks = ({
   return (
     <div className="table-wrapper">
       <div className="summary-bar-vertical">
-        <div className="top-openings-header-half">
-          White Openings Win/loss trends
-        </div>
-        <div className="top-openings-header-half">
-          Black Openings Win/loss trends
+        <div className="top-openings-header">
+          <div className="top-openings-header-half">
+            White Openings Win/loss trends
+          </div>
+          <div className="top-openings-header-half">
+            Black Openings Win/loss trends
+          </div>
         </div>
       </div>
       <div className="top-openings-section">
