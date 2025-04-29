@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { FaInfoCircle } from "react-icons/fa";
 
-const ToastMessage = () => {
+const RedToastMessage = () => {
   const [toast, setToast] = useState({ message: "", visible: false });
 
   useEffect(() => {
-    const handleToast = (e) => {
+    const handleRedToast = (e) => {
       setToast({ message: e.detail, visible: true });
 
       setTimeout(() => {
@@ -14,15 +14,16 @@ const ToastMessage = () => {
       }, 3000);
     };
 
-    window.addEventListener("trigger-toast", handleToast);
-    return () => window.removeEventListener("trigger-toast", handleToast);
+    window.addEventListener("trigger-red-toast", handleRedToast);
+    return () =>
+      window.removeEventListener("trigger-red-toast", handleRedToast);
   }, []);
 
   if (!toast.visible) return null;
 
   console.log("Received toast message: ", toast.message);
   return (
-    <div className="toast-message">
+    <div className="toast-base red-toast-message">
       <FaInfoCircle style={{ color: "white", marginRight: "8px" }} />
       <span>{toast.message}</span>
       <button
@@ -35,4 +36,4 @@ const ToastMessage = () => {
   );
 };
 
-export default ToastMessage;
+export default RedToastMessage;

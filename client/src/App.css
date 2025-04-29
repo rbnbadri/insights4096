@@ -577,12 +577,11 @@ th.sortable:hover {
   vertical-align: baseline;
 }
 
-.toast-message {
+.toast-base {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #008000;
   color: white;
   padding: 12px 24px;
   border-radius: 6px;
@@ -591,6 +590,14 @@ th.sortable:hover {
   align-items: center;
   z-index: 1000;
   animation: fadeIn 0.3s ease;
+}
+
+.green-toast-message {
+  background-color: #008000;
+}
+
+.red-toast-message {
+  background-color: #cc0000;
 }
 
 .toast-message span {

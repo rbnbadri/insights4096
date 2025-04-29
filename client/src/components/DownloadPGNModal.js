@@ -4,7 +4,7 @@ import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select from "react-select";
 import "../App.css";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { triggerToast } from "../utils/toast";
+import { triggerGreenToast } from "../utils/toast";
 
 const DownloadPGNModal = ({
   isOpen,
@@ -57,7 +57,7 @@ const DownloadPGNModal = ({
     if (newSelections.length === 3) {
       setSelectedResults([]);
       console.log("Triggering toast message from DownloadPGNModal");
-      triggerToast("All games will be downloaded.");
+      triggerGreenToast("All games will be downloaded.");
     } else {
       setSelectedResults(newSelections);
     }

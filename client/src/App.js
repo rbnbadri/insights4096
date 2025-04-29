@@ -3,7 +3,8 @@ import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
-import ToastMessage from "./components/ToastMessage";
+import GreenToastMessage from "./components/GreenToastMessage";
+import RedToastMessage from "./components/RedToastMessage";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
@@ -91,7 +92,8 @@ function Insights4096() {
 
   return (
     <div className="App">
-      <ToastMessage />
+      <GreenToastMessage />
+      <RedToastMessage />
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
         <h1 className="header">Chess Insights v0.9.5</h1>

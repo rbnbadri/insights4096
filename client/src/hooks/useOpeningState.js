@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchOpenings } from "../api/fetchOpenings";
+import { triggerRedToast } from "../utils/toast";
 
 export default function useOpeningState(username) {
   const [filteredData, setFilteredData] = useState(null);
@@ -50,6 +51,13 @@ export default function useOpeningState(username) {
         setCachedOneMonthWhite,
         setCachedOneMonthBlack,
       );
+
+      if (
+        Object.keys(gamedata.white || {}).length === 0 &&
+        Object.keys(gamedata.black || {}).length === 0
+      ) {
+        triggerRedToast("Zero games found for this user.");
+      }
 
       setFilteredData({
         white: gamedata.white,

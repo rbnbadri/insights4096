@@ -5,7 +5,7 @@ import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import DownloadPGNModal from "./components/DownloadPGNModal";
 import { BACKEND_URL } from "./apiConfig";
-import { triggerToast } from "./utils/toast";
+import { triggerGreenToast } from "./utils/toast";
 
 const OpeningStatsTable = ({
   data = {},
@@ -17,7 +17,6 @@ const OpeningStatsTable = ({
   color = null,
   summaryLabel = "All Games",
   testId = `Openings filter- ${color}`,
-  isOwnUsername,
   enteredUsername,
   username,
 }) => {
@@ -130,7 +129,7 @@ const OpeningStatsTable = ({
   };
 
   const handleClearFilters = () => {
-    triggerToast("Clearing filters and setting date range to Last 1 Month.");
+    triggerGreenToast("Clearing filters and setting date range to Last 1 Month.");
     setSelectedOptions([]);
     setViewLimit(5);
     setShowingFilteredSummary(false);
