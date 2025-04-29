@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import OpeningStatsTable from "./OpeningStatsTable";
+import OpeningStatsSection from "./OpeningStatsSection";
 import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
 import GreenToastMessage from "./components/GreenToastMessage";
@@ -52,7 +52,7 @@ function Insights4096() {
     const enteredUsername = isOwnUsername ? null : username;
     return submitted && filteredData?.[color] ? (
       <div className="table-section">
-        <OpeningStatsTable
+        <OpeningStatsSection
           data={{
             ...filteredData,
             startDate,
@@ -153,7 +153,7 @@ function Insights4096() {
                 setSortColumn("played");
                 setSortDirection("desc");
 
-                // ✅ Trigger full reset so OpeningStatsTable clears filters
+                // ✅ Trigger full reset so OpeningStatsSection clears filters
                 setFullResetTrigger(true);
                 setTimeout(() => setFullResetTrigger(false), 100);
 

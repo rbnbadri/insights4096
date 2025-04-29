@@ -7,7 +7,7 @@ import DownloadPGNModal from "./components/DownloadPGNModal";
 import { BACKEND_URL } from "./apiConfig";
 import { triggerGreenToast, triggerRedToast } from "./utils/toast";
 
-const OpeningStatsTable = ({
+const OpeningStatsSection = ({
   data = {},
   onDateRangeChange,
   loading,
@@ -276,4 +276,4 @@ const OpeningStatsTable = ({
   );
 };
 
-export default OpeningStatsTable;
+export default OpeningStatsSection;
