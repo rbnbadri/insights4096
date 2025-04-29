@@ -26,15 +26,25 @@ const DownloadPGNModal = ({
   }, [isOpen, color]);
 
   const handleDownload = () => {
-    if (!selectedOpenings.length || !selectedResults.length) {
-      alert("Please select at least one opening and one result type.");
+    if (!selectedOpenings.length) {
+      alert("Please select at least one Opening Variation.");
       return;
     }
-    onDownload({ selectedColor, selectedOpenings, selectedResults, startDate, endDate });
+    onDownload({
+      selectedColor,
+      selectedOpenings,
+      selectedResults,
+      startDate,
+      endDate,
+    });
     onClose();
   };
 
   if (!isOpen) return null;
+
+  const filteredAvailableOpenings = availableOpenings[selectedColor] || [];
+
+  console.log(filteredAvailableOpenings);
 
   return (
     <div className="modal-overlay">
@@ -47,18 +57,32 @@ const DownloadPGNModal = ({
             <label className="modal-label">Color</label>
             <div className="radio-group">
               <label>
-                <input type="radio" value="white" checked={selectedColor === "white"} onChange={() => setSelectedColor("white")} /> White
+                <input
+                  type="radio"
+                  value="white"
+                  checked={selectedColor === "white"}
+                  onChange={() => setSelectedColor("white")}
+                />{" "}
+                White
               </label>
               <label style={{ marginLeft: "20px" }}>
-                <input type="radio" value="black" checked={selectedColor === "black"} onChange={() => setSelectedColor("black")} /> Black
+                <input
+                  type="radio"
+                  value="black"
+                  checked={selectedColor === "black"}
+                  onChange={() => setSelectedColor("black")}
+                />{" "}
+                Black
               </label>
             </div>
           </div>
 
           <div className="form-group">
-            <label className="modal-label">Opening Variations</label>
+            <label className="modal-label">
+              Opening Variations <span style={{ color: "red" }}>*</span>
+            </label>
             <OpeningSelectorDropdown
-              availableOpenings={availableOpenings}
+              availableOpenings={filteredAvailableOpenings}
               selectedOpenings={selectedOpenings}
               setSelectedOpenings={setSelectedOpenings}
             />
@@ -74,7 +98,10 @@ const DownloadPGNModal = ({
                 { value: "drawn", label: "Drawn" },
               ]}
               classNamePrefix="react-select"
-              value={selectedResults.map((r) => ({ value: r, label: r.charAt(0).toUpperCase() + r.slice(1) }))}
+              value={selectedResults.map((r) => ({
+                value: r,
+                label: r.charAt(0).toUpperCase() + r.slice(1),
+              }))}
               onChange={(opts) => setSelectedResults(opts.map((o) => o.value))}
             />
           </div>
@@ -83,14 +110,23 @@ const DownloadPGNModal = ({
             <label className="modal-label">Date Range</label>
             <div className="date-range-display">
               <input type="text" value={startDate} readOnly />
-              <input type="text" value={endDate} readOnly style={{ marginLeft: "10px" }} />
+              <input
+                type="text"
+                value={endDate}
+                readOnly
+                style={{ marginLeft: "10px" }}
+              />
             </div>
           </div>
         </div>
 
         <div className="modal-footer">
-          <button className="btn-cancel" onClick={onClose}>Cancel</button>
-          <button className="btn-primary" onClick={handleDownload}>Download</button>
+          <button className="btn-cancel" onClick={onClose}>
+            Cancel
+          </button>
+          <button className="btn-primary" onClick={handleDownload}>
+            Download
+          </button>
         </div>
       </div>
     </div>

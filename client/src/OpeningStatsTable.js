@@ -170,9 +170,18 @@ const OpeningStatsTable = ({
     color,
   };
 
-  const availableOpenings = Object.entries(data[color])
-    .sort(([, a], [, b]) => b.played - a.played)
-    .map(([name]) => ({ name }));
+  const availableOpenings = {
+    white: data.white
+      ? Object.entries(data.white)
+          .sort(([, a], [, b]) => b.played - a.played)
+          .map(([name]) => ({ name }))
+      : [],
+    black: data.black
+      ? Object.entries(data.black)
+          .sort(([, a], [, b]) => b.played - a.played)
+          .map(([name]) => ({ name }))
+      : [],
+  };
 
   const handleDownloadRequest = ({
     selectedColor,

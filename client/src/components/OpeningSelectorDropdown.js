@@ -1,8 +1,14 @@
 // OpeningSelectorDropdown.js
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 
-const OpeningSelectorDropdown = ({ availableOpenings, selectedOpenings, setSelectedOpenings }) => {
+const OpeningSelectorDropdown = ({
+  availableOpenings,
+  selectedOpenings,
+  setSelectedOpenings,
+}) => {
+  const [searchText, setSearchText] = useState("");
+
   const handleToggle = (name) => {
     if (selectedOpenings.includes(name)) {
       setSelectedOpenings(selectedOpenings.filter((n) => n !== name));
@@ -19,19 +25,38 @@ const OpeningSelectorDropdown = ({ availableOpenings, selectedOpenings, setSelec
     return 0;
   });
 
+  const filteredOpenings = sortedOpenings.filter((opening) =>
+    opening.name.toLowerCase().includes(searchText.toLowerCase()),
+  );
+
   return (
     <div className="opening-selector-list">
-      {sortedOpenings.map((opening) => (
-        <label key={opening.name} className="checkbox-row">
-          <input
-            type="checkbox"
-            checked={selectedOpenings.includes(opening.name)}
-            onChange={() => handleToggle(opening.name)}
-            disabled={!selectedOpenings.includes(opening.name) && selectedOpenings.length >= 3}
-          />
-          <span className="opening-label">{opening.name}</span>
-        </label>
-      ))}
+      <input
+        type="text"
+        className="opening-search"
+        placeholder="Search openings..."
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        style={{ marginBottom: "12px", padding: "8px" }}
+      />
+      {filteredOpenings.length > 0 ? (
+        filteredOpenings.map((opening) => (
+          <label key={opening.name} className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={selectedOpenings.includes(opening.name)}
+              onChange={() => handleToggle(opening.name)}
+              disabled={
+                !selectedOpenings.includes(opening.name) &&
+                selectedOpenings.length >= 3
+              }
+            />
+            <span className="opening-label">{opening.name}</span>
+          </label>
+        ))
+      ) : (
+        <div className="no-openings-found">No Openings Found</div>
+      )}
     </div>
   );
 };
