@@ -5,7 +5,7 @@ import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import DownloadPGNModal from "./components/DownloadPGNModal";
 import { BACKEND_URL } from "./apiConfig";
-import { triggerGreenToast } from "./utils/toast";
+import { triggerGreenToast, triggerRedToast } from "./utils/toast";
 
 const OpeningStatsTable = ({
   data = {},
@@ -129,7 +129,9 @@ const OpeningStatsTable = ({
   };
 
   const handleClearFilters = () => {
-    triggerGreenToast("Clearing filters and setting date range to Last 1 Month.");
+    triggerGreenToast(
+      "Clearing filters and setting date range to Last 1 Month.",
+    );
     setSelectedOptions([]);
     setViewLimit(5);
     setShowingFilteredSummary(false);
@@ -184,26 +186,47 @@ const OpeningStatsTable = ({
       : [],
   };
 
-  const handleDownloadRequest = ({
+  const handleDownloadRequest = async ({
     selectedColor,
     selectedOpenings,
     selectedResults,
     startDate,
     endDate,
   }) => {
-    selectedOpenings.forEach((openingName) => {
-      const ecoFormatted = openingName.replace(/ /g, "-");
-      let downloadUrl = `${BACKEND_URL}/pgns/${username}?color=${selectedColor}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}`;
+    const formattedOpenings = selectedOpenings
+      .map((o) => o.replace(/ /g, "-"))
+      .join(",");
+    let query = `color=${selectedColor}&eco=${formattedOpenings}&start=${startDate}&end=${endDate}`;
+    if (selectedResults.length > 0) {
+      query += `&gameResult=${selectedResults.join(",")}`;
+    }
 
-      if (selectedResults.length > 0) {
-        downloadUrl += `&gameResult=${selectedResults.join(",")}`;
+    const baseUrl = `${BACKEND_URL}/pgns/${username}`;
+    const checkUrl = `${baseUrl}?${query}&checkOnly=true`;
+
+    try {
+      const res = await fetch(checkUrl);
+      if (res.ok) {
+        const data = await res.json();
+        const { gameCount, filename } = data;
+
+        triggerGreenToast(
+          `Downloading ${filename} with ${gameCount} game${gameCount > 1 ? "s" : ""}.`,
+        );
+
+        // Actually trigger the file download
+        const downloadUrl = `${baseUrl}?${query}`;
+        window.open(downloadUrl, "_blank");
+      } else if (res.status >= 400 && res.status < 500) {
+        const errData = await res.json();
+        triggerRedToast(`${res.status}: ${errData.message}`);
+      } else {
+        triggerRedToast("Internal server error");
       }
-
-      console.log("Download Triggered:", { downloadUrl });
-
-      // Uncomment below to actually download
-      // window.open(downloadUrl, "_blank");
-    });
+    } catch (err) {
+      console.error("Download error:", err);
+      triggerRedToast("Failed to download. Please try again.");
+    }
   };
 
   return (
