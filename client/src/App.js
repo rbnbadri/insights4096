@@ -45,7 +45,7 @@ function Insights4096() {
     setSortDirection,
     handleSubmit,
     handleResetToCachedOneMonth,
-    setResetToDefaultRange,
+    handleSearchClick,
   } = useOpeningState(username);
 
   const renderTable = (color, summaryLabel) => {
@@ -100,32 +100,26 @@ function Insights4096() {
       </div>
 
       <div className="flex-row">
-        <input
-          type="text"
-          ref={usernameRef}
-          value={username}
-          onChange={handleChange}
-          placeholder="Enter ChessDotCom username"
-        />
+        <div className="username-input-wrapper">
+          <input
+            type="text"
+            ref={usernameRef}
+            value={username}
+            onChange={handleChange}
+            placeholder="Enter ChessDotCom username"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearchClick();
+            }}
+          />
+          {username.length > 0 && (
+            <button className="clear-username" onClick={() => setUsername("")}>
+              ×
+            </button>
+          )}
+        </div>
         <button
           onClick={() => {
-            const today = new Date();
-            const oneMonthAgo = new Date(today);
-            oneMonthAgo.setDate(today.getDate() - 30);
-            const defaultStart = oneMonthAgo.toISOString().split("T")[0];
-            const defaultEnd = today.toISOString().split("T")[0];
-
-            setStartDate(defaultStart);
-            setEndDate(defaultEnd);
-
-            setResetToDefaultRange(true);
-            setFullResetTrigger(true);
-            setTimeout(() => {
-              setResetToDefaultRange(false);
-              setFullResetTrigger(false);
-            }, 100);
-
-            handleSubmit(defaultStart, defaultEnd, selectedColor);
+            handleSearchClick();
           }}
         >
           Search

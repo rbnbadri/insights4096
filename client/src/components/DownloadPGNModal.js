@@ -146,13 +146,14 @@ const DownloadPGNModal = ({
           <div className="form-group">
             <label className="modal-label">Date Range</label>
             <div className="date-range-display">
-              <input type="text" value={startDate} readOnly />
-              <input
-                type="text"
-                value={endDate}
-                readOnly
-                style={{ marginLeft: "10px" }}
-              />
+              <div className="date-field">
+                <label className="date-label">Start Date</label>
+                <input type="text" value={startDate} readOnly />
+              </div>
+              <div className="date-field">
+                <label className="date-label">End Date</label>
+                <input type="text" value={endDate} readOnly />
+              </div>
             </div>
           </div>
         </div>

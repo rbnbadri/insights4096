@@ -34,6 +34,26 @@ export default function useOpeningState(username) {
     setEndDate(today.toISOString().split("T")[0]);
   }, []);
 
+  const handleSearchClick = () => {
+    const today = new Date();
+    const oneMonthAgo = new Date(today);
+    oneMonthAgo.setDate(today.getDate() - 30);
+    const defaultStart = oneMonthAgo.toISOString().split("T")[0];
+    const defaultEnd = today.toISOString().split("T")[0];
+
+    setStartDate(defaultStart);
+    setEndDate(defaultEnd);
+
+    setResetToDefaultRange(true);
+    setFullResetTrigger(true);
+    setTimeout(() => {
+      setResetToDefaultRange(false);
+      setFullResetTrigger(false);
+    }, 100);
+
+    handleSubmit(defaultStart, defaultEnd, selectedColor);
+  };
+
   const handleSubmit = async (
     start = startDate,
     end = endDate,
@@ -108,7 +128,6 @@ export default function useOpeningState(username) {
     submitted,
     loadingState,
     resetToDefaultRange,
-    setResetToDefaultRange,
     fullResetTrigger,
     setFullResetTrigger,
     expandedTable,
@@ -125,5 +144,6 @@ export default function useOpeningState(username) {
     setSortDirection,
     handleSubmit,
     handleResetToCachedOneMonth,
+    handleSearchClick,
   };
 }

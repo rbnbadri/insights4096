@@ -452,6 +452,7 @@ th.sortable:hover {
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  height: 500px;
 }
 
 .modal-header {
@@ -534,8 +535,8 @@ th.sortable:hover {
 }
 
 .btn-secondary {
-  background-color: white;
-  color: black;
+  background-color: black !important;
+  color: white !important;
   border: 1px solid black;
   padding: 6px 12px;
   cursor: pointer;
@@ -544,27 +545,33 @@ th.sortable:hover {
 
 .search-container {
   position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .opening-search {
-  width: 50%;
-  padding: 8px 30px 8px 8px;
+  width: 100%;
+  padding: 8px 36px 8px 8px; /* extra right padding for X button */
   margin-bottom: 12px;
-  border: 1px solid black; 
+  border: 1px solid black;
   border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 .clear-search-button {
   position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
+  top: 20%;
+  right: 10px;
   background: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
-  color: #333;
+  color: #666;
+  padding: 0;
+  line-height: 1;
 }
+
 
 .clear-search-button:hover {
   color: red;
@@ -648,4 +655,42 @@ th.sortable:hover {
     font-size: 0.85rem;
     color: #ccc;
   }
+}
+
+.date-range-display {
+  display: flex;
+  gap: 20px;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.username-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.username-input-wrapper input {
+  padding-right: 28px; /* Add room for clear icon */
+}
+
+.clear-username {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
 }
