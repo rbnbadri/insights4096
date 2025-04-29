@@ -8,6 +8,7 @@ const TopOpeningsDownloadLinks = ({
   startDate,
   endDate,
   username,
+  onCustomDownloadClick
 }) => {
   if (!openingsData || !openingsData.white || !openingsData.black) {
     return null;
@@ -67,6 +68,11 @@ const TopOpeningsDownloadLinks = ({
           endDate={endDate}
           username={username}
         />
+      </div>
+      <div className="download-other-section">
+        <button className="btn-secondary" onClick={onCustomDownloadClick}>
+          Download Other PGNs
+        </button>
       </div>
     </div>
   );

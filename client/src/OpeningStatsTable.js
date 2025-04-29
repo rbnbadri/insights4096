@@ -3,6 +3,8 @@ import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
 import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import DownloadPGNModal from "./components/DownloadPGNModal";
+import { BACKEND_URL } from "./apiConfig";
 
 const OpeningStatsTable = ({
   data = {},
@@ -14,9 +16,9 @@ const OpeningStatsTable = ({
   color = null,
   summaryLabel = "All Games",
   testId = `Openings filter- ${color}`,
-  isOwnUsername = { isOwnUsername },
-  enteredUsername = { enteredUsername },
-  username = { username },
+  isOwnUsername,
+  enteredUsername,
+  username,
 }) => {
   const [sortColumn, setSortColumn] = useState("played");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -25,6 +27,7 @@ const OpeningStatsTable = ({
   const [viewLimit, setViewLimit] = useState(5);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   useEffect(() => {
     if (resetToDefaultRange) setDateRangeOption("last-30");
@@ -40,7 +43,7 @@ const OpeningStatsTable = ({
         }));
       setFilterOptions(sortedOptions);
     }
-  }, [data]);
+  }, [data, color]);
 
   useEffect(() => {
     if (fullResetTrigger) {
@@ -67,17 +70,20 @@ const OpeningStatsTable = ({
         )
       : entries;
 
-    const sorted = filtered.sort(([_, a], [__, b]) => {
-      const order = sortOrder === "asc" ? 1 : -1;
-      return (a[sortColumn] - b[sortColumn]) * order;
-    });
+    const sorted = filtered.sort(
+      ([_, a], [__, b]) => {
+        const order = sortOrder === "asc" ? 1 : -1;
+        return (a[sortColumn] - b[sortColumn]) * order;
+      },
+      [data, color],
+    );
 
     return Object.fromEntries(sorted.slice(0, viewLimit));
-  }, [data, selectedOptions, sortColumn, sortOrder, viewLimit]);
+  }, [data, selectedOptions, sortColumn, sortOrder, viewLimit, color]);
 
   const fullSummary = useMemo(() => {
     return Object.entries(data[color]).reduce(
-      (acc, [key, val]) => {
+      (acc, [_, val]) => {
         acc.played += val.played;
         acc.won += val.won;
         acc.lost += val.lost;
@@ -86,7 +92,7 @@ const OpeningStatsTable = ({
       },
       { played: 0, won: 0, lost: 0, drawn: 0 },
     );
-  }, [data]);
+  }, [data, color]);
 
   const filteredSummary = useMemo(() => {
     return Object.entries(filteredEntries).reduce(
@@ -164,6 +170,32 @@ const OpeningStatsTable = ({
     color,
   };
 
+  const availableOpenings = Object.entries(data[color])
+    .sort(([, a], [, b]) => b.played - a.played)
+    .map(([name]) => ({ name }));
+
+  const handleDownloadRequest = ({
+    selectedColor,
+    selectedOpenings,
+    selectedResults,
+    startDate,
+    endDate,
+  }) => {
+    selectedOpenings.forEach((openingName) => {
+      const ecoFormatted = openingName.replace(/ /g, "-");
+      let downloadUrl = `${BACKEND_URL}/pgns/${username}?color=${selectedColor}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}`;
+
+      if (selectedResults.length > 0) {
+        downloadUrl += `&gameResult=${selectedResults.join(",")}`;
+      }
+
+      console.log("Download Triggered:", { downloadUrl });
+
+      // Uncomment below to actually download
+      // window.open(downloadUrl, "_blank");
+    });
+  };
+
   return (
     <div
       data-test-id={`Openings table - ${color || "both"}`}
@@ -195,6 +227,16 @@ const OpeningStatsTable = ({
         startDate={data.startDate}
         endDate={data.endDate}
         username={username}
+        onCustomDownloadClick={() => setShowDownloadModal(true)}
+      />
+      <DownloadPGNModal
+        isOpen={showDownloadModal}
+        onClose={() => setShowDownloadModal(false)}
+        color={color}
+        startDate={data.startDate}
+        endDate={data.endDate}
+        availableOpenings={availableOpenings}
+        onDownload={handleDownloadRequest}
       />
       <ScrollToTopButton />
     </div>
