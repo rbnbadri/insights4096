@@ -616,3 +616,29 @@ th.sortable:hover {
     transform: translate(-50%, 0);
   }
 }
+
+.modal-label-with-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.openings-count {
+  color: #003366;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .modal-label-with-count {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .openings-count {
+    font-size: 0.85rem;
+    color: #ccc;
+  }
+}

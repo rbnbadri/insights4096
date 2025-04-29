@@ -57,12 +57,16 @@ const DownloadPGNModal = ({
     if (newSelections.length === 3) {
       setSelectedResults([]);
       console.log("Triggering toast message from DownloadPGNModal");
-      triggerToast(
-        "All games will be downloaded.",
-      );
+      triggerToast("All games will be downloaded.");
     } else {
       setSelectedResults(newSelections);
     }
+  };
+
+  const handleColorChange = (newColor) => {
+    setSelectedColor(newColor);
+    setSelectedOpenings([]);
+    setSelectedResults([]);
   };
 
   if (!isOpen) return null;
@@ -84,7 +88,7 @@ const DownloadPGNModal = ({
                   type="radio"
                   value="white"
                   checked={selectedColor === "white"}
-                  onChange={() => setSelectedColor("white")}
+                  onChange={() => handleColorChange("white")}
                 />{" "}
                 White
               </label>
@@ -93,7 +97,7 @@ const DownloadPGNModal = ({
                   type="radio"
                   value="black"
                   checked={selectedColor === "black"}
-                  onChange={() => setSelectedColor("black")}
+                  onChange={() => handleColorChange("black")}
                 />{" "}
                 Black
               </label>
@@ -101,10 +105,18 @@ const DownloadPGNModal = ({
           </div>
 
           <div className="form-group">
-            <label className="modal-label">
-              Opening Variations (maximum 3)
-              <span className="required-asterisk">*</span>
-            </label>
+            <div className="modal-label-with-count">
+              <label className="modal-label">
+                Opening Variations (maximum 3)
+                <span className="required-asterisk">*</span>
+              </label>
+              {selectedOpenings.length > 0 && (
+                <span className="openings-count">
+                  {selectedOpenings.length} opening
+                  {selectedOpenings.length > 1 ? "s" : ""} selected
+                </span>
+              )}
+            </div>
             <OpeningSelectorDropdown
               availableOpenings={filteredAvailableOpenings}
               selectedOpenings={selectedOpenings}

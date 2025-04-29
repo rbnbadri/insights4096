@@ -10,6 +10,7 @@ const OpeningSelectorDropdown = ({
 }) => {
   const [searchText, setSearchText] = useState("");
   const searchInputRef = useRef(null);
+  const listRef = useRef(null);
 
   useEffect(() => {
     if (searchInputRef.current) {
@@ -18,12 +19,21 @@ const OpeningSelectorDropdown = ({
   }, []);
 
   const handleToggle = (name) => {
-    clearError();
+    const scrollTopBefore = listRef.current ? listRef.current.scrollTop : 0;
+
     if (selectedOpenings.includes(name)) {
       setSelectedOpenings(selectedOpenings.filter((n) => n !== name));
     } else if (selectedOpenings.length < 3) {
       setSelectedOpenings([...selectedOpenings, name]);
+      clearError();
     }
+
+    // After state update, restore scroll position (small delay)
+    setTimeout(() => {
+      if (listRef.current) {
+        listRef.current.scrollTop = scrollTopBefore;
+      }
+    }, 0);
   };
 
   const sortedOpenings = [...availableOpenings].sort((a, b) => {
@@ -39,7 +49,7 @@ const OpeningSelectorDropdown = ({
   );
 
   return (
-    <div className="opening-selector-list">
+    <div className="opening-selector-list" ref={listRef}>
       <div className="search-container">
         <input
           type="text"
