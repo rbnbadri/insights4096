@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select from "react-select";
 import "../App.css";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { triggerToast } from "../utils/toast";
 
 const DownloadPGNModal = ({
   isOpen,
@@ -16,6 +18,7 @@ const DownloadPGNModal = ({
   const [selectedColor, setSelectedColor] = useState(color);
   const [selectedOpenings, setSelectedOpenings] = useState([]);
   const [selectedResults, setSelectedResults] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -25,11 +28,19 @@ const DownloadPGNModal = ({
     }
   }, [isOpen, color]);
 
+  const clearError = () => {
+    setError("");
+  };
+
   const handleDownload = () => {
     if (!selectedOpenings.length) {
-      alert("Please select at least one Opening Variation.");
+      setError("Please select at least one Opening Variation.");
       return;
     }
+
+    // Clear error before proceeding
+    setError("");
+
     onDownload({
       selectedColor,
       selectedOpenings,
@@ -40,11 +51,23 @@ const DownloadPGNModal = ({
     onClose();
   };
 
+  const handleCheckboxChange = (opts) => {
+    const newSelections = opts.map((o) => o.value);
+
+    if (newSelections.length === 3) {
+      setSelectedResults([]);
+      console.log("Triggering toast message from DownloadPGNModal");
+      triggerToast(
+        "All games will be downloaded.",
+      );
+    } else {
+      setSelectedResults(newSelections);
+    }
+  };
+
   if (!isOpen) return null;
 
   const filteredAvailableOpenings = availableOpenings[selectedColor] || [];
-
-  console.log(filteredAvailableOpenings);
 
   return (
     <div className="modal-overlay">
@@ -79,12 +102,14 @@ const DownloadPGNModal = ({
 
           <div className="form-group">
             <label className="modal-label">
-              Opening Variations <span style={{ color: "red" }}>*</span>
+              Opening Variations (maximum 3)
+              <span className="required-asterisk">*</span>
             </label>
             <OpeningSelectorDropdown
               availableOpenings={filteredAvailableOpenings}
               selectedOpenings={selectedOpenings}
               setSelectedOpenings={setSelectedOpenings}
+              clearError={clearError}
             />
           </div>
 
@@ -102,7 +127,7 @@ const DownloadPGNModal = ({
                 value: r,
                 label: r.charAt(0).toUpperCase() + r.slice(1),
               }))}
-              onChange={(opts) => setSelectedResults(opts.map((o) => o.value))}
+              onChange={(opts) => handleCheckboxChange(opts)}
             />
           </div>
 
@@ -121,6 +146,11 @@ const DownloadPGNModal = ({
         </div>
 
         <div className="modal-footer">
+          {error && (
+            <div className="red-text">
+              <FaExclamationTriangle className="red-icon" /> {error}
+            </div>
+          )}
           <button className="btn-cancel" onClick={onClose}>
             Cancel
           </button>

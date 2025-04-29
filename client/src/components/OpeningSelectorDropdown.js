@@ -1,15 +1,24 @@
 // OpeningSelectorDropdown.js
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../App.css";
 
 const OpeningSelectorDropdown = ({
   availableOpenings,
   selectedOpenings,
   setSelectedOpenings,
+  clearError,
 }) => {
   const [searchText, setSearchText] = useState("");
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
 
   const handleToggle = (name) => {
+    clearError();
     if (selectedOpenings.includes(name)) {
       setSelectedOpenings(selectedOpenings.filter((n) => n !== name));
     } else if (selectedOpenings.length < 3) {
@@ -31,14 +40,25 @@ const OpeningSelectorDropdown = ({
 
   return (
     <div className="opening-selector-list">
-      <input
-        type="text"
-        className="opening-search"
-        placeholder="Search openings..."
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        style={{ marginBottom: "12px", padding: "8px" }}
-      />
+      <div className="search-container">
+        <input
+          type="text"
+          ref={searchInputRef}
+          className="opening-search"
+          placeholder="Search openings..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        {searchText && (
+          <button
+            className="clear-search-button"
+            onClick={() => setSearchText("")}
+          >
+            &#10005;
+          </button>
+        )}
+      </div>
+
       {filteredOpenings.length > 0 ? (
         filteredOpenings.map((opening) => (
           <label key={opening.name} className="checkbox-row">

@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import OpeningStatsTable from "./OpeningStatsTable";
 import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
+import ToastMessage from "./components/ToastMessage";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
   const [isOwnUsername, setIsOwnUsername] = useState(true);
+
+  const usernameRef = useRef(null);
+
+  useEffect(() => {
+    if (usernameRef.current && username.trim().length === 0) {
+      usernameRef.current.focus();
+    }
+  }, [username]);
 
   const handleChange = (e) => setUsername(e.target.value);
 
@@ -82,6 +91,7 @@ function Insights4096() {
 
   return (
     <div className="App">
+      <ToastMessage />
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
         <h1 className="header">Chess Insights v0.9.5</h1>
@@ -90,6 +100,7 @@ function Insights4096() {
       <div className="flex-row">
         <input
           type="text"
+          ref={usernameRef}
           value={username}
           onChange={handleChange}
           placeholder="Enter ChessDotCom username"

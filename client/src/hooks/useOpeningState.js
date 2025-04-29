@@ -117,6 +117,5 @@ export default function useOpeningState(username) {
     setSortDirection,
     handleSubmit,
     handleResetToCachedOneMonth,
-    setResetToDefaultRange,
   };
 }
