@@ -1,7 +1,7 @@
 // DownloadPGNModal.js
 import React, { useState, useEffect } from "react";
 import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import "../App.css";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { triggerGreenToast } from "../utils/toast";
@@ -70,6 +70,17 @@ const DownloadPGNModal = ({
   };
 
   if (!isOpen) return null;
+  const testId = "Results Filter";
+
+  const CustomControl = ({ children, innerRef, innerProps, ...rest }) => (
+    <components.Control
+      {...rest}
+      innerRef={innerRef}
+      innerProps={{ ...innerProps, "data-test-id": testId }}
+    >
+      {children}
+    </components.Control>
+  );
 
   const filteredAvailableOpenings = availableOpenings[selectedColor] || [];
 
@@ -135,11 +146,14 @@ const DownloadPGNModal = ({
                 { value: "drawn", label: "Drawn" },
               ]}
               classNamePrefix="react-select"
+              components={{ Control: CustomControl }}
               value={selectedResults.map((r) => ({
                 value: r,
                 label: r.charAt(0).toUpperCase() + r.slice(1),
               }))}
               onChange={(opts) => handleCheckboxChange(opts)}
+              menuPortalTarget={document.body}
+              styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
             />
           </div>
 

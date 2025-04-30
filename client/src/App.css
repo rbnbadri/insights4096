@@ -459,12 +459,13 @@ th.sortable:hover {
   background-color: white;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh;         /* Responsive max height */
+  max-height: 90vh;
+  height: auto;
   border: 2px solid black;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;         /* Avoid outer scroll */
+  overflow: hidden;
 }
 
 .modal-header {

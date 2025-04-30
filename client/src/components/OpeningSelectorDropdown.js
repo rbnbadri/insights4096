@@ -75,6 +75,7 @@ const OpeningSelectorDropdown = ({
             <input
               type="checkbox"
               checked={selectedOpenings.includes(opening.name)}
+              data-checked={selectedOpenings.includes(opening.name)}
               onChange={() => handleToggle(opening.name)}
               disabled={
                 !selectedOpenings.includes(opening.name) &&
