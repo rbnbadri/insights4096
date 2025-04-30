@@ -6,6 +6,7 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import DownloadPGNModal from "./components/DownloadPGNModal";
 import { BACKEND_URL } from "./apiConfig";
 import { triggerGreenToast, triggerRedToast } from "./utils/toast";
+import { downloadPGN } from "./utils/downloadPGN";
 
 const OpeningStatsSection = ({
   data = {},
@@ -193,54 +194,24 @@ const OpeningStatsSection = ({
     startDate,
     endDate,
   }) => {
-    const formattedOpenings = selectedOpenings
-      .map((o) => o.replace(/ /g, "-"))
-      .join(",");
-    let query = `color=${selectedColor}&eco=${formattedOpenings}&start=${startDate}&end=${endDate}`;
-    if (selectedResults.length > 0) {
-      query += `&gameResult=${selectedResults.join(",")}`;
-    }
+    const eco = selectedOpenings.map((o) => o.replace(/ /g, "-")).join(",");
+    const gameResult =
+      selectedResults.length > 0 ? selectedResults.join(",") : undefined;
 
-    const baseUrl = `${BACKEND_URL}/pgns/${username}`;
-    const checkUrl = `${baseUrl}?${query}&checkOnly=true`;
-
-    try {
-      const res = await fetch(checkUrl);
-      if (res.ok) {
-        const { gameCount, filename } = await res.json();
-
-        triggerGreenToast(
-          `Downloading ${filename} with ${gameCount} game${gameCount > 1 ? "s" : ""}.`,
-        );
-
-        const downloadUrl = `${baseUrl}?${query}`;
-        const pgnRes = await fetch(downloadUrl);
-
-        if (!pgnRes.ok) {
-          triggerRedToast("Failed to fetch PGN content.");
-          return;
-        }
-
-        const pgnText = await pgnRes.text();
-        const blob = new Blob([pgnText], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename || "games.pgn";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      } else if (res.status >= 400 && res.status < 500) {
-        const errData = await res.json();
-        triggerRedToast(`${res.status}: ${errData.message}`);
-      } else {
-        triggerRedToast("Internal server error");
-      }
-    } catch (err) {
-      console.error("Download error:", err);
-      triggerRedToast("Failed to download. Please try again.");
-    }
+    await downloadPGN({
+      urlBase: `${BACKEND_URL}/pgns/${username}`,
+      queryParams: {
+        color: selectedColor,
+        eco,
+        start: startDate,
+        end: endDate,
+        ...(gameResult && { gameResult }),
+      },
+      filenameFallback: "games.pgn",
+      showToast: true,
+      toastSuccess: triggerGreenToast,
+      toastError: triggerRedToast,
+    });
   };
 
   return (
@@ -283,7 +254,7 @@ const OpeningStatsSection = ({
         startDate={data.startDate}
         endDate={data.endDate}
         availableOpenings={availableOpenings}
-        onDownload={handleDownloadRequest}
+        await onDownload={handleDownloadRequest}
       />
       <ScrollToTopButton />
     </div>

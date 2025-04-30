@@ -61,22 +61,23 @@ const DownloadPGNModal = ({
     setError("");
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!selectedOpenings.length) {
       setError("Please select at least one Opening Variation.");
       return;
     }
 
-    // Clear error before proceeding
     setError("");
 
-    onDownload({
+    await onDownload({
       selectedColor,
       selectedOpenings,
       selectedResults,
       startDate,
       endDate,
     });
+
+    closeButtonRef.current?.focus(); // No timeout needed now
   };
 
   const handleCheckboxChange = (opts) => {

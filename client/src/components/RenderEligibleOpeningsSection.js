@@ -3,6 +3,7 @@
 import React from "react";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import { BACKEND_URL } from "../apiConfig";
+import { downloadPGN } from "../utils/downloadPGN";
 
 export const RenderEligibleOpeningsSection = ({
   openings,
@@ -11,37 +12,22 @@ export const RenderEligibleOpeningsSection = ({
   endDate,
   username,
 }) => {
-  const getDownloadUrl = (openingName, gameResult) => {
-    const ecoFormatted = openingName.replace(/ /g, "-");
-    return `${BACKEND_URL}/pgns/${username}?color=${color}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}&gameResult=${gameResult}`;
-  };
+  const handleDirectDownload = (openingName, resultType) => {
+    const eco = openingName.replace(/ /g, "-");
+    const queryParams = {
+      color,
+      eco,
+      start: startDate,
+      end: endDate,
+      gameResult: resultType,
+    };
 
-  const handleDirectDownload = async (openingName, resultType) => {
-    const baseUrl = getDownloadUrl(openingName, resultType);
-    const checkUrl = `${baseUrl}&checkOnly=true`;
-
-    try {
-      const res = await fetch(checkUrl);
-      if (!res.ok) throw new Error("No games found");
-
-      const { filename } = await res.json();
-
-      const fileRes = await fetch(baseUrl);
-      const pgnText = await fileRes.text();
-
-      const blob = new Blob([pgnText], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename || `download-${resultType}.pgn`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      alert("PGN download failed or no games found.");
-      console.error(err);
-    }
+    downloadPGN({
+      urlBase: `${BACKEND_URL}/pgns/${username}`,
+      queryParams,
+      filenameFallback: `${eco}-${resultType}.pgn`,
+      showToast: false,
+    });
   };
 
   const renderOpeningRow = (opening, badgeType) => {
