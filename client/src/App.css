@@ -445,14 +445,26 @@ th.sortable:hover {
   justify-content: center;
 }
 
-.download-modal {
+/* .download-modal {
   background-color: white;
   width: 500px;
   border: 2px solid black;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 600px;
+} */
+
+.download-modal {
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;         /* Responsive max height */
+  border: 2px solid black;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;         /* Avoid outer scroll */
 }
 
 .modal-header {
@@ -468,6 +480,9 @@ th.sortable:hover {
 
 .modal-body {
   padding: 16px;
+  overflow-y: auto;
+  flex: 1;                  /* Fills remaining height */
+  min-height: 0;            /* Prevents overflow conflict */
 }
 
 .modal-label {
@@ -510,8 +525,16 @@ th.sortable:hover {
   cursor: pointer;
 }
 
-.opening-selector-list {
+/* .opening-selector-list {
   max-height: 160px;
+  overflow-y: auto;
+  border: 1px solid black;
+  padding: 8px;
+  background-color: white;
+} */
+
+.opening-selector-list {
+  max-height: 200px;        /* Increase for better visibility */
   overflow-y: auto;
   border: 1px solid black;
   padding: 8px;
@@ -654,6 +677,24 @@ th.sortable:hover {
   .openings-count {
     font-size: 0.85rem;
     color: #ccc;
+  }
+
+  .download-modal {
+    height: 90vh;
+    width: 95%;
+  }
+
+  .opening-selector-list {
+    max-height: 150px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-footer button {
+    width: 100%;
   }
 }
 
