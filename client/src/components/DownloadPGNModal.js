@@ -1,9 +1,9 @@
 // DownloadPGNModal.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FaTimes, FaExclamationTriangle } from "react-icons/fa";
 import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select, { components } from "react-select";
 import "../App.css";
-import { FaExclamationTriangle } from "react-icons/fa";
 import { triggerGreenToast } from "../utils/toast";
 
 const DownloadPGNModal = ({
@@ -20,6 +20,35 @@ const DownloadPGNModal = ({
   const [selectedResults, setSelectedResults] = useState([]);
   const [error, setError] = useState("");
 
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      } else if (
+        e.key === "Enter" &&
+        document.activeElement === closeButtonRef.current
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      setSelectedColor(color);
+      setSelectedOpenings([]);
+      setSelectedResults([]);
+
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 0);
+
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, color, onClose]);
+
   useEffect(() => {
     if (isOpen) {
       setSelectedColor(color);
@@ -32,23 +61,23 @@ const DownloadPGNModal = ({
     setError("");
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!selectedOpenings.length) {
       setError("Please select at least one Opening Variation.");
       return;
     }
 
-    // Clear error before proceeding
     setError("");
 
-    onDownload({
+    await onDownload({
       selectedColor,
       selectedOpenings,
       selectedResults,
       startDate,
       endDate,
     });
-    onClose();
+
+    closeButtonRef.current?.focus(); // No timeout needed now
   };
 
   const handleCheckboxChange = (opts) => {
@@ -89,6 +118,14 @@ const DownloadPGNModal = ({
       <div className="download-modal">
         <div className="modal-header">
           <h2 className="modal-header-text">Download PGNs</h2>
+          <button
+            className="modal-close-button"
+            onClick={onClose}
+            aria-label="Close Modal"
+            ref={closeButtonRef}
+          >
+            <FaTimes color="white" size={20} />
+          </button>
         </div>
         <div className="modal-body">
           <div className="form-group">
@@ -178,7 +215,15 @@ const DownloadPGNModal = ({
               <FaExclamationTriangle className="red-icon" /> {error}
             </div>
           )}
-          <button className="btn-cancel" onClick={onClose}>
+          <button
+            className="btn-cancel"
+            onClick={() => {
+              setSelectedOpenings([]);
+              setSelectedResults([]);
+              setError("");
+              onClose();
+            }}
+          >
             Cancel
           </button>
           <button className="btn-primary" onClick={handleDownload}>

@@ -3,6 +3,7 @@
 import React from "react";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import { BACKEND_URL } from "../apiConfig";
+import { downloadPGN } from "../utils/downloadPGN";
 
 export const RenderEligibleOpeningsSection = ({
   openings,
@@ -11,9 +12,22 @@ export const RenderEligibleOpeningsSection = ({
   endDate,
   username,
 }) => {
-  const getDownloadUrl = (openingName, gameResult) => {
-    const ecoFormatted = openingName.replace(/ /g, "-");
-    return `${BACKEND_URL}/pgns/${username}?color=${color}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}&gameResult=${gameResult}`;
+  const handleDirectDownload = (openingName, resultType) => {
+    const eco = openingName.replace(/ /g, "-");
+    const queryParams = {
+      color,
+      eco,
+      start: startDate,
+      end: endDate,
+      gameResult: resultType,
+    };
+
+    downloadPGN({
+      urlBase: `${BACKEND_URL}/pgns/${username}`,
+      queryParams,
+      filenameFallback: `${eco}-${resultType}.pgn`,
+      showToast: false,
+    });
   };
 
   const renderOpeningRow = (opening, badgeType) => {
@@ -66,13 +80,17 @@ export const RenderEligibleOpeningsSection = ({
             className="top-opening-link"
             data-test-id={`top-opening-link-${color}`}
           >
-            <a
-              href={getDownloadUrl(name, resultType)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <span
+              className="pgn-download-link"
+              onClick={() => handleDirectDownload(name, resultType)}
+              role="link"
+              tabIndex={0}
+              onKeyDown={(e) =>
+                e.key === "Enter" && handleDirectDownload(name, resultType)
+              }
             >
               Download PGN for {resultType} games
-            </a>
+            </span>
           </div>
         ) : (
           <div className="top-opening-link">-</div>

@@ -471,6 +471,23 @@ th.sortable:hover {
 .modal-header {
   background-color: black;
   padding: 12px;
+  position: relative;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.modal-close-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px white;
+  border-radius: 2px;
 }
 
 .modal-header-text {
@@ -735,4 +752,15 @@ th.sortable:hover {
   color: #999;
   cursor: pointer;
   padding: 0;
+}
+
+.pgn-download-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pgn-download-link:hover {
+  color: darkblue;
 }
