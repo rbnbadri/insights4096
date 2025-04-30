@@ -7,10 +7,12 @@ const { resultMapping } = require("./utils");
 function setupPgnDownloadRoute(app, gameCacheStore) {
   app.get("/pgns/:username", async (req, res) => {
     const username = req.params.username;
-    const { start, end, color, eco, gameResult } = req.query;
+    const { start, end, color, eco, gameResult, checkOnly } = req.query;
 
     if (!start || !end || !color || !eco) {
-      return res.status(400).json({ message: "Missing required parameters." });
+      return res
+        .status(404)
+        .json({ message: "No matching games found for the given filters." });
     }
 
     if (!gameCacheStore[username]) {
@@ -57,9 +59,6 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
 
       return true;
     });
-    if (filteredGames.length === 0) {
-      return res.status(404).json({ message: "No matching games found." });
-    }
 
     if (filteredGames.length > 100) {
       return res.status(400).json({
@@ -68,11 +67,33 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
     }
 
     const pgnContent = filteredGames.map((g) => g.pgn).join("\n\n");
+    let newFilename =
+      ecos.length === 1
+        ? `${username}_${color}_${eco}`
+        : `${username}_${color}_multiple_ecos`;
+
+    if (resultsFilter) newFilename += `_${resultsFilter.join("_")}`;
+    const compressed = filteredGames.length > 50;
+    newFilename += compressed ? ".zip" : ".pgn";
+
+    if (filteredGames.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No matching games found for the given filters." });
+    }
+
+    if (checkOnly) {
+      return res.status(200).json({
+        status: "ready",
+        gameCount: filteredGames.length,
+        filename: newFilename,
+      });
+    }
 
     if (filteredGames.length <= 50) {
       res.setHeader(
         "Content-disposition",
-        `attachment; filename=${username}_games.pgn`,
+        `attachment; filename=${newFilename}`,
       );
       res.setHeader("Content-Type", "application/x-chess-pgn");
       return res.send(pgnContent);
@@ -83,12 +104,12 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
       const archive = archiver("zip", { zlib: { level: 9 } });
       res.setHeader(
         "Content-disposition",
-        `attachment; filename=${username}_games.zip`,
+        `attachment; filename=${newFilename}`,
       );
       res.setHeader("Content-Type", "application/zip");
 
       archive.pipe(res);
-      archive.file(tempPgnPath, { name: `${username}_games.pgn` });
+      archive.file(tempPgnPath, { name: `${newFilename}.pgn` });
       archive.finalize();
 
       archive.on("end", () => {

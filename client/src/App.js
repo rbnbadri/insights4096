@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import OpeningStatsTable from "./OpeningStatsTable";
+import OpeningStatsSection from "./OpeningStatsSection";
 import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
+import GreenToastMessage from "./components/GreenToastMessage";
+import RedToastMessage from "./components/RedToastMessage";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
   const [isOwnUsername, setIsOwnUsername] = useState(true);
+
+  const usernameRef = useRef(null);
+
+  useEffect(() => {
+    if (usernameRef.current && username.trim().length === 0) {
+      usernameRef.current.focus();
+    }
+  }, [username]);
 
   const handleChange = (e) => setUsername(e.target.value);
 
@@ -35,14 +45,14 @@ function Insights4096() {
     setSortDirection,
     handleSubmit,
     handleResetToCachedOneMonth,
-    setResetToDefaultRange,
+    handleSearchClick,
   } = useOpeningState(username);
 
   const renderTable = (color, summaryLabel) => {
     const enteredUsername = isOwnUsername ? null : username;
     return submitted && filteredData?.[color] ? (
       <div className="table-section">
-        <OpeningStatsTable
+        <OpeningStatsSection
           data={{
             ...filteredData,
             startDate,
@@ -82,37 +92,34 @@ function Insights4096() {
 
   return (
     <div className="App">
+      <GreenToastMessage />
+      <RedToastMessage />
       <div className="header-with-logo">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.9.2</h1>
+        <h1 className="header">Chess Insights v0.9.5</h1>
       </div>
 
       <div className="flex-row">
-        <input
-          type="text"
-          value={username}
-          onChange={handleChange}
-          placeholder="Enter ChessDotCom username"
-        />
+        <div className="username-input-wrapper">
+          <input
+            type="text"
+            ref={usernameRef}
+            value={username}
+            onChange={handleChange}
+            placeholder="Enter ChessDotCom username"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearchClick();
+            }}
+          />
+          {username.length > 0 && (
+            <button className="clear-username" onClick={() => setUsername("")}>
+              ×
+            </button>
+          )}
+        </div>
         <button
           onClick={() => {
-            const today = new Date();
-            const oneMonthAgo = new Date(today);
-            oneMonthAgo.setDate(today.getDate() - 30);
-            const defaultStart = oneMonthAgo.toISOString().split("T")[0];
-            const defaultEnd = today.toISOString().split("T")[0];
-
-            setStartDate(defaultStart);
-            setEndDate(defaultEnd);
-
-            setResetToDefaultRange(true);
-            setFullResetTrigger(true);
-            setTimeout(() => {
-              setResetToDefaultRange(false);
-              setFullResetTrigger(false);
-            }, 100);
-
-            handleSubmit(defaultStart, defaultEnd, selectedColor);
+            handleSearchClick();
           }}
         >
           Search
@@ -140,7 +147,7 @@ function Insights4096() {
                 setSortColumn("played");
                 setSortDirection("desc");
 
-                // ✅ Trigger full reset so OpeningStatsTable clears filters
+                // ✅ Trigger full reset so OpeningStatsSection clears filters
                 setFullResetTrigger(true);
                 setTimeout(() => setFullResetTrigger(false), 100);
 
