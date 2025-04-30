@@ -16,6 +16,34 @@ export const RenderEligibleOpeningsSection = ({
     return `${BACKEND_URL}/pgns/${username}?color=${color}&eco=${ecoFormatted}&start=${startDate}&end=${endDate}&gameResult=${gameResult}`;
   };
 
+  const handleDirectDownload = async (openingName, resultType) => {
+    const baseUrl = getDownloadUrl(openingName, resultType);
+    const checkUrl = `${baseUrl}&checkOnly=true`;
+
+    try {
+      const res = await fetch(checkUrl);
+      if (!res.ok) throw new Error("No games found");
+
+      const { filename } = await res.json();
+
+      const fileRes = await fetch(baseUrl);
+      const pgnText = await fileRes.text();
+
+      const blob = new Blob([pgnText], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename || `download-${resultType}.pgn`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("PGN download failed or no games found.");
+      console.error(err);
+    }
+  };
+
   const renderOpeningRow = (opening, badgeType) => {
     const { name, winPercent } = opening;
 
@@ -66,13 +94,17 @@ export const RenderEligibleOpeningsSection = ({
             className="top-opening-link"
             data-test-id={`top-opening-link-${color}`}
           >
-            <a
-              href={getDownloadUrl(name, resultType)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <span
+              className="pgn-download-link"
+              onClick={() => handleDirectDownload(name, resultType)}
+              role="link"
+              tabIndex={0}
+              onKeyDown={(e) =>
+                e.key === "Enter" && handleDirectDownload(name, resultType)
+              }
             >
               Download PGN for {resultType} games
-            </a>
+            </span>
           </div>
         ) : (
           <div className="top-opening-link">-</div>

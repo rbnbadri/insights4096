@@ -1,5 +1,5 @@
 // OpeningSelectorDropdown.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "../App.css";
 
 const OpeningSelectorDropdown = ({
@@ -11,12 +11,6 @@ const OpeningSelectorDropdown = ({
   const [searchText, setSearchText] = useState("");
   const searchInputRef = useRef(null);
   const listRef = useRef(null);
-
-  useEffect(() => {
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, []);
 
   const handleToggle = (name) => {
     const scrollTopBefore = listRef.current ? listRef.current.scrollTop : 0;
@@ -62,7 +56,10 @@ const OpeningSelectorDropdown = ({
         {searchText && (
           <button
             className="clear-search-button"
-            onClick={() => setSearchText("")}
+            onClick={() => {
+              setSearchText("");
+              searchInputRef.current?.focus();
+            }}
           >
             &#10005;
           </button>

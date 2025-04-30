@@ -207,16 +207,30 @@ const OpeningStatsSection = ({
     try {
       const res = await fetch(checkUrl);
       if (res.ok) {
-        const data = await res.json();
-        const { gameCount, filename } = data;
+        const { gameCount, filename } = await res.json();
 
         triggerGreenToast(
           `Downloading ${filename} with ${gameCount} game${gameCount > 1 ? "s" : ""}.`,
         );
 
-        // Actually trigger the file download
         const downloadUrl = `${baseUrl}?${query}`;
-        window.open(downloadUrl, "_blank");
+        const pgnRes = await fetch(downloadUrl);
+
+        if (!pgnRes.ok) {
+          triggerRedToast("Failed to fetch PGN content.");
+          return;
+        }
+
+        const pgnText = await pgnRes.text();
+        const blob = new Blob([pgnText], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename || "games.pgn";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
       } else if (res.status >= 400 && res.status < 500) {
         const errData = await res.json();
         triggerRedToast(`${res.status}: ${errData.message}`);
