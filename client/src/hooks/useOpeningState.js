@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchOpenings } from "../api/fetchOpenings";
-import { triggerRedToast } from "../utils/toast";
+import { triggerRedToast, triggerGreenToast } from "../utils/toast";
 
 export default function useOpeningState(username) {
   const [filteredData, setFilteredData] = useState(null);
@@ -24,6 +24,7 @@ export default function useOpeningState(username) {
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [sortColumn, setSortColumn] = useState("played");
   const [sortDirection, setSortDirection] = useState("desc");
+  const [isDefaultLoad, setIsDefaultLoad] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -51,13 +52,14 @@ export default function useOpeningState(username) {
       setFullResetTrigger(false);
     }, 100);
 
-    handleSubmit(defaultStart, defaultEnd, selectedColor);
+    handleSubmit(defaultStart, defaultEnd, selectedColor, true);
   };
 
   const handleSubmit = async (
     start = startDate,
     end = endDate,
     section = selectedColor,
+    forceDefaultToast = false,
   ) => {
     if (!username) return;
 
@@ -77,6 +79,18 @@ export default function useOpeningState(username) {
         Object.keys(gamedata.black || {}).length === 0
       ) {
         triggerRedToast("Zero games found for this user.");
+        setSubmitted(false);
+        return;
+      } else {
+        if (forceDefaultToast || isDefaultLoad) {
+          triggerGreenToast(
+            "Successfully retrieved games for the Last 1 Month.",
+          );
+        } else {
+          triggerGreenToast(
+            "Successfully retrieved games for the selected date range.",
+          );
+        }
       }
 
       setFilteredData({
@@ -90,6 +104,7 @@ export default function useOpeningState(username) {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
+      setIsDefaultLoad(false);
       setLoadingState((prev) => ({ ...prev, [section]: false }));
     }
   };
@@ -145,5 +160,7 @@ export default function useOpeningState(username) {
     handleSubmit,
     handleResetToCachedOneMonth,
     handleSearchClick,
+    isDefaultLoad,
+    setIsDefaultLoad,
   };
 }

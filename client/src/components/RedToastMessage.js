@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const RedToastMessage = () => {
   const [toast, setToast] = useState({ message: "", visible: false });
@@ -23,7 +23,7 @@ const RedToastMessage = () => {
 
   return (
     <div className="toast-base red-toast-message">
-      <FaInfoCircle style={{ color: "white", marginRight: "8px" }} />
+      <FaExclamationTriangle style={{ color: "white", marginRight: "8px" }} />
       <span>{toast.message}</span>
       <button
         className="toast-close"

@@ -47,6 +47,7 @@ function Insights4096() {
     handleSubmit,
     handleResetToCachedOneMonth,
     handleSearchClick,
+    setIsDefaultLoad,
   } = useOpeningState(username);
 
   const renderTable = (color, summaryLabel) => {
@@ -109,7 +110,10 @@ function Insights4096() {
                 onChange={handleChange}
                 placeholder="Enter ChessDotCom username"
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSearchClick();
+                  if (e.key === "Enter") {
+                    setIsDefaultLoad(true);
+                    handleSearchClick();
+                  }
                 }}
               />
               {username.length > 0 && (
@@ -123,6 +127,7 @@ function Insights4096() {
             </div>
             <button
               onClick={() => {
+                setIsDefaultLoad(true);
                 handleSearchClick();
               }}
             >
