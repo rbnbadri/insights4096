@@ -228,7 +228,7 @@ th, td {
 
 .toast-base {
   position: fixed;
-  top: 20px;
+  top: 25px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
