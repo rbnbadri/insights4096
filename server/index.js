@@ -34,7 +34,6 @@ app.get("/openings/:username", async (req, res) => {
     let allGames = [];
 
     if (start && end) {
-      console.log(`Fetching games for ${username} between ${start} and ${end}`);
       allGames = await fetchGamesInRange(username, start, end);
     } else {
       // Default to hardcoded Jan-Mar 2025

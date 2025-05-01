@@ -86,7 +86,6 @@ const DownloadPGNModal = ({
 
     if (newSelections.length === 3) {
       setSelectedResults([]);
-      console.log("Triggering toast message from DownloadPGNModal");
       triggerGreenToast("All games will be downloaded.");
     } else {
       setSelectedResults(newSelections);

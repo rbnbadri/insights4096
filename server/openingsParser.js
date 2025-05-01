@@ -94,7 +94,6 @@ function extractOpenings(games, username) {
         }
     });
 
-    console.log(`Total Rapid Games Processed: ${rapidCount}`);
     return openings;
 }
 

@@ -21,7 +21,6 @@ const RedToastMessage = () => {
 
   if (!toast.visible) return null;
 
-  console.log("Received toast message: ", toast.message);
   return (
     <div className="toast-base red-toast-message">
       <FaInfoCircle style={{ color: "white", marginRight: "8px" }} />
