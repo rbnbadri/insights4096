@@ -4,7 +4,6 @@ import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select, { components } from "react-select";
 import "../App.css";
 import "./styles/DownloadPGNSidebar.css";
-import "./styles/DownloadPGNModal.css";
 import { triggerGreenToast } from "../utils/toast";
 
 const DownloadPGNSidebar = ({
@@ -117,7 +116,7 @@ const DownloadPGNSidebar = ({
 
       <div className="download-content">
         <div className="form-group">
-          <label className="modal-label">Color</label>
+          <label className="sidebar-label">Color</label>
           <div className="radio-group">
             <label>
               <input
@@ -141,8 +140,8 @@ const DownloadPGNSidebar = ({
         </div>
 
         <div className="form-group">
-          <div className="modal-label-with-count">
-            <label className="modal-label">
+          <div className="sidebar-label-with-count">
+            <label className="sidebar-label">
               Opening Variations (maximum 3)
               <span className="required-asterisk">*</span>
             </label>
@@ -162,7 +161,7 @@ const DownloadPGNSidebar = ({
         </div>
 
         <div className="form-group">
-          <label className="modal-label">Results</label>
+          <label className="sidebar-label">Results</label>
           <Select
             isMulti
             options={[
@@ -183,7 +182,7 @@ const DownloadPGNSidebar = ({
         </div>
 
         <div className="form-group">
-          <label className="modal-label">Date Range</label>
+          <label className="sidebar-label">Date Range</label>
           <div className="date-range-display">
             <div className="date-field">
               <label className="date-label">Start Date</label>
@@ -196,7 +195,7 @@ const DownloadPGNSidebar = ({
           </div>
         </div>
 
-        <div className="modal-footer">
+        <div className="sidebar-footer">
           {error && (
             <div className="red-text">
               <FaExclamationTriangle className="red-icon" /> {error}
