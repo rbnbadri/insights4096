@@ -2,7 +2,7 @@
 import React from "react";
 import "../App.css";
 import { RenderEligibleOpeningsSection } from "./RenderEligibleOpeningsSection";
-import "./TopOpeningsDownloadLinks.css";
+import "./styles/TopOpeningsDownloadLinks.css";
 
 const TopOpeningsDownloadLinks = ({
   openingsData,

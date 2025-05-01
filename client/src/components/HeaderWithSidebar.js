@@ -1,8 +1,8 @@
 // HeaderWithSidebar.js
 import React, { useState, useRef, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
-import "./HeaderWithSidebar.css";
+import "./styles/HeaderWithSidebar.css";
 import logo from "../logo.png"; // adjust path as needed
+import AboutSidebar from "./AboutSidebar";
 
 export default function HeaderWithSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -39,33 +39,10 @@ export default function HeaderWithSidebar() {
         </div>
       </header>
 
-      {isSidebarOpen && (
-        <aside className="about-sidebar">
-          <div className="about-header">
-            <span className="about-title">ABOUT THIS SITE</span>
-            <button
-              className="about-close"
-              onClick={() => setIsSidebarOpen(false)}
-              ref={closeBtnRef}
-              aria-label="Close About Sidebar"
-            >
-              <FaTimes size={22} />
-            </button>
-          </div>
-          <div className="about-content">
-            <p>
-              <strong>Full description of the site</strong>
-            </p>
-            <p>
-              Including the various options, what can be done with the data and
-              so on.
-            </p>
-            <p>
-              This sidebar should close on Esc key, or Enter when ❌ is focused.
-            </p>
-          </div>
-        </aside>
-      )}
+      <AboutSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
     </>
   );
 }

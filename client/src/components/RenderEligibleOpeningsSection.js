@@ -4,7 +4,7 @@ import React from "react";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import { BACKEND_URL } from "../apiConfig";
 import { downloadPGN } from "../utils/downloadPGN";
-import "./TopOpeningsDownloadLinks.css";
+import "./styles/TopOpeningsDownloadLinks.css";
 
 export const RenderEligibleOpeningsSection = ({
   openings,
