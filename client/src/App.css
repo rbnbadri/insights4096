@@ -142,7 +142,7 @@ th, td {
 }
 
 .color-toggle-buttons button.active {
-  background-color: black;
+  background-color: #1e1e1e;
   color: white;
 }
 
@@ -355,7 +355,7 @@ th, td {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  background-color: black !important;
+  background-color: #1e1e1e !important;
   color: white !important;
   padding: 12px 10px 6px 10px; 
   margin: 0;

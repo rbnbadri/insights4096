@@ -3,7 +3,7 @@ const ecoData = require("./eco_openings.json").data;
 
 // Extract ECO codes from rapid games
 function extractOpenings(games, username) {
-    const openings = { white: {}, black: {}, both: {} };
+    const openings = { white: {}, black: {} };
     let rapidCount = 0;
 
     games.forEach((game) => {
@@ -24,7 +24,7 @@ function extractOpenings(games, username) {
                     .trim()
                     .toLowerCase(),
             );
-
+            game.ecoDisplayName = ecoMain;
             const color =
                 game.white.username.toLowerCase() === username.toLowerCase()
                     ? "white"
@@ -64,32 +64,15 @@ function extractOpenings(games, username) {
                 };
             }
 
-            if (!openings.both[ecoMain]) {
-                openings.both[ecoMain] = {
-                    played: 0,
-                    won: 0,
-                    lost: 0,
-                    drawn: 0,
-                    ecoCode: ecoCodeString,
-                    ecoUrl: ecoUrl,
-                    ecoUrlString: ecoUrlString,
-                };
-            }
-
-            // Update stats
             openings[color][ecoMain].played++;
-            openings.both[ecoMain].played++;
 
             const result = resultMapping[game[color].result] || "unknown";
             if (result === "win") {
                 openings[color][ecoMain].won++;
-                openings.both[ecoMain].won++;
             } else if (result === "lost") {
                 openings[color][ecoMain].lost++;
-                openings.both[ecoMain].lost++;
             } else if (result === "drawn") {
                 openings[color][ecoMain].drawn++;
-                openings.both[ecoMain].drawn++;
             }
         }
     });

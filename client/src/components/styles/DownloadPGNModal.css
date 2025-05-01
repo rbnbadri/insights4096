@@ -25,7 +25,7 @@
 }
 
 .modal-header {
-  background-color: black;
+  background-color: #1e1e1e;
   padding: 12px;
   position: relative;
 }
@@ -109,7 +109,7 @@
 }
 
 .btn-primary {
-  background-color: black;
+  background-color: #1e1e1e;
   color: white;
   border: none;
   padding: 6px 12px;

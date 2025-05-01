@@ -1,0 +1,10 @@
+.download-content {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  overflow-y: auto;
+}
+
+.download-content .form-group {
+  margin-bottom: 20px;
+}

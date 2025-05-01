@@ -21,7 +21,7 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
         .json({ message: "Game data not cached. Please search first." });
     }
 
-    const ecos = eco.split(",");
+    const ecos = eco.split(",").map((e) => e.replace(/-/g, " "));
     const resultsFilter = gameResult ? gameResult.split(",") : null;
 
     const allGames = gameCacheStore[username];
@@ -36,18 +36,7 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
           : "black";
       if (gameColor !== color) return false;
 
-      // ECO match
-      const ecoUrlMatch = game.pgn.match(/\[ECOUrl\s+"(.*?)"\]/);
-      if (!ecoUrlMatch) return false;
-
-      const ecoUrlLastPart = ecoUrlMatch[1].split("/").pop();
-      const cleanedEcoUrl = ecoUrlLastPart
-        .split(/[.\d]/)[0]
-        .replace(/-+$/, "")
-        .trim();
-
-      // Match if **any** eco in the ecos array is a prefix of ecoUrlLastPart
-      const matchesAnyEco = ecos.includes(cleanedEcoUrl);
+      const matchesAnyEco = ecos.includes(game.ecoDisplayName);
 
       if (!matchesAnyEco) return false;
 
