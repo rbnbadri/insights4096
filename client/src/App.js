@@ -5,6 +5,7 @@ import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
 import GreenToastMessage from "./components/GreenToastMessage";
 import RedToastMessage from "./components/RedToastMessage";
+import HeaderWithSidebar from "./components/HeaderWithSidebar";
 
 function Insights4096() {
   const [username, setUsername] = useState("");
@@ -94,46 +95,52 @@ function Insights4096() {
     <div className="App">
       <GreenToastMessage />
       <RedToastMessage />
-      <div className="header-with-logo">
+      <HeaderWithSidebar />
+      <div className="page-title-container">
         <img src={logo} alt="Logo" className="logo" />
-        <h1 className="header">Chess Insights v0.9.6</h1>
+        <div className="title-and-input">
+          <h2 className="section-title">Chess Insights v1.0.0</h2>
+          <div className="flex-row">
+            <div className="username-input-wrapper">
+              <input
+                type="text"
+                ref={usernameRef}
+                value={username}
+                onChange={handleChange}
+                placeholder="Enter ChessDotCom username"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearchClick();
+                }}
+              />
+              {username.length > 0 && (
+                <button
+                  className="clear-username"
+                  onClick={() => setUsername("")}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+            <button
+              onClick={() => {
+                handleSearchClick();
+              }}
+            >
+              Search
+            </button>
+            <label>
+              <input
+                type="checkbox"
+                checked={isOwnUsername}
+                onChange={(e) => setIsOwnUsername(e.target.checked)}
+                style={{ marginLeft: "10px", marginRight: "4px" }}
+              />
+              This is my username
+            </label>
+          </div>
+        </div>
       </div>
 
-      <div className="flex-row">
-        <div className="username-input-wrapper">
-          <input
-            type="text"
-            ref={usernameRef}
-            value={username}
-            onChange={handleChange}
-            placeholder="Enter ChessDotCom username"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearchClick();
-            }}
-          />
-          {username.length > 0 && (
-            <button className="clear-username" onClick={() => setUsername("")}>
-              ×
-            </button>
-          )}
-        </div>
-        <button
-          onClick={() => {
-            handleSearchClick();
-          }}
-        >
-          Search
-        </button>
-        <label>
-          <input
-            type="checkbox"
-            checked={isOwnUsername}
-            onChange={(e) => setIsOwnUsername(e.target.checked)}
-            style={{ marginLeft: "10px", marginRight: "4px" }}
-          />
-          This is my username
-        </label>
-      </div>
       {submitted && (
         <div className="color-toggle-buttons">
           {["white", "black"].map((color) => (
