@@ -1,70 +1,26 @@
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.download-modal {
-  background-color: white;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  height: auto;
-  border: 2px solid black;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.modal-header {
-  background-color: black;
-  padding: 12px;
-  position: relative;
-}
-
-.modal-header-text {
-  margin: 0;
-  color: white;
-  font-size: 18px;
-}
-
-.modal-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: white;
-}
-
-.modal-body {
-  padding: 16px;
+.download-content {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
   overflow-y: auto;
-  flex: 1;                  /* Fills remaining height */
-  min-height: 0;            /* Prevents overflow conflict */
+}
+
+.download-content .form-group {
+  margin-bottom: 20px;
 }
 
 .form-group {
   margin-bottom: 20px;
 }
 
-.modal-label {
+.sidebar-label {
   font-weight: 600;
   margin-bottom: 4px;
   display: block;
   color: #003366;
 }
 
-.modal-label-with-count {
+.sidebar-label-with-count {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -93,7 +49,7 @@
   margin-bottom: 4px;
 }
 
-.modal-footer {
+.sidebar-footer {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -109,7 +65,7 @@
 }
 
 .btn-primary {
-  background-color: black;
+  background-color: #1e1e1e;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -125,7 +81,7 @@
 }
 
 @media (max-width: 480px) {
-  .modal-label-with-count {
+  .sidebar-label-with-count {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
@@ -145,12 +101,12 @@
     max-height: 150px;
   }
 
-  .modal-footer {
+  .sidebar-footer {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .modal-footer button {
+  .sidebar-footer button {
     width: 100%;
   }
 }

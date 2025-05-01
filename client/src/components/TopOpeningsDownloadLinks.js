@@ -3,6 +3,7 @@ import React from "react";
 import "../App.css";
 import { RenderEligibleOpeningsSection } from "./RenderEligibleOpeningsSection";
 import "./styles/TopOpeningsDownloadLinks.css";
+import DownloadPGNSidebar from "./DownloadPGNSidebar";
 
 const TopOpeningsDownloadLinks = ({
   openingsData,

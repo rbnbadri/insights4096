@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import "../App.css";
 import "./styles/OpeningSelectorDropdown.css";
-import "./styles/DownloadPGNModal.css";
+import "./styles/DownloadPGNSidebar.css";
 
 const OpeningSelectorDropdown = ({
   availableOpenings,

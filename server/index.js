@@ -48,10 +48,9 @@ app.get("/openings/:username", async (req, res) => {
     gameCacheStore[username] = allGames;
     const openings = extractOpenings(allGames, username);
 
-    const totalGamesPlayed = Object.values(openings.both).reduce(
-      (sum, opening) => sum + (opening.played || 0),
-      0,
-    );
+    const totalGamesPlayed =
+      Object.values(openings.white).reduce((sum, o) => sum + o.played, 0) +
+      Object.values(openings.black).reduce((sum, o) => sum + o.played, 0);
 
     res.json({
       status: "success",

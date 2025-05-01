@@ -3,10 +3,10 @@ import SummaryBar from "./SummaryBar";
 import OpeningTable from "./OpeningTable";
 import TopOpeningsDownloadLinks from "./components/TopOpeningsDownloadLinks";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-import DownloadPGNModal from "./components/DownloadPGNModal";
 import { BACKEND_URL } from "./apiConfig";
 import { triggerGreenToast, triggerRedToast } from "./utils/toast";
 import { downloadPGN } from "./utils/downloadPGN";
+import DownloadPGNSidebar from "./components/DownloadPGNSidebar";
 
 const OpeningStatsSection = ({
   data = {},
@@ -28,7 +28,7 @@ const OpeningStatsSection = ({
   const [viewLimit, setViewLimit] = useState(5);
   const [showingFilteredSummary, setShowingFilteredSummary] = useState(false);
   const [dateRangeOption, setDateRangeOption] = useState("last-30");
-  const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const [showDownloadSidebar, setShowDownloadSidebar] = useState(false);
 
   useEffect(() => {
     if (resetToDefaultRange) setDateRangeOption("last-30");
@@ -245,16 +245,16 @@ const OpeningStatsSection = ({
         startDate={data.startDate}
         endDate={data.endDate}
         username={username}
-        onCustomDownloadClick={() => setShowDownloadModal(true)}
+        onCustomDownloadClick={() => setShowDownloadSidebar(true)}
       />
-      <DownloadPGNModal
-        isOpen={showDownloadModal}
-        onClose={() => setShowDownloadModal(false)}
+      <DownloadPGNSidebar
+        isOpen={showDownloadSidebar}
+        onClose={() => setShowDownloadSidebar(false)}
         color={color}
         startDate={data.startDate}
         endDate={data.endDate}
         availableOpenings={availableOpenings}
-        await onDownload={handleDownloadRequest}
+        onDownload={handleDownloadRequest}
       />
       <ScrollToTopButton />
     </div>
