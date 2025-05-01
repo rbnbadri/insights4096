@@ -1,0 +1,142 @@
+.top-openings-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  border: 2px solid black;
+  margin: 0 auto; 
+  padding: 0 10px; 
+  box-sizing: border-box; 
+}
+
+.top-openings-half {
+  flex: 0 0 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  min-width: 0;
+}
+
+.top-openings-header {
+  display: flex;
+  width: 100%;
+}
+
+.top-openings-header-half {
+  flex: 0 0 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  min-width: 0;
+  text-align: center;
+}
+
+.top-opening-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px; /* tighter, instead of 8px */
+  font-size: 14px;
+  color: black;
+  width: 100%;
+  padding: 2px 0; /* ✅ add slight vertical breathing room */
+}
+
+.top-opening-percent {
+  flex: 0 0 80px; /* fixed width for % */
+  text-align: center;
+  font-size: 14px;
+  min-width: 0;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+.top-opening-link {
+  flex: 1; /* fill remaining space */
+  text-align: right; /* align download links nicely */
+  padding-left: 20px; /* small gap between % and download link */
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.top-opening-link a {
+  font-size: 14px;
+  text-decoration: underline;
+  color: blue;
+}
+
+.top-opening-download {
+  overflow-wrap: anywhere;
+}
+
+.top-opening-name {
+  flex: 0 0 350px; 
+  max-width: 350px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.top-opening-name-text {
+  max-width: 300px; /* visible text limit */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.top-opening-insufficient-data {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ center nicely */
+  padding: 4px 8px;
+  background-color: #f9f9f9;
+  color: #003366;
+  font-size: 16px; /* ✅ a little less bold than 18px now */
+  font-weight: 500;
+}
+
+.top-opening-insufficient-data .icon {
+  margin-right: 8px;
+  color: #cc3300; /* Warning color for the icon only */
+  font-size: 18px;
+}
+
+.download-other-section {
+  margin-top: 12px;
+}
+
+.btn-secondary {
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid black;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.top-openings-half:last-child {
+  border-right: none;
+}
+
+.top-openings-header-half:first-child {
+  text-align: center;
+  border-right: 2px solid white;
+}
+
+.top-openings-header-half:last-child {
+  text-align: center;
+}
+
+.top-openings-header-half:hover {
+  background-color: #222; /* subtle dark grey background */
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.top-openings-half:first-child {
+  border-right: 2px solid black;
+}
+

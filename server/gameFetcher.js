@@ -65,7 +65,6 @@ async function fetchGamesInRange(username, startDateStr, endDateStr) {
     isGameInRange(game, start, end),
   );
 
-  console.log("Number of filtered games:", gamesByMonth.length);
   return filteredGames;
 }
 

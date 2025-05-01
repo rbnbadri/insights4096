@@ -2,13 +2,14 @@
 import React from "react";
 import "../App.css";
 import { RenderEligibleOpeningsSection } from "./RenderEligibleOpeningsSection";
+import "./styles/TopOpeningsDownloadLinks.css";
 
 const TopOpeningsDownloadLinks = ({
   openingsData,
   startDate,
   endDate,
   username,
-  onCustomDownloadClick
+  onCustomDownloadClick,
 }) => {
   if (!openingsData || !openingsData.white || !openingsData.black) {
     return null;

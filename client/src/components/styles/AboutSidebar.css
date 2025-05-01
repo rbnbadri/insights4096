@@ -1,0 +1,66 @@
+.about-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30%;
+  background-color: white;
+  color: black;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid black;
+}
+
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.about-title {
+  font-size: 1rem;
+}
+
+.about-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  outline: none;
+}
+
+.about-close:focus {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+.about-content {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  overflow-y: auto;
+}
+
+.about-content h1,
+.about-content h2 {
+  margin: 1rem 0 0.5rem;
+  font-weight: bold;
+}
+
+.about-content a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.about-content strong {
+  font-weight: bold;
+}
+
+.about-content em {
+  font-style: italic;
+}

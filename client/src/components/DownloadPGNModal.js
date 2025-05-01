@@ -5,6 +5,7 @@ import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select, { components } from "react-select";
 import "../App.css";
 import { triggerGreenToast } from "../utils/toast";
+import "./styles/DownloadPGNModal.css";
 
 const DownloadPGNModal = ({
   isOpen,
@@ -85,7 +86,6 @@ const DownloadPGNModal = ({
 
     if (newSelections.length === 3) {
       setSelectedResults([]);
-      console.log("Triggering toast message from DownloadPGNModal");
       triggerGreenToast("All games will be downloaded.");
     } else {
       setSelectedResults(newSelections);

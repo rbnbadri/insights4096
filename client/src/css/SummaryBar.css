@@ -1,0 +1,10 @@
+.summary-text {
+  padding: 6px 0; /* Minor addition */
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.filter-dropdown,
+.date-range-dropdown {
+  margin-top: 4px;
+}

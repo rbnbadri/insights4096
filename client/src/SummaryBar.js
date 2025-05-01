@@ -2,6 +2,7 @@ import React from "react";
 import Select, { components } from "react-select";
 import ControlButtons from "./ControlButtons";
 import DateRangeSelector from "./DateRangeSelector";
+import "./css/SummaryBar.css";
 
 const SummaryBar = ({
   summaryData,

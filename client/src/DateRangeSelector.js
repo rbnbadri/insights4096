@@ -24,7 +24,7 @@ const DateRangeSelector = ({
       setCustomStartDate(null);
       setCustomEndDate(null);
     }
-  }, [resetToDefaultRange]);
+  }, [resetToDefaultRange, setDateRangeOption]);
 
   const [customStartDate, setCustomStartDate] = useState(null);
   const [customEndDate, setCustomEndDate] = useState(null);
