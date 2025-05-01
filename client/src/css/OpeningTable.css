@@ -1,0 +1,57 @@
+.table-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0;              
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+.chess-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 8px 8px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.opening-name-cell {
+  max-width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eco-code {
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sortable {
+  cursor: pointer;
+}
+
+th.sortable:hover {
+  background-color: #ddd;
+}

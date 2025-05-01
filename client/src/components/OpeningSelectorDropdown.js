@@ -1,6 +1,8 @@
 // OpeningSelectorDropdown.js
 import React, { useState, useRef } from "react";
 import "../App.css";
+import "./OpeningSelectorDropdown.css";
+import "./DownloadPGNModal.css";
 
 const OpeningSelectorDropdown = ({
   availableOpenings,

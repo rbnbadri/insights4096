@@ -5,6 +5,7 @@ import OpeningSelectorDropdown from "./OpeningSelectorDropdown";
 import Select, { components } from "react-select";
 import "../App.css";
 import { triggerGreenToast } from "../utils/toast";
+import "./DownloadPGNModal.css";
 
 const DownloadPGNModal = ({
   isOpen,

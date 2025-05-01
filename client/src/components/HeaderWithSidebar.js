@@ -31,12 +31,10 @@ export default function HeaderWithSidebar() {
       <header className="header-bar">
         <div className="header-left">
           <img src={logo} alt="Insights4096 Logo" className="header-logo" />
-          <span className="header-title">INSIGHTS4096</span>
-        </div>
-        <div className="header-right">
-          <span className="nav-link active">HOME</span>
+          <span className="header-title">Insights4096</span>
+          <span className="nav-link active">Home</span>
           <span className="nav-link" onClick={() => setIsSidebarOpen(true)}>
-            ABOUT
+            About
           </span>
         </div>
       </header>

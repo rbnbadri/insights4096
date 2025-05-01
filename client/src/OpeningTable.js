@@ -1,5 +1,6 @@
 import React from "react";
 import { generateChessComLink } from "./chessLinkUtils";
+import "./css/OpeningTable.css";
 
 const OpeningTable = ({
   color,
