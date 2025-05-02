@@ -6,6 +6,8 @@ const axios = require("axios");
 const { extractOpenings } = require("./openingsParser");
 const app = express();
 const PORT = 3000;
+const { logAction } = require("./logger");
+const { sendResponse } = require("./responseUtils");
 
 app.use(cors()); // Enable CORS for all requests
 
@@ -28,7 +30,7 @@ async function fetchGames(username, year, month) {
 
 app.get("/openings/:username", async (req, res) => {
   const username = req.params.username;
-  const { start, end } = req.query;
+  const { start, end, source } = req.query;
 
   try {
     let allGames = [];
@@ -45,6 +47,13 @@ app.get("/openings/:username", async (req, res) => {
       }
     }
 
+    logAction(req, "fetch_openings", {
+      username,
+      source: source || "unspecified",
+      start,
+      end,
+    });
+
     gameCacheStore[username] = allGames;
     const openings = extractOpenings(allGames, username);
 
@@ -52,15 +61,37 @@ app.get("/openings/:username", async (req, res) => {
       Object.values(openings.white).reduce((sum, o) => sum + o.played, 0) +
       Object.values(openings.black).reduce((sum, o) => sum + o.played, 0);
 
-    res.json({
-      status: "success",
-      timestamp: new Date().toISOString(),
-      count: totalGamesPlayed,
-      data: openings,
-    });
+    return sendResponse(
+      req,
+      res,
+      200,
+      "openings_processed",
+      {
+        status: "success",
+        timestamp: new Date().toISOString(),
+        count: totalGamesPlayed,
+        data: openings,
+      },
+      {
+        username,
+        count: totalGamesPlayed,
+      },
+    );
   } catch (err) {
-    console.error("Error processing request:", err.message);
-    res.status(500).json({ status: "error", message: err.message });
+    return sendResponse(
+      req,
+      res,
+      500,
+      "error",
+      {
+        status: "error",
+        message: err.message,
+      },
+      {
+        route: "/api/openings",
+        error: err.message,
+      },
+    );
   }
 });
 
