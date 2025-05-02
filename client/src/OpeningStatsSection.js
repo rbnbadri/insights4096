@@ -206,6 +206,7 @@ const OpeningStatsSection = ({
         start: startDate,
         end: endDate,
         ...(gameResult && { gameResult }),
+        source: "download_from_sidebar",
       },
       filenameFallback: "games.pgn",
       showToast: true,

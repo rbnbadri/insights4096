@@ -21,6 +21,7 @@ export const RenderEligibleOpeningsSection = ({
       start: startDate,
       end: endDate,
       gameResult: resultType,
+      source: "download_from_trends",
     };
 
     downloadPGN({

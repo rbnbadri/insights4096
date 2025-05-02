@@ -72,7 +72,7 @@ function Insights4096() {
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);
-            handleSubmit(start, end, color);
+            handleSubmit(start, end, color, false, "fetch_with_date_range");
           }}
           isOwnUsername={isOwnUsername}
           enteredUsername={enteredUsername}

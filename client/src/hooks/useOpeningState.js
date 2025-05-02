@@ -60,6 +60,7 @@ export default function useOpeningState(username) {
     end = endDate,
     section = selectedColor,
     forceDefaultToast = false,
+    source = "initial_fetch",
   ) => {
     if (!username) return;
 
@@ -72,6 +73,7 @@ export default function useOpeningState(username) {
         end,
         setCachedOneMonthWhite,
         setCachedOneMonthBlack,
+        source
       );
 
       if (
