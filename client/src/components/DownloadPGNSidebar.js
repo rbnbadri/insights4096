@@ -140,24 +140,25 @@ const DownloadPGNSidebar = ({
         </div>
 
         <div className="form-group">
-          <div className="sidebar-label-with-count">
-            <label className="sidebar-label">
-              Opening Variations (maximum 3)
-              <span className="required-asterisk">*</span>
-            </label>
-            {selectedOpenings.length > 0 && (
-              <span className="openings-count">
-                {selectedOpenings.length} opening
-                {selectedOpenings.length > 1 ? "s" : ""} selected
-              </span>
-            )}
-          </div>
+          <label className="sidebar-label">
+            Opening Variations (maximum 3)
+            <span className="required-asterisk">*</span>
+          </label>
+
           <OpeningSelectorDropdown
             availableOpenings={filteredAvailableOpenings}
             selectedOpenings={selectedOpenings}
             setSelectedOpenings={setSelectedOpenings}
             clearError={clearError}
           />
+
+          {selectedOpenings.length > 0 && (
+            <div className="openings-count" style={{ marginTop: "6px" }}>
+              {selectedOpenings.length} opening
+              {selectedOpenings.length > 1 ? "s" : ""} selected. Selected
+              openings are displayed at the top.
+            </div>
+          )}
         </div>
 
         <div className="form-group">

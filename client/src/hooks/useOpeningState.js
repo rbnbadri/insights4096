@@ -41,10 +41,6 @@ export default function useOpeningState(username) {
   }, []);
 
   const handleSearchClick = () => {
-    if (!username) {
-      return;
-    }
-
     const today = new Date();
     const oneMonthAgo = new Date(today);
     oneMonthAgo.setDate(today.getDate() - 30);
