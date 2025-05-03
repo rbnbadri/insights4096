@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { fetchOpenings } from "../api/fetchOpenings";
-import { triggerRedToast, triggerGreenToast } from "../utils/toast";
+import {
+  triggerRedToast,
+  triggerGreenToast,
+  triggerGreyToastStart,
+  triggerGreyToastStop,
+} from "../utils/toast";
 
 export default function useOpeningState(username) {
   const [filteredData, setFilteredData] = useState(null);
@@ -36,6 +41,10 @@ export default function useOpeningState(username) {
   }, []);
 
   const handleSearchClick = () => {
+    if (!username) {
+      return;
+    }
+
     const today = new Date();
     const oneMonthAgo = new Date(today);
     oneMonthAgo.setDate(today.getDate() - 30);
@@ -62,9 +71,13 @@ export default function useOpeningState(username) {
     forceDefaultToast = false,
     source = "initial_fetch",
   ) => {
-    if (!username) return;
-
     setLoadingState((prev) => ({ ...prev, [section]: true }));
+    triggerGreyToastStart(); // ✅ Start the toast
+
+    // ✅ Safety timeout to auto-hide after 10 seconds
+    const autoStopTimer = setTimeout(() => {
+      triggerGreyToastStop();
+    }, 10000);
 
     try {
       const gamedata = await fetchOpenings(
@@ -73,7 +86,7 @@ export default function useOpeningState(username) {
         end,
         setCachedOneMonthWhite,
         setCachedOneMonthBlack,
-        source
+        source,
       );
 
       if (
@@ -106,6 +119,8 @@ export default function useOpeningState(username) {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
+      triggerGreyToastStop(); // ✅ Ensure toast is stopped early if data arrives before 10s
+      clearTimeout(autoStopTimer); // ✅ Cancel timer
       setIsDefaultLoad(false);
       setLoadingState((prev) => ({ ...prev, [section]: false }));
     }

@@ -53,9 +53,11 @@ const ToastMessage = () => {
         ? FaInfoCircle
         : null;
 
+  const IconColor = toast.type === "grey" ? "#333" : "white";
+
   return (
     <div className={`toast-base ${toastClass}`}>
-      {Icon && <Icon style={{ color: "white", marginRight: "8px" }} />}
+      {Icon && <Icon style={{ color: IconColor, marginRight: "8px" }} />}
       <span>{toast.message}</span>
       {toast.type !== "grey" && (
         <button
