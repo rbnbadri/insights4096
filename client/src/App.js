@@ -3,8 +3,7 @@ import "./App.css";
 import OpeningStatsSection from "./OpeningStatsSection";
 import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
-import GreenToastMessage from "./components/GreenToastMessage";
-import RedToastMessage from "./components/RedToastMessage";
+import ToastMessage from "./components/ToastMessage";
 import HeaderWithSidebar from "./components/HeaderWithSidebar";
 
 function Insights4096() {
@@ -72,7 +71,7 @@ function Insights4096() {
           onDateRangeChange={(start, end) => {
             setStartDate(start);
             setEndDate(end);
-            handleSubmit(start, end, color);
+            handleSubmit(start, end, color, false, "fetch_with_date_range");
           }}
           isOwnUsername={isOwnUsername}
           enteredUsername={enteredUsername}
@@ -94,8 +93,7 @@ function Insights4096() {
 
   return (
     <div className="App">
-      <GreenToastMessage />
-      <RedToastMessage />
+      <ToastMessage />
       <HeaderWithSidebar />
       <div className="page-title-container">
         <img src={logo} alt="Logo" className="logo" />
@@ -162,15 +160,6 @@ function Insights4096() {
                 // ✅ Trigger full reset so OpeningStatsSection clears filters
                 setFullResetTrigger(true);
                 setTimeout(() => setFullResetTrigger(false), 100);
-
-                // ✅ Retain current date range for the new color
-                if (filteredData?.startDate && filteredData?.endDate) {
-                  handleSubmit(
-                    filteredData.startDate,
-                    filteredData.endDate,
-                    color,
-                  );
-                }
               }}
             >
               {color.charAt(0).toUpperCase() + color.slice(1)}

@@ -249,6 +249,17 @@ th, td {
   background-color: #cc0000;
 }
 
+.grey-toast-message {
+  top: 28px;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.grey-toast-message {
+  background-color: #ffffff;
+  color: #333;
+}
+
 .toast-message span {
   flex: 1;
 }

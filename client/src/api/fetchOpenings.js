@@ -6,9 +6,13 @@ export async function fetchOpenings(
   end,
   setCacheWhite,
   setCacheBlack,
+  source = "initial_fetch",
 ) {
   const baseUrl = `${BACKEND_URL}/openings/${username}`;
-  const url = start && end ? `${baseUrl}?start=${start}&end=${end}` : baseUrl;
+  const url =
+    start && end
+      ? `${baseUrl}?start=${start}&end=${end}&source=${source}`
+      : `${baseUrl}?source=${source}`;
 
   const response = await fetch(url);
   if (!response.ok) {

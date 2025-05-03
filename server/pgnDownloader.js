@@ -2,23 +2,45 @@ const fs = require("fs");
 const path = require("path");
 const archiver = require("archiver");
 const { resultMapping } = require("./utils");
+const { logAction } = require("./logger");
+const { sendResponse } = require("./responseUtils");
 
 // Also add fetchGames if you still use the manual month-by-month fetching
 function setupPgnDownloadRoute(app, gameCacheStore) {
   app.get("/pgns/:username", async (req, res) => {
     const username = req.params.username;
-    const { start, end, color, eco, gameResult, checkOnly } = req.query;
+    const { start, end, color, eco, gameResult, checkOnly, source } = req.query;
 
     if (!start || !end || !color || !eco) {
-      return res
-        .status(404)
-        .json({ message: "No matching games found for the given filters." });
+      return sendResponse(
+        req,
+        res,
+        400,
+        "bad_request",
+        {
+          message: "Incomplete query parameters in the API request.",
+        },
+        {
+          route: "/pgns/:username",
+          reason: "Missing start, end, color or eco",
+        },
+      );
     }
 
     if (!gameCacheStore[username]) {
-      return res
-        .status(400)
-        .json({ message: "Game data not cached. Please search first." });
+      return sendResponse(
+        req,
+        res,
+        400,
+        "bad_request",
+        {
+          message: "Game data not cached. Please search first.",
+        },
+        {
+          route: "/pgns/:username",
+          reason: "No cached data",
+        },
+      );
     }
 
     const ecos = eco.split(",").map((e) => e.replace(/-/g, " "));
@@ -50,9 +72,19 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
     });
 
     if (filteredGames.length > 100) {
-      return res.status(400).json({
-        message: "Too many games to export. Please narrow your filter.",
-      });
+      return sendResponse(
+        req,
+        res,
+        400,
+        "too_many_games",
+        {
+          message: "Too many games to export. Please narrow your filter.",
+        },
+        {
+          route: "/pgns/:username",
+          reason: "More than 100 games matched",
+        },
+      );
     }
 
     const pgnContent = filteredGames.map((g) => g.pgn).join("\n\n");
@@ -66,18 +98,50 @@ function setupPgnDownloadRoute(app, gameCacheStore) {
     newFilename += compressed ? ".zip" : ".pgn";
 
     if (filteredGames.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No matching games found for the given filters." });
+      return sendResponse(
+        req,
+        res,
+        404,
+        "not_found",
+        {
+          message: "No matching games found for the given filters.",
+        },
+        {
+          route: "/pgns/:username",
+          reason: "Filtered list was empty",
+        },
+      );
     }
 
     if (checkOnly) {
-      return res.status(200).json({
-        status: "ready",
-        gameCount: filteredGames.length,
-        filename: newFilename,
-      });
+      return sendResponse(
+        req,
+        res,
+        200,
+        "download_check_only",
+        {
+          status: "ready",
+          gameCount: filteredGames.length,
+          filename: newFilename,
+        },
+        {
+          username,
+          color,
+          source: source || "unspecified",
+          eco,
+          result: gameResult || "all",
+        },
+      );
     }
+
+    logAction(req, "download_pgn", {
+      username,
+      color,
+      source: source || "unspecified",
+      eco,
+      result: gameResult || "all",
+      count: filteredGames.length,
+    });
 
     if (filteredGames.length <= 50) {
       res.setHeader(
