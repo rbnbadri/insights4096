@@ -11,7 +11,6 @@ function getClientIp(req) {
 }
 
 function logAction(req, action, details = {}) {
-  console.log(`Received ${action} action with:\n ${JSON.stringify(details)}`);
   const serviceKey = process.env.FIREBASE_SERVICE_ACCOUNT;
   if (!serviceKey) return; // Skip logging if not running in the right env
 

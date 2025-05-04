@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const { setupPgnDownloadRoute } = require("./routes/pgnDownloader");
 const { fetchGamesInRange } = require("./gameFetcher");
-const axios = require("axios");
 const { extractOpenings } = require("./openingsParser");
 const app = express();
 const PORT = 3000;
@@ -13,23 +12,6 @@ const logsRouter = require("./routes/logs");
 app.use("/logs", logsRouter);
 app.use(cors()); // Enable CORS for all requests
 
-// Function to fetch games for a specific month with proper zero-padding
-async function fetchGames(username, year, month) {
-  try {
-    const formattedMonth = month.toString().padStart(2, "0"); // Ensure MM format
-    const url = `https://api.chess.com/pub/player/${username}/games/${year}/${formattedMonth}`;
-    const response = await axios.get(url);
-    console.info(url);
-    console.log(
-      `Fetched ${response.data.games.length} games for ${username} in ${year}-${formattedMonth}`,
-    );
-    return response.data.games || [];
-  } catch (error) {
-    console.error(`Error fetching games for ${month}/${year}:`, error);
-    return [];
-  }
-}
-
 app.get("/openings/:username", async (req, res) => {
   const username = req.params.username;
   const { start, end, source } = req.query;
@@ -37,23 +19,27 @@ app.get("/openings/:username", async (req, res) => {
   try {
     let allGames = [];
 
-    if (start && end) {
-      allGames = await fetchGamesInRange(username, start, end);
-    } else {
-      // Default to hardcoded Jan-Mar 2025
-      const year = 2025;
-      const months = [1, 2, 3];
-      for (const month of months) {
-        const games = await fetchGames(username, year, month);
-        allGames = allGames.concat(games);
-      }
+    let resolvedStart = start;
+    let resolvedEnd = end;
+
+    if (!start && !end) {
+      const today = new Date();
+      const endDate = today.toISOString().split("T")[0]; // yyyy-mm-dd
+      const startDateObj = new Date(today);
+      startDateObj.setDate(today.getDate() - 30);
+      const startDate = startDateObj.toISOString().split("T")[0];
+
+      resolvedStart = startDate;
+      resolvedEnd = endDate;
     }
 
+    allGames = await fetchGamesInRange(username, resolvedStart, resolvedEnd);
+    
     logAction(req, "fetch_openings", {
       username,
       source: source || "unspecified",
-      start,
-      end,
+      resolvedStart,
+      resolvedEnd,
     });
 
     gameCacheStore[username] = allGames;
