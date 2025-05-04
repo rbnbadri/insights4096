@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const archiver = require("archiver");
-const { resultMapping } = require("./utils");
-const { logAction } = require("./logger");
-const { sendResponse } = require("./responseUtils");
+const { resultMapping } = require("../utils");
+const { logAction } = require("../logger");
+const { sendResponse } = require("../responseUtils");
 
 // Also add fetchGames if you still use the manual month-by-month fetching
 function setupPgnDownloadRoute(app, gameCacheStore) {

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { setupPgnDownloadRoute } = require("./pgnDownloader");
+const { setupPgnDownloadRoute } = require("./routes/pgnDownloader");
 const { fetchGamesInRange } = require("./gameFetcher");
 const axios = require("axios");
 const { extractOpenings } = require("./openingsParser");
@@ -8,7 +8,9 @@ const app = express();
 const PORT = 3000;
 const { logAction } = require("./logger");
 const { sendResponse } = require("./responseUtils");
+const logsRouter = require("./routes/logs");
 
+app.use("/logs", logsRouter);
 app.use(cors()); // Enable CORS for all requests
 
 // Function to fetch games for a specific month with proper zero-padding

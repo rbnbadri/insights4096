@@ -1,10 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const ignoredIps = ["49.37.249.208"]; // Replace with your actual IP
-// const ignoredIps = ["YOUR.IP.HERE"]; // Replace with your actual IP
-
-const logPath = path.join(__dirname, "access.log");
+const ignoredIps = ["49.37.249.208"];
 
 function getClientIp(req) {
   return (
@@ -17,6 +11,10 @@ function getClientIp(req) {
 }
 
 function logAction(req, action, details = {}) {
+  console.log(`Received ${action} action with:\n ${JSON.stringify(details)}`);
+  const serviceKey = process.env.FIREBASE_SERVICE_ACCOUNT;
+  if (!serviceKey) return; // Skip logging if not running in the right env
+
   const ip = getClientIp(req);
   if (ignoredIps.includes(ip)) return;
 
@@ -26,15 +24,27 @@ function logAction(req, action, details = {}) {
   });
   const timestamp = now.replace(",", "").replace(/\//g, "-");
 
-  const detailStr = Object.entries(details)
-    .map(([key, val]) => `${key}=${val}`)
-    .join(" ");
+  // Lazy import and initialize firebase-admin
+  const admin = require("firebase-admin");
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(JSON.parse(serviceKey)),
+    });
+  }
 
-  const logLine = `[${timestamp}] IP: ${ip} | Action: ${action} | ${detailStr}\n`;
+  const db = admin.firestore?.();
+  if (!db) return;
 
-  fs.appendFile(logPath, logLine, (err) => {
-    if (err) console.error("Error writing log:", err);
-  });
+  db.collection("logs")
+    .add({
+      timestamp,
+      ip,
+      action,
+      details,
+    })
+    .catch((err) => {
+      console.error("Error logging to Firestore:", err);
+    });
 }
 
 module.exports = { logAction, getClientIp };
