@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import OpeningStatsSection from "./OpeningStatsSection";
-import logo from "./logo.png";
 import useOpeningState from "./hooks/useOpeningState";
 import ToastMessage from "./components/ToastMessage";
 import HeaderWithSidebar from "./components/HeaderWithSidebar";
+const SHOW_MY_USERNAME_CHECKBOX = false;
 
 function Insights4096() {
   const [username, setUsername] = useState("");
@@ -17,8 +17,6 @@ function Insights4096() {
       usernameRef.current.focus();
     }
   }, [username]);
-
-  const handleChange = (e) => setUsername(e.target.value);
 
   const {
     filteredData,
@@ -94,56 +92,27 @@ function Insights4096() {
   return (
     <div className="App">
       <ToastMessage />
-      <HeaderWithSidebar />
-      <div className="page-title-container">
-        <img src={logo} alt="Logo" className="logo" />
-        <div className="title-and-input">
-          <h2 className="section-title">Chess Insights v1.0.0</h2>
-          <div className="flex-row">
-            <div className="username-input-wrapper">
-              <input
-                type="text"
-                ref={usernameRef}
-                value={username}
-                onChange={handleChange}
-                placeholder="Enter ChessDotCom username"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    setIsDefaultLoad(true);
-                    handleSearchClick();
-                  }
-                }}
-              />
-              {username.length > 0 && (
-                <button
-                  className="clear-username"
-                  onClick={() => setUsername("")}
-                >
-                  ×
-                </button>
-              )}
-            </div>
-            <button
-              onClick={() => {
-                setIsDefaultLoad(true);
-                handleSearchClick();
-              }}
-            >
-              Search
-            </button>
-            <label>
-              <input
-                type="checkbox"
-                checked={isOwnUsername}
-                onChange={(e) => setIsOwnUsername(e.target.checked)}
-                style={{ marginLeft: "10px", marginRight: "4px" }}
-              />
-              This is my username
-            </label>
-          </div>
+      <HeaderWithSidebar
+        username={username}
+        setUsername={setUsername}
+        isOwnUsername={isOwnUsername}
+        setIsOwnUsername={setIsOwnUsername}
+        handleSearchClick={handleSearchClick}
+        setIsDefaultLoad={setIsDefaultLoad}
+      />
+      {SHOW_MY_USERNAME_CHECKBOX && (
+        <div className="my-username-toggle">
+          <label>
+            <input
+              type="checkbox"
+              checked={isOwnUsername}
+              onChange={(e) => setIsOwnUsername(e.target.checked)}
+              style={{ marginRight: "4px" }}
+            />
+            This is my username
+          </label>
         </div>
-      </div>
-
+      )}
       {submitted && (
         <div className="color-toggle-buttons">
           {["white", "black"].map((color) => (
