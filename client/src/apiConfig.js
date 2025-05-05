@@ -1,3 +1,3 @@
 // src/apiConfig.js
 
-export const BACKEND_URL = "https://insights-4096-rbnbadri.replit.app";
+export const BACKEND_URL = "https://api.insights4096.com";
