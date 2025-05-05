@@ -100,3 +100,35 @@
   line-height: 1.4;
   overflow-y: auto;
 }
+
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 2rem;
+}
+
+.header-search input {
+  padding: 6px 8px;
+  font-size: 14px;
+}
+
+.clear-username {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .header-search {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-search input,
+  .header-search button {
+    width: 100%;
+    margin-top: 4px;
+  }
+}

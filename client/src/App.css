@@ -373,3 +373,8 @@ th, td {
   border: none;
   border-radius: 0;
 }
+
+.my-username-toggle {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+}

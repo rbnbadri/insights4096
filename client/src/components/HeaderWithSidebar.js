@@ -4,9 +4,21 @@ import "./styles/HeaderWithSidebar.css";
 import logo from "../logo.png"; // adjust path as needed
 import AboutSidebar from "./AboutSidebar";
 
-export default function HeaderWithSidebar() {
+export default function HeaderWithSidebar({
+  username,
+  setUsername,
+  handleSearchClick,
+  setIsDefaultLoad,
+}) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeBtnRef = useRef(null);
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchInputRef.current && username.trim().length === 0) {
+      searchInputRef.current.focus();
+    }
+  }, [username]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -36,6 +48,40 @@ export default function HeaderWithSidebar() {
           <span className="nav-link" onClick={() => setIsSidebarOpen(true)}>
             About
           </span>
+
+          <div className="header-search">
+            <input
+              type="text"
+              ref={searchInputRef}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter ChessDotCom username"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setIsDefaultLoad(true);
+                  handleSearchClick();
+                }
+              }}
+              autoFocus
+            />
+            {username.length > 0 && (
+              <button
+                className="clear-username"
+                onClick={() => setUsername("")}
+                aria-label="Clear username"
+              >
+                ×
+              </button>
+            )}
+            <button
+              onClick={() => {
+                setIsDefaultLoad(true);
+                handleSearchClick();
+              }}
+            >
+              Search
+            </button>
+          </div>
         </div>
       </header>
 
