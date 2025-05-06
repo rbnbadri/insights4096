@@ -11,7 +11,6 @@ function getClientIp(req) {
 }
 
 function logAction(req, action, details = {}) {
-  console.log(process.env.ENABLE_LOGGING);
   if (process.env.ENABLE_LOGGING !== "true") return;
 
   const serviceKey = process.env.FIREBASE_SERVICE_ACCOUNT;
