@@ -1,3 +1,12 @@
+const fs = require("fs");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+if (fs.existsSync(".env.development.local")) {
+  dotenv.config({ path: ".env.development.local", override: true });
+}
+
 const express = require("express");
 const cors = require("cors");
 const { setupPgnDownloadRoute } = require("./routes/pgnDownloader");
@@ -34,7 +43,7 @@ app.get("/openings/:username", async (req, res) => {
     }
 
     allGames = await fetchGamesInRange(username, resolvedStart, resolvedEnd);
-    
+
     logAction(req, "fetch_openings", {
       username,
       source: source || "unspecified",
